@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Latein Vokabeln lernen</title>
+<meta name="theme-color" content="#0b0d0f">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital@0;1&display=swap" rel="stylesheet">
+<style>
+
+:root{color-scheme:dark;--bg:#0b0d0f;--card:#15191c;--card2:#1d2327;--ink:#eceff1;--mute:#8b959c;--acc:#7fb0dd;--soft:#1b2a38;--ok:#5fc08f;--bad:#ec8a7f;--line:#252b30;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:480px;margin:0 auto;padding:28px 20px 56px}
+h1{font:400 1.35rem/1.2 "Libre Caslon Text",Georgia,serif;margin:0 0 22px}
+[hidden]{display:none!important}
+button,select{font:inherit;color:var(--ink);background:var(--card);border:0;border-radius:12px;padding:12px 16px;cursor:pointer;box-shadow:none}
+button.on{background:var(--ink);color:var(--bg);box-shadow:none}
+button:disabled{opacity:.55;cursor:default}
+button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.tabs button{background:none;box-shadow:none;border-radius:0;padding:8px 0;color:var(--mute);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button.on{background:none;color:var(--ink);border-bottom-color:var(--ink)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.prog{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--ok);width:0;transition:width .25s}
+.count{color:var(--mute);font-size:.85rem;margin:8px 0 14px}
+.card{min-height:260px;background:var(--card);border:0;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;cursor:pointer;width:100%;color:var(--ink);box-shadow:none}
+.card .w{font:400 2rem/1.3 "Libre Caslon Text",Georgia,serif;overflow-wrap:anywhere}
+.card .w.de{font-family:system-ui,sans-serif;font-size:1.6rem}
+.card .hint{color:var(--mute);font-size:.82rem;margin-top:16px}
+#tplay .card{min-height:190px}
+.act{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.act button{padding:15px;font-weight:600}
+.no{color:var(--bad)}.yes{color:var(--ok)}
+.tools{display:flex;gap:4px;flex-wrap:wrap;margin-top:18px}
+.tools button{background:none;box-shadow:none;padding:7px 10px;font-size:.85rem;color:var(--mute)}
+.tools button.on{background:var(--soft);color:var(--acc)}
+.stack{display:grid;gap:16px}
+.fld{display:grid;gap:6px;margin-top:14px;font-size:.82rem;color:var(--mute)}
+.stack .fld{margin:0}
+.fld select,.fld input{width:100%;font-size:1rem;color:var(--ink)}
+input[type=text]{font:inherit;border:0;box-shadow:none;background:var(--card);color:var(--ink);border-radius:12px;padding:13px 14px;width:100%}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opt{width:100%;text-align:left;padding:15px 16px}
+.opt.good{background:var(--ok);color:#fff;box-shadow:none}
+.opt.bad{background:var(--bad);color:#fff;box-shadow:none}
+.fb{margin-top:12px;font-weight:600;min-height:1.5em;white-space:pre-line}
+.wide{width:100%;margin-top:22px;padding:15px;font-weight:600}
+#tfields button{width:100%;margin-top:16px;padding:15px;font-weight:600}
+#tresult .w{margin:6px 0 10px;font-size:2rem}
+.small{color:var(--mute);font-size:.85rem;margin:8px 0}
+details{margin-top:22px}
+summary{cursor:pointer;color:var(--mute);font-size:.88rem}
+details.edit{margin-top:44px;padding-top:18px;border-top:1px solid var(--line)}
+textarea{width:100%;min-height:200px;margin-top:10px;font:15px/1.5 ui-monospace,Menlo,monospace;background:var(--card);color:var(--ink);border:0;box-shadow:none;border-radius:12px;padding:12px}
+.res{margin:12px 0;padding-left:22px}
+.res li{padding:10px 0;border-bottom:1px solid var(--line)}
+#lbar{margin-bottom:18px}
+#lbar select{width:100%}
+.lrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+.lrow button{background:none;padding:6px 8px;font-size:.85rem;color:var(--mute)}
+.lh{font-weight:600;margin-top:26px}
+#llist{margin-top:28px}
+#medit{margin-top:20px}
+#medit textarea{min-height:160px}
+#hsclear{background:none;box-shadow:none;color:var(--mute);padding-left:0}
+::placeholder{color:var(--mute);opacity:.7}
+::selection{background:var(--soft)}
+button{transition:background .15s,transform .1s,color .15s}
+button:active:not(:disabled){transform:scale(.98)}
+.opt:hover:not(:disabled),.act button:hover,.bar button:not(.on):hover{background:var(--card2)}
+.tools button:hover,.tabs button:hover,.lrow button:hover{color:var(--ink)}
+.tabs button.on{border-bottom-color:var(--acc)}
+.card{border:1px solid var(--line);border-radius:22px}
+.card:hover{background:var(--card2)}
+#tplay .card:hover{background:var(--card)}
+.prog{height:4px}
+.act button{background:var(--card)}
+.res li:last-child{border-bottom:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}button:active{transform:none!important}}
+/* --- extra clean --- */
+main{max-width:440px;padding:36px 22px 72px}
+h1{font:500 .9rem/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--mute);margin:0 0 26px}
+.tabs{border-bottom:0;gap:20px;margin-bottom:28px}
+.tabs button{padding:6px 0;margin:0;border-bottom:0;font-size:.95rem;position:relative}
+.tabs button.on{border-bottom:0;color:var(--ink)}
+.tabs button.on::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--ink);border-radius:2px}
+button,select{border-radius:14px}
+select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5l5 5 5-5' fill='none' stroke='%238b959c' stroke-width='1.5' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+#lbar{margin-bottom:14px}
+#lbar select{width:auto;max-width:100%;background-color:transparent;color:var(--mute);padding:6px 24px 6px 0;background-position:right 2px center}
+.card{border:0;border-radius:26px;min-height:300px}
+.card:hover,#tplay .card:hover{background:var(--card)}
+.card .w{font-size:2.2rem}
+.card .hint{opacity:.55}
+.prog{height:2px}
+.count{margin:10px 0 18px}
+.act{gap:12px;margin-top:14px}
+.act button{padding:17px;border-radius:16px}
+.tools{margin-top:22px;gap:2px}
+.opt{border-radius:16px;padding:17px 18px}
+.wide,#tfields button{border-radius:16px;padding:17px}
+input[type=text],textarea{border-radius:14px}
+.lrow{padding:14px 0}
+.res li{padding:12px 0}
+.lh{margin-top:30px}
+summary{list-style:none}
+summary::-webkit-details-marker{display:none}
+#tresult .w{font-size:2.4rem}
+/* --- mehr Details --- */
+h1{font:400 1.8rem/1.15 "Libre Caslon Text",Georgia,serif;color:var(--ink);margin:0 0 6px}
+.sub{color:var(--mute);font-size:.9rem;margin:0 0 26px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 18px}
+.tile{background:var(--card);border-radius:16px;padding:12px 14px;border:1px solid var(--line)}
+.tile b{display:block;font-size:1.4rem;font-weight:600;line-height:1.2}
+.tile span{font-size:.75rem;color:var(--mute)}
+#cnt{display:none}
+.prog{height:4px;margin:0 0 16px}
+.prog i{background:linear-gradient(90deg,var(--acc),var(--ok))}
+.card,.card:hover,#tplay .card:hover{background:linear-gradient(165deg,#1a2024,#111518)}
+.card{border:1px solid var(--line);justify-content:space-between;align-items:stretch;padding:16px 18px 18px;min-height:320px}
+#tplay .card{min-height:240px}
+.ctop{display:flex;justify-content:space-between;gap:8px;font-size:.8rem;color:var(--mute)}
+.cmid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px 0}
+.cside{align-self:center;font-size:.75rem;color:var(--acc);background:var(--soft);padding:4px 12px;border-radius:999px;min-height:1.7em}
+.tools{gap:8px}
+.tools button{box-shadow:inset 0 0 0 1px var(--line);border-radius:999px;padding:7px 13px}
+.info{color:var(--mute);font-size:.9rem;margin:0 0 18px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0}
+.chips span{font-size:.78rem;color:var(--mute);background:var(--card);padding:5px 11px;border-radius:999px;border:1px solid var(--line)}
+.res.hs{padding-left:0;list-style:none}
+.hsrow{display:flex;align-items:center;gap:14px}
+.hsrow .rk{width:28px;height:28px;border-radius:50%;background:var(--card2);display:grid;place-items:center;font-size:.8rem;font-weight:600;flex:none}
+.hs li:nth-child(1) .rk{background:var(--acc);color:var(--bg)}
+.hsrow .nm{flex:1;font-weight:500}
+.hsrow .nm small{display:block;color:var(--mute);font-weight:400;font-size:.75rem}
+.hsrow .pt{font-weight:600;font-size:1.05rem}
+.lt{display:block;flex:1}
+.lt b{display:block;font-weight:600}
+.lt small{display:block;color:var(--mute);font-size:.8rem}
+.mini{display:block;height:3px;background:var(--line);border-radius:2px;margin-top:8px}
+.mini em{display:block;height:100%;background:var(--ok);border-radius:2px}
+#tresult .stats{margin-top:4px}
+/* --- Interaktion --- */
+.card{touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;will-change:transform}
+.card:active{cursor:grabbing}
+.card[data-dir=yes]{border-color:var(--ok)}
+.card[data-dir=no]{border-color:var(--bad)}
+@keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+.cmid.pop{animation:pop .22s ease-out}
+.opt:active:not(:disabled),.act button:active{background:var(--soft)}
+@media (prefers-reduced-motion:reduce){.cmid.pop{animation:none}}
+/* --- Verlauf --- */
+.pv{font-weight:600;font-size:1.05rem;min-width:56px;text-align:right}
+.mini em.g{background:var(--ok)}
+.mini em.m{background:var(--acc)}
+.mini em.b{background:var(--bad)}
+#histclear{background:none;color:var(--mute);padding-left:0;margin-top:14px}
+/* --- Lektionen-Auswahl --- */
+.lchips{display:flex;gap:8px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none}
+.lchips::-webkit-scrollbar{display:none}
+.lchip{flex:none;white-space:nowrap;padding:8px 15px;border-radius:999px;font-size:.88rem;background:var(--card);color:var(--mute)}
+.lchip.on{background:var(--soft);color:var(--acc)}
+</style>
+</head>
+<body>
+<main>
+<h1>Latein Vokabeln</h1>
+<p class="sub">Lernen, testen und den Highscore knacken.</p>
+<div class="tabs">
+  <button id="tabL" class="on">Lernen</button>
+  <button id="tabT">Test</button>
+  <button id="tabH">Ergebnisse</button>
+  <button id="tabV">Vokabeln</button>
+</div>
+
+<div id="lbar"><div id="lsel" class="lchips" role="group" aria-label="Lektionen"></div></div>
+
+<div id="hs" hidden>
+  <div class="tools" id="hsv" style="margin:0 0 6px"><button id="vB" class="on">Bestenliste</button><button id="vH">Verlauf</button></div>
+  <div id="hsBest">
+    <p class="small" id="hsempty">Noch kein Ergebnis. Mach einen Test!</p>
+    <div id="hslist"></div>
+    <p class="small">Der Highscore wird nur in diesem Browser auf deinem Gerät gespeichert.</p>
+    <button id="hsclear">Highscore löschen</button>
+  </div>
+  <div id="hsHist" hidden>
+    <p class="small" id="histempty">Noch kein Test gemacht.</p>
+    <div id="histbody"></div>
+    <button id="histclear">Verlauf löschen</button>
+  </div>
+</div>
+
+<div id="learn">
+<div class="stats">
+  <div class="tile"><b id="sV">0</b><span>Vokabeln</span></div>
+  <div class="tile"><b id="sK">0</b><span id="sKl">gewusst</span></div>
+  <div class="tile"><b id="sB">–</b><span>Bestwert</span></div>
+</div>
+<div class="prog"><i id="pb"></i></div>
+<div class="count" id="cnt"></div>
+
+<button class="card" id="card" aria-live="polite">
+  <div class="ctop"><span id="clec"></span><span id="cnum"></span></div>
+  <div class="cmid" id="lmid"><div class="w" id="front"></div><div class="hint" id="hint"></div></div>
+  <div class="cside" id="cside"></div>
+</button>
+<div class="act">
+  <button id="again" class="no">↺ Nochmal</button>
+  <button id="known" class="yes">✓ Gewusst</button>
+</div>
+<div class="tools">
+  <button id="dir">Latein → Deutsch</button>
+  <button id="only">Nur unbekannte</button>
+  <button id="shuf">Mischen</button>
+  <button id="reset">Zurücksetzen</button>
+</div>
+</div>
+
+<div id="test" hidden>
+  <div id="tsetup">
+    <p class="info" id="tinfo"></p>
+    <div class="stack">
+      <label class="fld">Richtung<select id="tdir"><option value="ld">Latein → Deutsch</option><option value="dl">Deutsch → Latein</option></select></label>
+      <label class="fld">Anzahl<select id="tcount"><option value="10">10 Fragen</option><option value="20">20 Fragen</option><option value="all">Alle Vokabeln</option></select></label>
+      <label class="fld">Art des Tests<select id="ttype">
+        <option value="mc">Multiple Choice</option>
+        <option value="type">Eintippen</option>
+        <option value="mix">Gemischt</option>
+        <option value="form">Mit Formen und Geschlecht</option>
+      </select></label>
+      <label class="fld">Dein Name (für den Highscore)<input id="tname" type="text" maxlength="20" autocomplete="off"></label>
+    </div>
+    <details class="rules">
+      <summary>Punkte und Regeln</summary>
+      <p class="small">Multiple Choice gibt 5 Punkte, Eintippen 10. Hat eine Vokabel mehrere Bedeutungen, reicht eine. Jede weitere richtige Bedeutung gibt +5 Punkte (mit Komma trennen). Klammern und kleine Tippfehler sind egal.</p>
+      <p class="small">Bei „Mit Formen und Geschlecht“ tippst du zusätzlich die weiteren Formen (z. B. Genitiv) und wählst das Geschlecht, wenn die Vokabel eins hat. Dafür müssen die Formen in deiner Liste stehen, z. B. <i>amor, amoris m. = die Liebe</i>.</p>
+    </details>
+    <div class="chips"><span>Multiple Choice 5 Punkte</span><span>Eintippen 10 Punkte</span><span>+5 je weitere Bedeutung</span><span>Tippfehler erlaubt</span></div>
+    <button id="tstart" class="on wide">Test starten</button>
+  </div>
+  <div id="tplay" hidden>
+    <div class="count" id="tprog"></div>
+    <div class="card" style="cursor:default">
+      <div class="ctop"><span id="tl"></span><span id="tm"></span></div>
+      <div class="cmid"><div class="w" id="tq"></div></div>
+      <div class="cside" id="ts"></div>
+    </div>
+    <div id="topts" class="opts"></div>
+    <div id="tform" class="act" style="grid-template-columns:1fr auto">
+      <input id="tin" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Deine Antwort" placeholder="Antwort eintippen">
+      <button id="tcheck" class="on">Prüfen</button>
+    </div>
+    <div id="tfields"></div>
+    <div id="tfb" class="fb" aria-live="polite"></div>
+    <button id="tnext" class="on" style="width:100%;margin-top:10px" hidden>Weiter</button>
+  </div>
+  <div id="tresult" hidden></div>
+</div>
+
+<div id="vok" hidden>
+  <label class="fld" style="margin-top:0">Lektion
+    <input id="vname" type="text" maxlength="30" placeholder="z. B. Lektion 15" autocomplete="off">
+  </label>
+  <button id="photoBtn" class="on wide">Foto einlesen</button>
+  <input type="file" id="photo" accept="image/*" multiple hidden>
+  <p class="small" id="ocrStatus">Fotografiere die Vokabelseite einer Lektion. Der Text wird auf deinem Gerät ausgelesen, du brauchst dafür Internet.</p>
+  <div id="review" hidden>
+    <label class="fld">Erkannter Text, bitte prüfen
+      <textarea id="rtext" spellcheck="false"></textarea>
+    </label>
+    <button id="rsave" class="on wide">In Lektion speichern</button>
+  </div>
+  <div id="llist"></div>
+  <p class="small">Deine Lektionen werden auf diesem Gerät in diesem Browser gespeichert und sind beim nächsten Öffnen wieder da.</p>
+  <div id="medit" hidden>
+    <label class="fld"><span>Manuell ändern: <b id="mname"></b></span>
+      <textarea id="mtext" spellcheck="false"></textarea>
+    </label>
+    <p class="small">Eine Vokabel pro Zeile: Latein = Deutsch, z. B. <i>amor, amoris m. = die Liebe</i></p>
+    <div class="bar"><button id="msave" class="on">Speichern</button><button id="mcancel">Abbrechen</button></div>
+  </div>
+</div>
+</main>
+
+<script>
+const SAMPLE = [
+"amor, amoris m. = die Liebe",
+"deus, dei m. = der Gott",
+"urbs, urbis f. = die Stadt",
+"et = und",
+"ego = ich",
+"tu = du",
+"nos = wir",
+"vos = ihr",
+"qui, quae, quod = der, die, das (Relativpronomen: welcher, welche, welches)"
+].join("\n");
+
+const $ = id => document.getElementById(id);
+let cards = [], queue = [], known = new Set(), flipped = false, dirLD = true, onlyUnknown = false;
+
+function store(k, v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k, v);}catch(e){ return null; } }
+
+function parse(text){
+  return text.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{
+    const i = l.indexOf("=");
+    return i>0 ? {la:l.slice(0,i).trim(), de:l.slice(i+1).trim()} : null;
+  }).filter(Boolean);
+}
+function build(shuffle){
+  queue = cards.map((c,i)=>i).filter(i=>!onlyUnknown || !known.has(cards[i].la));
+  if(shuffle) queue.sort(()=>Math.random()-.5);
+  flipped = false; render();
+}
+function render(){
+  const done = cards.filter(c=>known.has(c.la)).length;
+  $("pb").style.width = cards.length ? (done/cards.length*100)+"%" : "0";
+  $("cnt").textContent = done+" von "+cards.length+" gewusst";
+  updateStats(done);
+  $("clec").textContent = ""; $("cnum").textContent = ""; $("cside").textContent = "";
+  if(!queue.length){
+    $("front").textContent = cards.length ? "Alles gewusst" : "Noch keine Vokabeln";
+    $("front").className="w de"; $("hint").textContent = cards.length ? "Tippe auf „Zurücksetzen“, um neu zu starten." : "Lies im Reiter „Vokabeln“ ein Foto ein.";
+    return;
+  }
+  const c = cards[queue[0]];
+  const showLa = flipped ? !dirLD : dirLD;
+  $("front").textContent = showLa ? c.la : c.de;
+  $("front").className = "w" + (showLa ? "" : " de");
+  $("hint").textContent = flipped ? "Wische nach rechts: gewusst, nach links: nochmal" : "Antippen zum Umdrehen";
+  $("clec").textContent = c.lec || ""; $("cnum").textContent = queue.length+" offen";
+  $("cside").textContent = showLa ? "Latein" : "Deutsch";
+}
+function updateStats(done){
+  $("sV").textContent = cards.length; $("sK").textContent = pct(done,cards.length)+" %"; $("sKl").textContent = done+" von "+cards.length+" gewusst";
+  const sel = curName();
+  const best = getHS().filter(e=>(e.l||"Ohne Lektion")===sel).reduce((m,e)=>Math.max(m,e.p),0);
+  $("sB").textContent = best || "–";
+  const hl = getHist().filter(x=>(x.l||"")===sel), last = hl[hl.length-1];
+  $("tinfo").textContent = sel+" · "+cards.length+" Vokabeln"+(last ? " · letzter Test "+pct(last.ok,last.q)+" %" : "");
+}
+function answer(ok){
+  if(!queue.length) return;
+  const i = queue.shift(), c = cards[i];
+  if(ok){ known.add(c.la); } else { known.delete(c.la); queue.push(i); }
+  try{ navigator.vibrate && navigator.vibrate(ok ? 10 : [10,40,10]); }catch(e){}
+  store("lat_known", JSON.stringify([...known]));
+  flipped = false; render();
+}
+let busy = false, sup = false;
+function pop(){ const m = $("lmid"); m.classList.remove("pop"); void m.offsetWidth; m.classList.add("pop"); }
+function flip(){ if(queue.length && !busy){ flipped = !flipped; render(); pop(); } }
+function fly(ok){
+  if(busy || !queue.length) return; busy = true;
+  const c = $("card");
+  c.style.transition = "transform .2s ease, opacity .2s";
+  c.style.transform = "translateX("+(ok?500:-500)+"px) rotate("+(ok?18:-18)+"deg)";
+  c.style.opacity = "0";
+  setTimeout(()=>{
+    c.style.transition = "none"; c.style.transform = ""; answer(ok); pop();
+    requestAnimationFrame(()=>{ c.style.transition = "opacity .2s"; c.style.opacity = "1"; busy = false; });
+  }, 190);
+}
+(function(){
+  const c = $("card"); let sx = 0, dx = 0, drag = false;
+  c.addEventListener("pointerdown", e=>{
+    if(!queue.length || busy) return;
+    drag = true; sup = false; sx = e.clientX; dx = 0; c.style.transition = "none";
+    try{ c.setPointerCapture(e.pointerId); }catch(err){}
+  });
+  c.addEventListener("pointermove", e=>{
+    if(!drag) return;
+    dx = e.clientX - sx;
+    if(Math.abs(dx) > 8) sup = true;
+    c.style.transform = "translateX("+dx+"px) rotate("+(dx/25)+"deg)";
+    c.dataset.dir = dx > 50 ? "yes" : dx < -50 ? "no" : "";
+  });
+  const end = ()=>{
+    if(!drag) return; drag = false; c.dataset.dir = "";
+    if(Math.abs(dx) > 90){ c.style.transform = ""; fly(dx > 0); }
+    else { c.style.transition = "transform .2s ease"; c.style.transform = ""; }
+  };
+  c.addEventListener("pointerup", end);
+  c.addEventListener("pointercancel", end);
+  c.addEventListener("click", ()=>{ if(sup){ sup = false; return; } flip(); });
+})();
+document.addEventListener("keydown", e=>{
+  if($("learn").hidden || /INPUT|TEXTAREA|SELECT/.test((e.target.tagName||""))) return;
+  if(e.key==="ArrowRight") fly(true);
+  else if(e.key==="ArrowLeft") fly(false);
+  else if(e.key===" " && e.target===document.body){ e.preventDefault(); flip(); }
+});
+$("known").onclick = ()=>fly(true);
+$("again").onclick = ()=>fly(false);
+$("shuf").onclick = ()=>build(true);
+$("dir").onclick = e=>{ dirLD=!dirLD; e.target.textContent = dirLD ? "Latein → Deutsch" : "Deutsch → Latein"; flipped=false; render(); };
+$("only").onclick = e=>{ onlyUnknown=!onlyUnknown; e.target.classList.toggle("on", onlyUnknown); build(); };
+$("reset").onclick = ()=>{ known = new Set(); store("lat_known","[]"); build(true); };
+/* ---------- Test ---------- */
+let T = null;
+const show = (id,v)=>{ $(id).hidden = !v; };
+function tab(v){
+  show("learn",v==="l"); show("test",v==="t"); show("hs",v==="h"); show("vok",v==="v");
+  show("lbar", v==="l"||v==="t");
+  ["L","T","H","V"].forEach(x=>$("tab"+x).classList.toggle("on",x.toLowerCase()===v));
+  if(v==="t"){ show("tsetup",true); show("tplay",false); show("tresult",false); }
+  if(v==="h"){ renderHS(); renderHist(); hsView("b"); }
+  if(v==="v") renderLessons();
+}
+$("tabL").onclick = ()=>tab("l");
+$("tabT").onclick = ()=>tab("t");
+$("tabH").onclick = ()=>tab("h");
+$("tabV").onclick = ()=>tab("v");
+$("tname").value = store("lat_name") || "";
+const MODES = {mc:"Multiple Choice", type:"Eintippen", mix:"Gemischt", form:"Formen & Geschlecht"};
+function getHS(){ try{ return JSON.parse(store("lat_hs")||"[]"); }catch(e){ return []; } }
+function renderHS(){
+  const hs = getHS(), box = $("hslist"); box.innerHTML = "";
+  $("hsempty").hidden = hs.length>0;
+  const groups = {};
+  hs.forEach(e=>{ const k = e.l || "Ohne Lektion"; (groups[k] = groups[k] || []).push(e); });
+  const order = ["Alle Lektionen", ...lessons.map(l=>l.name)];
+  Object.keys(groups).sort((a,b)=>{ const x=order.indexOf(a), y=order.indexOf(b); return (x<0?99:x)-(y<0?99:y); }).forEach(k=>{
+    const h = document.createElement("div"); h.className = "lh"; h.textContent = k; box.appendChild(h);
+    const ol = document.createElement("ol"); ol.className = "res hs";
+    groups[k].sort((a,b)=>b.p-a.p || b.ok/b.q-a.ok/a.q).forEach((e,idx)=>{
+      const li = document.createElement("li"); li.className = "hsrow";
+      const sp = (c,t)=>{ const x=document.createElement("span"); x.className=c; x.textContent=t; return x; };
+      const nm = sp("nm", e.n);
+      const sm = document.createElement("small"); sm.textContent = e.ok+" von "+e.q+" richtig ("+pct(e.ok,e.q)+" %), "+(MODES[e.m]||"")+", "+e.d; nm.appendChild(sm);
+      li.appendChild(sp("rk", idx+1)); li.appendChild(nm); li.appendChild(sp("pt", e.p+" P."));
+      ol.appendChild(li);
+    });
+    box.appendChild(ol);
+  });
+}
+function getHist(){ try{ return JSON.parse(store("lat_hist")||"[]"); }catch(e){ return []; } }
+function pct(ok,q){ return q ? Math.round(ok/q*100) : 0; }
+const pcls = p=>p>=80 ? "g" : p>=50 ? "m" : "b";
+function hsView(v){ show("hsBest",v==="b"); show("hsHist",v==="h"); $("vB").classList.toggle("on",v==="b"); $("vH").classList.toggle("on",v==="h"); }
+$("vB").onclick = ()=>hsView("b");
+$("vH").onclick = ()=>hsView("h");
+function prow(title, sub, val, p){
+  const row = document.createElement("div"); row.className = "lrow";
+  const t = document.createElement("span"); t.className = "lt";
+  const b = document.createElement("b"); b.textContent = title; t.appendChild(b);
+  const sm = document.createElement("small"); sm.textContent = sub; t.appendChild(sm);
+  const mini = document.createElement("i"); mini.className = "mini";
+  const em = document.createElement("em"); em.style.width = p+"%"; em.className = pcls(p); mini.appendChild(em); t.appendChild(mini);
+  const v = document.createElement("span"); v.className = "pv"; v.textContent = val;
+  row.appendChild(t); row.appendChild(v); return row;
+}
+function head(box, text){ const h = document.createElement("div"); h.className = "lh"; h.textContent = text; box.appendChild(h); }
+function renderHist(){
+  const h = getHist(), box = $("histbody"); box.innerHTML = "";
+  $("histempty").hidden = h.length>0; $("histclear").hidden = h.length===0;
+  if(!h.length) return;
+  const ps = h.map(x=>pct(x.ok,x.q));
+  const tiles = document.createElement("div"); tiles.className = "stats";
+  [[h.length,"Tests"],[Math.round(ps.reduce((a,b)=>a+b,0)/ps.length)+" %","Ø Quote"],[Math.max(...ps)+" %","Bestes Ergebnis"]].forEach(([v,l])=>{
+    const t = document.createElement("div"); t.className = "tile";
+    const b = document.createElement("b"); b.textContent = v;
+    const sp = document.createElement("span"); sp.textContent = l;
+    t.appendChild(b); t.appendChild(sp); tiles.appendChild(t);
+  });
+  box.appendChild(tiles);
+  const groups = {};
+  h.forEach(x=>{ const k = x.l || "Ohne Lektion"; (groups[k] = groups[k] || []).push(x); });
+  head(box, "Nach Lektion");
+  Object.keys(groups).forEach(k=>{
+    const g = groups[k], avg = Math.round(g.reduce((a,x)=>a+pct(x.ok,x.q),0)/g.length);
+    box.appendChild(prow(k, g.length+(g.length===1 ? " Test" : " Tests")+", bester "+Math.max(...g.map(x=>pct(x.ok,x.q)))+" %", avg+" %", avg));
+  });
+  head(box, "Letzte Tests");
+  h.slice(-20).reverse().forEach(x=>{
+    const p = pct(x.ok,x.q);
+    box.appendChild(prow((x.l||"Ohne Lektion"), x.ok+" von "+x.q+" richtig, "+(MODES[x.m]||"")+", "+x.d, p+" %", p));
+  });
+}
+$("histclear").onclick = ()=>{ if(confirm("Verlauf wirklich löschen?")){ store("lat_hist","[]"); renderHist(); } };
+$("hsclear").onclick = ()=>{ if(confirm("Highscore wirklich löschen?")){ store("lat_hs","[]"); renderHS(); } };
+function saveHS(){
+  const name = ($("tname").value.trim() || "Ich").slice(0,20);
+  store("lat_name", name==="Ich" ? "" : name);
+  const hist = getHist();
+  hist.push({l:T.lesson, p:T.pts, ok:T.ok, q:T.q.length, m:T.mode, d:new Date().toISOString().slice(0,10)});
+  store("lat_hist", JSON.stringify(hist.slice(-100)));
+  const e = {n:name, l:T.lesson, p:T.pts, q:T.q.length, ok:T.ok, d:new Date().toISOString().slice(0,10), m:T.mode};
+  const groups = {};
+  [...getHS(), e].forEach(x=>{ const k = x.l || "Ohne Lektion"; (groups[k] = groups[k] || []).push(x); });
+  let keep = [];
+  Object.values(groups).forEach(g=>{ g.sort((a,b)=>b.p-a.p || b.ok/b.q-a.ok/a.q); keep = keep.concat(g.slice(0,10)); });
+  store("lat_hs", JSON.stringify(keep));
+  return groups[e.l].indexOf(e)+1;
+}
+const nLa = s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z\s]/g," ").replace(/\s+/g," ").trim();
+const nDe = s=>s.toLowerCase().replace(/\([^)]*\)/g,"").replace(/[^a-zäöüß\s]/g," ").replace(/\s+/g," ").trim().replace(/^(der|die|das|ein|eine)\s+/,"");
+function accepted(c, askLa){
+  return (askLa ? [nLa(c.la), nLa(c.la.split(",")[0])] : [...c.de.split(/[;,]/).map(nDe), nDe(c.de)]).filter(Boolean);
+}
+function startTest(idxs){
+  if(cards.length<1){ alert("Diese Lektion hat noch keine Vokabeln."); return; }
+  const ld = $("tdir").value==="ld";
+  const mode = $("ttype").value;
+  let pool = idxs || cards.map((_,i)=>i).sort(()=>Math.random()-.5);
+  if(!idxs){ const n=$("tcount").value; if(n!=="all") pool = pool.slice(0,+n); }
+  T = {q:pool, pos:0, ld, mode, wrong:[], ok:0, pts:0, retry:!!idxs, lesson:(idxs && T) ? T.lesson : curName()};
+  show("lbar",false); show("tsetup",false); show("tresult",false); show("tplay",true);
+  ask();
+}
+function ask(){
+  const i = T.q[T.pos], c = cards[i];
+  prog();
+  let qt = T.mode;
+  if(qt==="mix") qt = Math.random()<.5 ? "mc" : "type";
+  if(qt==="mc" && cards.length<3) qt = "type";
+  $("tl").textContent = T.lesson; $("tm").textContent = ({mc:"Multiple Choice",type:"Eintippen",form:"Formen & Geschlecht"})[qt] || "";
+  $("ts").textContent = T.ld ? "Latein → Deutsch" : "Deutsch → Latein";
+  $("tq").textContent = T.ld ? (qt==="form" ? parseLa(c.la).head : c.la) : c.de;
+  $("tq").className = "w"+(T.ld?"":" de");
+  $("tfb").textContent = ""; $("tfb").className = "fb";
+  show("tnext",false); show("topts",qt==="mc"); show("tform",qt==="type"); show("tfields",qt==="form");
+  const o = $("topts"); o.innerHTML = "";
+  $("tfields").innerHTML = "";
+  if(qt==="type"){
+    $("tin").value=""; $("tin").disabled=false; $("tcheck").disabled=false; $("tin").focus();
+    return;
+  }
+  if(qt==="form"){ buildFields(c); return; }
+  const ans = x=>T.ld ? cards[x].de : cards[x].la;
+  const right = ans(i);
+  const others = [...new Set(cards.map((_,k)=>k).filter(k=>k!==i).map(ans).filter(a=>a!==right))].sort(()=>Math.random()-.5).slice(0,3);
+  [right,...others].sort(()=>Math.random()-.5).forEach(t=>{
+    const b = document.createElement("button");
+    b.className = "opt"; b.textContent = t;
+    b.onclick = ()=>{ if(t!==right) b.classList.add("bad"); judge(t===right, null, t===right ? 5 : 0); };
+    o.appendChild(b);
+  });
+}
+function parseLa(s){
+  let t = s.trim(), g = "";
+  const m = t.match(/\s+([mfn])\.?(?:\s*\/\s*([mfn])\.?)?\s*$/i);
+  if(m){ g = m[1].toLowerCase() + (m[2] ? "/"+m[2].toLowerCase() : ""); t = t.slice(0,m.index).trim(); }
+  const parts = t.split(",").map(x=>x.trim()).filter(Boolean);
+  return {head: parts[0]||"", forms: parts.slice(1), gender: g};
+}
+function buildFields(c){
+  const p = parseLa(c.la), box = $("tfields"); box.innerHTML = "";
+  const F = [];
+  const add = (k,label,isSel)=>{
+    const w = document.createElement("label"); w.className = "fld"; w.appendChild(document.createTextNode(label));
+    let el;
+    if(isSel){
+      el = document.createElement("select");
+      ["","m","f","n"].forEach(v=>{ const o=document.createElement("option"); o.value=v; o.textContent=v||"wählen"; el.appendChild(o); });
+    } else {
+      el = document.createElement("input"); el.type="text"; el.autocomplete="off"; el.autocapitalize="off"; el.spellcheck=false;
+    }
+    w.appendChild(el); box.appendChild(w); F.push({k,el});
+  };
+  add(T.ld ? "tr" : "la", T.ld ? "Deutsch" : "Latein (Grundform)");
+  if(p.forms.length) add("fo","Weitere Formen (z. B. Genitiv)");
+  if(p.gender) add("ge","Geschlecht",true);
+  const b = document.createElement("button"); b.className = "on"; b.textContent = "Prüfen"; b.onclick = checkForm;
+  box.appendChild(b);
+  box.onkeydown = e=>{ if(e.key==="Enter" && !b.disabled) checkForm(); };
+  T.F = F; T.p = p; F[0].el.focus();
+}
+function checkForm(){
+  const c = cards[T.q[T.pos]], p = T.p;
+  const btn = $("tfields").querySelector("button");
+  if(btn.disabled) return;
+  btn.disabled = true;
+  let ok = true, pts = 0, typo = false, note = "";
+  T.F.forEach(({k,el})=>{
+    const v = el.value; let g = false;
+    if(k==="tr"){
+      const r = gradeDe(c,v); g = r.n>0; if(g){ pts += ptsDe(r); typo = typo || r.typo; note = noteDe({...r, typo:false}, c); }
+    } else if(k==="la"){
+      const r = gradeLa(v,[p.head]); g = r.ok; if(g){ pts += 10; typo = typo || r.typo; }
+    } else if(k==="fo"){
+      const r = gradeLa(v,[p.forms.join(" ")]); g = r.ok; if(g){ pts += 5; typo = typo || r.typo; }
+    } else {
+      g = !!v && p.gender.split("/").includes(v); if(g) pts += 5;
+    }
+    el.style.borderColor = g ? "var(--ok)" : "var(--bad)";
+    el.disabled = true;
+    if(!g) ok = false;
+  });
+  if(typo) note = ("Kleiner Tippfehler, zählt trotzdem.\n"+note).trim();
+  judge(ok, c.la+" = "+c.de, pts, note);
+}
+function prog(){ $("tprog").textContent = "Frage "+(T.pos+1)+" von "+T.q.length+" – "+T.pts+" Punkte"; }
+function judge(ok, rightFull, pts, note){
+  const i = T.q[T.pos], c = cards[i];
+  const right = rightFull || (T.ld ? c.de : c.la);
+  pts = pts || 0;
+  T.pts += pts; prog();
+  if(ok) T.ok++; else T.wrong.push(i);
+  $("tfb").textContent = (ok ? "Richtig ✓" : "Nicht ganz. Richtig: "+right) + "\n+"+pts+" Punkte" + (note ? "\n"+note : "");
+  $("tfb").className = "fb "+(ok?"yes":"no");
+  document.querySelectorAll(".opt").forEach(b=>{ b.disabled=true; if(b.textContent===right) b.classList.add("good"); });
+  $("tin").disabled = true; $("tcheck").disabled = true;
+  if(ok) known.add(c.la); else known.delete(c.la);
+  store("lat_known", JSON.stringify([...known])); render();
+  $("tnext").textContent = T.pos+1>=T.q.length ? "Ergebnis ansehen" : "Weiter";
+  show("tnext",true); $("tnext").focus();
+}
+function lev(a,b){
+  const m=a.length, n=b.length; if(!m) return n; if(!n) return m;
+  let p = Array.from({length:n+1},(_,j)=>j);
+  for(let i=1;i<=m;i++){
+    const c=[i];
+    for(let j=1;j<=n;j++) c[j]=Math.min(p[j]+1, c[j-1]+1, p[j-1]+(a[i-1]===b[j-1]?0:1));
+    p=c;
+  }
+  return p[n];
+}
+const tol = s=>s.length<=3 ? 0 : s.length<=7 ? 1 : 2;
+const close = (a,b)=>!!a && !!b && (a===b || lev(a,b)<=tol(b));
+function meanings(c){ return [...new Set(c.de.replace(/\([^)]*\)/g,"").split(/[;,]/).map(nDe).filter(Boolean))]; }
+function gradeDe(c, v){
+  const M = meanings(c);
+  const U = v.replace(/\([^)]*\)/g,"").split(/[;,\/]/).map(nDe).filter(Boolean);
+  let n = 0, typo = false;
+  M.forEach(m=>{
+    if(U.some(u=>{ if(u===m) return true; if(close(u,m)){ typo=true; return true; } return false; })) n++;
+  });
+  const whole = nDe(v.replace(/[()]/g," ")), full = nDe(c.de.replace(/[()]/g," "));
+  if(!n && close(whole,full)){ n = M.length||1; typo = typo || whole!==full; }
+  return {n, total: M.length||1, typo};
+}
+function gradeLa(v, targets){
+  const u = nLa(v); let ok=false, typo=false;
+  targets.map(nLa).forEach(t=>{ if(u && u===t) ok=true; else if(close(u,t)){ ok=true; typo=true; } });
+  return {ok, typo: typo && !targets.map(nLa).includes(u)};
+}
+function noteDe(g, c){
+  const n = [];
+  if(g.typo) n.push("Kleiner Tippfehler, zählt trotzdem.");
+  if(g.total>1 && g.n>0) n.push(g.n===g.total ? "Alle Bedeutungen genannt, Bonus!" : "Es gibt "+g.total+" Bedeutungen, du hast "+g.n+" genannt. Alle: "+c.de);
+  return n.join("\n");
+}
+const ptsDe = g=>g.n>0 ? 10+5*(g.n-1) : 0;
+function check(){
+  if($("tin").disabled) return;
+  const c = cards[T.q[T.pos]], v = $("tin").value;
+  if(T.ld){
+    const g = gradeDe(c,v);
+    judge(g.n>0, c.de, ptsDe(g), noteDe(g,c));
+  } else {
+    const g = gradeLa(v, [c.la, parseLa(c.la).head]);
+    judge(g.ok, c.la, g.ok?10:0, g.typo ? "Kleiner Tippfehler, zählt trotzdem." : "");
+  }
+}
+$("tcheck").onclick = check;
+$("tin").onkeydown = e=>{ if(e.key==="Enter") check(); };
+$("tnext").onclick = ()=>{ T.pos++; if(T.pos>=T.q.length) finish(); else ask(); };
+$("tstart").onclick = ()=>startTest();
+function finish(){
+  show("tplay",false); show("tresult",true);
+  const r = $("tresult"); r.innerHTML = "";
+  const rank = T.retry ? -1 : saveHS(); render();
+  const h = document.createElement("div"); h.className = "stats";
+  [[T.pts,"Punkte"],[T.ok+"/"+T.q.length,"richtig"],[Math.round(T.ok/T.q.length*100)+" %","Quote"]].forEach(([v,l])=>{
+    const t = document.createElement("div"); t.className = "tile";
+    const b = document.createElement("b"); b.textContent = v;
+    const sp = document.createElement("span"); sp.textContent = l;
+    t.appendChild(b); t.appendChild(sp); h.appendChild(t);
+  });
+  r.appendChild(h);
+  const s = document.createElement("div"); s.className = "small";
+  s.textContent = (rank===-1 ? "Fehler-Wiederholung, zählt nicht für den Highscore." : rank===1 ? "Neuer Highscore für "+T.lesson+"!" : rank>0 ? "Platz "+rank+" im Highscore für "+T.lesson+"." : "Nicht in den Top 10.");
+  r.appendChild(s);
+  if(T.wrong.length){
+    const p = document.createElement("div"); p.className="small"; p.textContent="Das solltest du nochmal lernen:"; r.appendChild(p);
+    const ul = document.createElement("ul"); ul.className="res";
+    T.wrong.forEach(i=>{ const li=document.createElement("li"); li.textContent=cards[i].la+" = "+cards[i].de; ul.appendChild(li); });
+    r.appendChild(ul);
+  }
+  const bar = document.createElement("div"); bar.className="bar";
+  if(T.wrong.length){
+    const b = document.createElement("button"); b.className="on"; b.textContent="Fehler nochmal testen";
+    const w = T.wrong.slice(); b.onclick=()=>startTest(w); bar.appendChild(b);
+  }
+  const n = document.createElement("button"); n.textContent="Neuer Test"; n.onclick=()=>tab("t"); bar.appendChild(n);
+  const v = document.createElement("button"); v.textContent="Verlauf ansehen"; v.onclick=()=>{ tab("h"); hsView("h"); }; bar.appendChild(v);
+  r.appendChild(bar);
+}
+
+function loadScript(src){
+  return new Promise((res,rej)=>{
+    if(window.Tesseract) return res();
+    const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=()=>rej(new Error("Skript konnte nicht geladen werden"));
+    document.head.appendChild(s);
+  });
+}
+function tidy(text){
+  return text.split("\n").map(l=>l.replace(/[|_]+/g," ").trim()).filter(l=>l.length>2).map(l=>{
+    if(l.includes("=")) return l;
+    const parts = l.split(/\t|\s[–—-]\s|\s{2,}/).map(p=>p.trim()).filter(Boolean);
+    return parts.length>=2 ? parts[0]+" = "+parts.slice(1).join(" ") : l+" = ???";
+  }).join("\n");
+}
+/* ---------- Lektionen ---------- */
+let lessons = [], editIdx = -1;
+function getSel(){
+  const v = store("lat_sel"); if(!v) return [];
+  try{ const a = JSON.parse(v); if(Array.isArray(a)) return a.filter(n=>lessons.some(l=>l.name===n)); }catch(e){}
+  return lessons.some(l=>l.name===v) ? [v] : [];
+}
+function setSel(a){ store("lat_sel", JSON.stringify(a)); }
+function curName(){ const a = getSel(); return a.length && a.length<lessons.length ? a.join(" + ") : "Alle Lektionen"; }
+const mk = (t,f)=>{ const b=document.createElement("button"); b.textContent=t; b.onclick=f; return b; };
+function saveLessons(){
+  store("lat_lessons", JSON.stringify(lessons));
+  setSel(getSel());
+  renderLessonSel(); renderLessons(); rebuildCards();
+}
+function renderLessonSel(){
+  const box = $("lsel"), sel = getSel(); box.innerHTML = "";
+  const chip = (t,on,f)=>{ const b=document.createElement("button"); b.textContent=t; b.className="lchip"+(on?" on":""); b.setAttribute("aria-pressed", on ? "true" : "false"); b.onclick=f; box.appendChild(b); };
+  chip("Alle", sel.length===0, ()=>{ setSel([]); renderLessonSel(); rebuildCards(); });
+  lessons.forEach(l=>chip(l.name, sel.includes(l.name), ()=>{
+    const cur = getSel(), i = cur.indexOf(l.name);
+    if(i>=0) cur.splice(i,1); else cur.push(l.name);
+    setSel(cur); renderLessonSel(); rebuildCards();
+  }));
+}
+function rebuildCards(){
+  const sel = getSel();
+  cards = lessons.filter(l=>!sel.length || sel.includes(l.name)).flatMap(l=>parse(l.text).map(c=>({...c, lec:l.name})));
+  build(true);
+}
+function renderLessons(){
+  const box = $("llist"); box.innerHTML = "";
+  if(!lessons.length){ const p=document.createElement("p"); p.className="small"; p.textContent="Noch keine Lektion. Lies oben ein Foto ein."; box.appendChild(p); return; }
+  lessons.forEach((l,i)=>{
+    const row = document.createElement("div"); row.className = "lrow";
+    const cs = parse(l.text), kn = cs.filter(c=>known.has(c.la)).length;
+    const t = document.createElement("span"); t.className = "lt";
+    const nb = document.createElement("b"); nb.textContent = l.name; t.appendChild(nb);
+    const sm = document.createElement("small"); const th = getHist().filter(x=>x.l===l.name);
+    const avg = th.length ? Math.round(th.reduce((a,x)=>a+pct(x.ok,x.q),0)/th.length) : null;
+    sm.textContent = cs.length+" Vokabeln, "+kn+" gewusst ("+pct(kn,cs.length)+" %)"+(avg!==null ? ", Test Ø "+avg+" %" : ""); t.appendChild(sm);
+    const mini = document.createElement("i"); mini.className = "mini";
+    const fill = document.createElement("em"); fill.style.width = (cs.length ? kn/cs.length*100 : 0)+"%";
+    mini.appendChild(fill); t.appendChild(mini);
+    const acts = document.createElement("span");
+    acts.appendChild(mk("Ändern", ()=>openEdit(i)));
+    acts.appendChild(mk("Löschen", ()=>{ if(confirm("Lektion „"+l.name+"“ löschen?")){ lessons.splice(i,1); show("medit",false); editIdx=-1; saveLessons(); } }));
+    row.appendChild(t); row.appendChild(acts); box.appendChild(row);
+  });
+}
+function openEdit(i){ editIdx = i; $("mname").textContent = lessons[i].name; $("mtext").value = lessons[i].text; show("medit",true); $("mtext").focus(); }
+$("msave").onclick = ()=>{ if(editIdx<0) return; lessons[editIdx].text = $("mtext").value.trim(); editIdx=-1; show("medit",false); saveLessons(); };
+$("mcancel").onclick = ()=>{ editIdx=-1; show("medit",false); };
+
+$("photoBtn").onclick = ()=>{
+  if(!$("vname").value.trim()){ $("ocrStatus").textContent = "Gib zuerst die Lektion an, z. B. „Lektion 15“."; $("vname").focus(); return; }
+  $("photo").click();
+};
+$("photo").onchange = async e=>{
+  const files = [...e.target.files]; if(!files.length) return;
+  const st = $("ocrStatus"); let all = "";
+  try{
+    st.textContent = "Lade Texterkennung …";
+    await loadScript("https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js");
+    for(let k=0;k<files.length;k++){
+      const r = await Tesseract.recognize(files[k], "lat+deu", {logger:m=>{ if(m.status==="recognizing text") st.textContent = "Lese Foto "+(k+1)+" von "+files.length+" … "+Math.round(m.progress*100)+" %"; }});
+      all += (all ? "\n" : "") + tidy(r.data.text);
+    }
+    $("rtext").value = all; show("review",true);
+    st.textContent = "Fertig. Prüfe den Text, korrigiere Fehler und ersetze „???“.";
+  }catch(err){
+    st.textContent = "Das Foto konnte nicht gelesen werden ("+err.message+"). Prüfe deine Internetverbindung.";
+  }
+  e.target.value = "";
+};
+$("rsave").onclick = ()=>{
+  const name = $("vname").value.trim().slice(0,30), text = $("rtext").value.trim();
+  if(!name || !text) return;
+  if(text.includes("???")){ $("ocrStatus").textContent = "Ersetze zuerst alle „???“ durch die richtige Bedeutung."; return; }
+  const ex = lessons.find(l=>l.name===name);
+  if(ex) ex.text = (ex.text.trim()+"\n"+text).trim(); else lessons.push({name, text});
+  const cs = getSel(); if(cs.length && !cs.includes(name)){ cs.push(name); setSel(cs); }
+  saveLessons(); $("vname").value = "";
+  show("review",false); $("rtext").value = "";
+  $("ocrStatus").textContent = "Gespeichert in „"+name+"“. Du kannst jetzt lernen oder testen. Für eine weitere Lektion gibst du oben einen neuen Namen ein.";
+};
+
+function init(){
+  try{ known = new Set(JSON.parse(store("lat_known")||"[]")); }catch(e){ known = new Set(); }
+  const raw = store("lat_lessons");
+  if(raw===null){
+    const old = store("lat_deck");
+    lessons = [{name: old ? "Meine Vokabeln" : "Beispiel", text: old || SAMPLE}];
+  } else { try{ lessons = JSON.parse(raw); }catch(e){ lessons = []; } }
+  saveLessons();
+}
+init();
+</script>
+</body>
+</html>
