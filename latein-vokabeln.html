@@ -23,6 +23,10 @@
   --serif:"Libre Caslon Text",Georgia,serif;
 }
 :root[data-lang=en]{--acc:#6ea8ff;--accInk:#07101f;--soft:rgba(110,168,255,.15)}
+:root[data-skin=ocean]{--acc:#3cc6d6;--accInk:#04181b;--soft:rgba(60,198,214,.15)}
+:root[data-skin=berry]{--acc:#f472b6;--accInk:#22060f;--soft:rgba(244,114,182,.15)}
+:root[data-skin=violet]{--acc:#a78bfa;--accInk:#120a26;--soft:rgba(167,139,250,.16)}
+:root[data-skin=sunset]{--acc:#fb923c;--accInk:#1f0c02;--soft:rgba(251,146,60,.15)}
 @media (prefers-color-scheme:light){
   :root{
     color-scheme:light;
@@ -33,6 +37,10 @@
     --shadow:0 12px 30px rgba(20,30,50,.09);
   }
   :root[data-lang=en]{--acc:#2563eb;--accInk:#fff;--soft:rgba(37,99,235,.1)}
+  :root[data-skin=ocean]{--acc:#0e7490;--accInk:#fff;--soft:rgba(14,116,144,.1)}
+  :root[data-skin=berry]{--acc:#be185d;--accInk:#fff;--soft:rgba(190,24,93,.09)}
+  :root[data-skin=violet]{--acc:#6d28d9;--accInk:#fff;--soft:rgba(109,40,217,.09)}
+  :root[data-skin=sunset]{--acc:#c2410c;--accInk:#fff;--soft:rgba(194,65,12,.09)}
 }
 
 /* ---------- Grundlagen ---------- */
@@ -77,16 +85,18 @@ details[open] summary::before{transform:rotate(90deg)}
 @supports ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
   .top{background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 }
-.ring{--p:0;flex:none;width:44px;height:44px;border-radius:50%;padding:0;background:conic-gradient(var(--acc) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;transition:background .3s}
+.ring{--p:0;position:relative;flex:none;width:44px;height:44px;border-radius:50%;padding:0;background:conic-gradient(var(--acc) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;transition:background .3s}
 .ring b{width:36px;height:36px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font:700 1rem/1 var(--disp)}
 .brand{flex:1;min-width:0;line-height:1.2}
-.brand h1{font-size:1.25rem;letter-spacing:-.01em}
+.brand h1{font-size:1.08rem;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand small{display:block;color:var(--mute);font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chips{display:flex;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:5px;padding:7px 11px;border-radius:999px;background:var(--card);border:1px solid var(--line);font:600 .92rem var(--disp);font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:5px;flex:none;margin-left:auto}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:var(--card);border:1px solid var(--line);font:600 .92rem var(--disp);font-variant-numeric:tabular-nums}
 .chip .ce{font-size:.95rem;line-height:1}
 .chip.cold .ce{filter:grayscale(1);opacity:.5}
 .chip.bump{animation:bump .45s ease-out}
+.ring .av{width:37px;height:37px}
+.lvb{position:absolute;right:-6px;bottom:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:var(--acc);color:var(--accInk);font:700 .68rem/16px var(--disp);text-align:center;border:2px solid var(--bg)}
 @keyframes bump{40%{transform:scale(1.14)}}
 
 /* ---------- Sprache & Tagesziel ---------- */
@@ -202,7 +212,8 @@ details[open] summary::before{transform:rotate(90deg)}
 #tnext{width:100%;margin-top:12px;padding:15px;border-radius:16px}
 .hero{text-align:center;padding:6px 0 4px}
 .bigring{--p:0;--c:var(--acc);width:136px;height:136px;border-radius:50%;margin:6px auto 14px;background:conic-gradient(var(--c) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center}
-.bigring div{width:112px;height:112px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font:700 1.9rem var(--disp)}
+.bigring>.av{width:114px;height:114px}
+.pctbig{font:700 2.1rem/1.1 var(--disp);margin-bottom:4px;font-variant-numeric:tabular-nums}
 .hero h2{font-size:1.45rem}
 .xpgain{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--acc);font:600 .95rem var(--disp);padding:7px 15px;border-radius:99px;margin:10px 0 16px}
 .res{margin:8px 0;padding:0;list-style:none}
@@ -214,7 +225,8 @@ details[open] summary::before{transform:rotate(90deg)}
 /* ---------- Erfolge ---------- */
 .lvcard{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 20%,var(--card)),var(--card) 75%)}
 .ring.big{width:78px;height:78px}
-.ring.big b{width:64px;height:64px;font-size:1.6rem;background:var(--card)}
+.ring.big .av{width:68px;height:68px}
+.ring.big .lvb{min-width:28px;height:28px;font-size:.85rem;line-height:24px;border-color:var(--card)}
 .lvi{flex:1;min-width:0}
 .lvi small{color:var(--mute);font-size:.76rem}
 .lvi h2{font-size:1.3rem;line-height:1.2;margin-bottom:8px}
@@ -269,14 +281,62 @@ details[open] summary::before{transform:rotate(90deg)}
 #medit{margin-top:6px}
 #medit textarea{min-height:170px}
 
+/* ---------- Münzen, Avatar & Shop ---------- */
+.coin{display:inline-block;width:1em;height:1em;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6c4 0 16%,#ffd23f 18% 58%,#e9a900 60%);box-shadow:inset 0 0 0 1.5px #c48a00;vertical-align:-.14em;flex:none}
+.av{display:block;border-radius:50%;overflow:hidden;background:var(--card2);background:color-mix(in srgb,var(--acc) 22%,var(--card))}
+.av svg{display:block;width:100%;height:100%}
+.daily{display:flex;align-items:center;gap:12px;padding:11px 12px 11px 14px;border-radius:18px;margin:0 0 14px;background:var(--card);background:linear-gradient(120deg,color-mix(in srgb,var(--acc) 24%,var(--card)),var(--card));border:1px solid var(--line);animation:pop .3s ease-out}
+.daily .e{font-size:1.8rem;line-height:1;animation:wiggle 2s ease-in-out infinite}
+.daily div{flex:1;min-width:0}
+.daily b{display:block;font:600 .95rem var(--disp)}
+.daily small{display:block;color:var(--mute);font-size:.78rem}
+.daily button{flex:none;padding:10px 16px;border-radius:12px}
+@keyframes wiggle{0%,60%,100%{transform:rotate(0)}10%{transform:rotate(-14deg)}20%{transform:rotate(12deg)}30%{transform:rotate(-8deg)}40%{transform:rotate(5deg)}}
+#shop{padding-bottom:76px}
+.avstage{display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 16px 16px;background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 16%,var(--card)),var(--card) 80%)}
+.avbig{width:150px;height:150px;box-shadow:0 10px 26px rgba(0,0,0,.22);animation:float 3.6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px)}}
+.avstage h2{font-size:1.15rem;margin-top:16px}
+.avstage small{color:var(--mute);font-size:.8rem}
+.coinbar{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 15px;border-radius:99px;background:var(--card2);font:700 1.1rem var(--disp);font-variant-numeric:tabular-nums}
+#cats{margin:0 -18px 12px;padding:0 18px 2px;overflow-x:auto;scrollbar-width:none}
+#cats::-webkit-scrollbar{display:none}
+.items{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px 9px;border-radius:16px;background:var(--card);border:1px solid var(--line);min-width:0}
+.item:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+.item .av,.item .sw{display:block;width:62px;height:62px;border-radius:50%}
+.item b{font-size:.78rem;font-weight:600;line-height:1.2;text-align:center}
+.pr{display:inline-flex;align-items:center;gap:4px;font:600 .74rem var(--disp);color:var(--mute)}
+.item.own .pr{color:var(--ok)}
+.item.on{border-color:var(--acc);background:var(--soft)}
+.item.on .pr{color:var(--acc)}
+.item.prev{border-color:var(--acc);border-style:dashed}
+.item.lock .av,.item.lock .sw{filter:grayscale(.85);opacity:.5}
+.buybar{position:fixed;left:50%;bottom:calc(80px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:29;width:min(444px,calc(100vw - 28px));display:flex;align-items:center;gap:6px;padding:10px 10px 10px 16px;border-radius:18px;background:var(--card2);border:1px solid var(--line);box-shadow:var(--shadow);animation:bbin .22s ease-out}
+@keyframes bbin{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+.buybar div{flex:1;min-width:0}
+.buybar b{display:block;font:600 .95rem var(--disp);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.buybar small{display:flex;align-items:center;gap:4px;color:var(--mute);font-size:.78rem;line-height:1.3}
+.buybar .ghost{padding:10px 8px}
+.buybar .primary{padding:11px 16px;border-radius:12px}
+.lchip.tr{color:var(--bad)}
+.lchip.tr.on{background:var(--badbg);color:var(--bad)}
+.srow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:10px 2px;border-bottom:1px solid var(--line);font-size:.92rem}
+.srow:last-child{border-bottom:0}
+.srow span{min-width:0;overflow-wrap:anywhere}
+.srow small{color:var(--mute);font-size:.76rem;white-space:nowrap}
+input[type=search]{width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink);font-size:1rem;-webkit-appearance:none;appearance:none}
+input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3px var(--soft)}
+#sres{margin:6px 0 10px}
+
 /* ---------- Navigation ---------- */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
 @supports ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
   .nav{background:color-mix(in srgb,var(--bg) 85%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 }
-.nav div{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
-.nav button{background:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 2px;border-radius:12px;color:var(--mute);font-size:.72rem;font-weight:600}
-.nav svg{width:22px;height:22px;padding:4px 16px;box-sizing:content-box;border-radius:99px;transition:background .2s}
+.nav div{max-width:480px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+.nav button{background:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 2px;border-radius:12px;color:var(--mute);font-size:.7rem;font-weight:600}
+.nav svg{width:22px;height:22px;padding:4px 12px;box-sizing:content-box;border-radius:99px;transition:background .2s}
 .nav button:hover{color:var(--ink)}
 .nav button.on{color:var(--acc)}
 .nav button.on svg{background:var(--soft)}
@@ -300,10 +360,12 @@ details[open] summary::before{transform:rotate(90deg)}
   *,*::before{transition:none!important;animation:none!important}
   button:active{transform:none!important}
 }
-@media (max-width:360px){
+@media (max-width:380px){
+  .brand{display:none}
+  #lbar,#cats{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}
   main{padding-left:14px;padding-right:14px}
   .top{margin:0 -14px;padding-left:14px;padding-right:14px}
-  .chip{padding:6px 9px}
+  .chip{padding:5px 8px}
   .w{font-size:2rem}
 }
 </style>
@@ -311,11 +373,12 @@ details[open] summary::before{transform:rotate(90deg)}
 <body>
 <main>
 <header class="top">
-  <button class="ring" id="lvlRing" aria-label="Level ansehen"><b id="lvlNum">1</b></button>
-  <div class="brand"><h1>Vokabeln</h1><small id="lvlSub">Level 1 · Neuling</small></div>
+  <button class="ring" id="lvlRing" aria-label="Dein Avatar"><span class="av" id="avTop"></span><span class="lvb" id="lvlNum">1</span></button>
+  <div class="brand"><h1 id="lvlH">Level 1</h1><small id="lvlSub">Neuling</small></div>
   <div class="chips">
     <button class="chip" id="stkChip" title="Tage in Folge mit erreichtem Tagesziel"><span class="ce">🔥</span><b id="stk">0</b></button>
     <button class="chip" id="xpChip" title="Deine Punkte"><span class="ce">⭐</span><b id="xpT">0</b></button>
+    <button class="chip" id="coinChip" title="Deine Münzen"><i class="coin ce"></i><b id="coinT">0</b></button>
   </div>
 </header>
 
@@ -324,6 +387,12 @@ details[open] summary::before{transform:rotate(90deg)}
   <button data-lang="en"><span class="lg">EN</span>Englisch</button>
 </div>
 <div class="goal" id="goal"><span>Tagesziel</span><div class="gbar"><i id="gfill"></i></div><b id="gtxt">0 / 50</b></div>
+
+<div class="daily" id="daily" hidden>
+  <span class="e">🎁</span>
+  <div><b>Tägliche Belohnung</b><small id="dSub"></small></div>
+  <button class="primary" id="dBtn">Abholen</button>
+</div>
 
 <div id="lbar"><div id="lsel" class="lchips" role="group" aria-label="Lektionen"></div></div>
 
@@ -425,7 +494,7 @@ details[open] summary::before{transform:rotate(90deg)}
 
   <div id="hsPts">
     <div class="panel lvcard">
-      <div class="ring big" id="lvRing"><b id="lvN">1</b></div>
+      <div class="ring big" id="lvRing"><span class="av" id="lvAv"></span><span class="lvb" id="lvN">1</span></div>
       <div class="lvi"><small>Dein Level</small><h2 id="lvT">Neuling</h2><div class="prog"><i id="lvBar"></i></div><p id="lvS"></p></div>
     </div>
     <div class="stats">
@@ -476,6 +545,30 @@ details[open] summary::before{transform:rotate(90deg)}
   </div>
 </section>
 
+<!-- ======== Shop ======== -->
+<section id="shop" hidden>
+  <div class="panel avstage">
+    <div class="av avbig" id="avBig"></div>
+    <h2 id="avLv">Level 1 · Neuling</h2>
+    <small>Tippe auf etwas, um es anzuprobieren.</small>
+    <div class="coinbar"><i class="coin"></i><span id="coinBig">0</span><span style="font-weight:500;color:var(--mute);font-size:.85rem">Münzen</span></div>
+  </div>
+  <div id="cats"><div class="lchips" id="catl" role="group" aria-label="Kategorien"></div></div>
+  <div class="items" id="items"></div>
+  <details>
+    <summary>So bekommst du Münzen</summary>
+    <ul class="plist">
+      <li><span>Je 5 Punkte, die du sammelst</span><b>+1</b></li>
+      <li><span>Tägliche Belohnung (steigt jeden Tag)</span><b>+10 bis +50</b></li>
+      <li><span>Tagesziel erreicht</span><b>+10</b></li>
+      <li><span>Test ohne Fehler</span><b>+10</b></li>
+      <li><span>Neues Abzeichen</span><b>+20</b></li>
+      <li><span>Level aufgestiegen</span><b>+25</b></li>
+    </ul>
+    <p class="small">Manche Sachen gibt es erst ab einem bestimmten Level. Was du gekauft hast, gehört dir für immer, und du kannst jederzeit wechseln.</p>
+  </details>
+</section>
+
 <!-- ======== Vokabeln ======== -->
 <section id="vok" hidden>
   <div class="panel">
@@ -498,6 +591,8 @@ details[open] summary::before{transform:rotate(90deg)}
     </div>
   </div>
   <h2 class="lh" id="llh">Deine Lektionen</h2>
+  <input id="vsearch" type="search" placeholder="🔍 Vokabel suchen …" autocomplete="off" aria-label="Vokabel suchen">
+  <div id="sres"></div>
   <div id="llist"></div>
   <div id="medit" class="panel" hidden>
     <label class="fld" style="margin-top:0"><span>Ändern: <b id="mname"></b></span>
@@ -506,7 +601,12 @@ details[open] summary::before{transform:rotate(90deg)}
     <p class="small">Eine Vokabel pro Zeile: Fremdwort = Deutsch, z. B. <i class="ex"></i></p>
     <div class="bar" style="margin-bottom:0"><button id="msave" class="primary">Speichern</button><button id="mcancel">Abbrechen</button></div>
   </div>
-  <p class="small">Deine Lektionen werden auf diesem Gerät in diesem Browser gespeichert und sind beim nächsten Öffnen wieder da.</p>
+  <div class="panel" style="margin-top:18px">
+    <div class="ph"><b>Sichern &amp; Gerät wechseln</b></div>
+    <p class="small" style="margin-top:0">Alles wird nur in diesem Browser gespeichert. Mit einem Backup nimmst du Lektionen, Punkte, Münzen und deinen Avatar auf ein anderes Gerät mit.</p>
+    <div class="two"><button id="bkOut">💾 Backup speichern</button><button id="bkIn">📂 Backup laden</button></div>
+    <input type="file" id="bkFile" accept="application/json,.json" hidden>
+  </div>
 </section>
 </main>
 
@@ -514,8 +614,15 @@ details[open] summary::before{transform:rotate(90deg)}
   <button id="tabL" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="14" rx="3"/><path d="M8 3h9a4 4 0 0 1 4 4v9"/></svg>Lernen</button>
   <button id="tabT"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4H9z"/><path d="M15 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>Test</button>
   <button id="tabH"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3"/><path d="M17 6h3v1a3 3 0 0 1-3 3"/><path d="M12 14v3"/><path d="M8 21h8l-1-4H9z"/></svg>Erfolge</button>
+  <button id="tabS"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>Shop</button>
   <button id="tabV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 11h4"/></svg>Vokabeln</button>
 </div></nav>
+
+<div class="buybar" id="buybar" hidden>
+  <div><b id="bbN"></b><small id="bbS"></small></div>
+  <button class="ghost" id="bbCancel">Zurück</button>
+  <button class="primary" id="bbBuy">Kaufen</button>
+</div>
 
 <div class="toasts" id="toasts" aria-live="polite"></div>
 
@@ -557,6 +664,148 @@ const MODES = {mc:"Multiple Choice", type:"Eintippen", mix:"Gemischt", form:"Mit
 const WD = ["So","Mo","Di","Mi","Do","Fr","Sa"];
 const TITLES = [[1,"Neuling"],[3,"Lernender"],[5,"Wortsammler"],[8,"Kenner"],[12,"Experte"],[16,"Meister"],[20,"Legende"]];
 
+/* ================= Avatar & Shop ================= */
+const INK = "#2b2d42";
+const SHOP = {
+  color:{t:"Farbe", items:[
+    {id:"sun",n:"Sonne",v:"#ffc94d",p:0},{id:"sky",n:"Himmel",v:"#6ab8ff",p:0},{id:"mint",n:"Minze",v:"#5fd4a8",p:0},
+    {id:"rose",n:"Rosa",v:"#ff8fb3",p:40},{id:"grape",n:"Traube",v:"#a98bff",p:40},{id:"orange",n:"Orange",v:"#ff9b52",p:40},
+    {id:"red",n:"Kirsche",v:"#ff6b6b",p:60},{id:"lime",n:"Limette",v:"#b5e05a",p:60},{id:"night",n:"Nacht",v:"#5b6690",p:80},
+    {id:"snow",n:"Schnee",v:"#eef2f7",p:80},{id:"choco",n:"Schoko",v:"#a0714f",p:80},{id:"gold",n:"Gold",v:"#f2c14e",p:300,lv:10,shine:true}]},
+  eyes:{t:"Augen", items:[
+    {id:"normal",n:"Normal",p:0},{id:"happy",n:"Fröhlich",p:30},{id:"sleepy",n:"Verträumt",p:30},{id:"wink",n:"Zwinkern",p:50},
+    {id:"heart",n:"Verliebt",p:100},{id:"star",n:"Sterne",p:120},{id:"cool",n:"Sonnenbrille",p:150}]},
+  mouth:{t:"Mund", items:[
+    {id:"smile",n:"Lächeln",p:0},{id:"grin",n:"Grinsen",p:30},{id:"wow",n:"Staunen",p:30},{id:"cat",n:"Katze",p:50},{id:"tongue",n:"Zunge",p:50}]},
+  hat:{t:"Kopf", items:[
+    {id:"none",n:"Nichts",p:0},{id:"cap",n:"Kappe",p:60},{id:"beanie",n:"Mütze",p:70},{id:"party",n:"Partyhut",p:80},
+    {id:"laurel",n:"Lorbeerkranz",p:100},{id:"tophat",n:"Zylinder",p:120},{id:"headphones",n:"Kopfhörer",p:150},
+    {id:"wizard",n:"Zauberhut",p:200},{id:"grad",n:"Doktorhut",p:250,lv:8},{id:"crown",n:"Krone",p:400,lv:12}]},
+  extra:{t:"Extras", items:[
+    {id:"none",n:"Nichts",p:0},{id:"bowtie",n:"Fliege",p:50},{id:"glasses",n:"Brille",p:60},{id:"scarf",n:"Schal",p:70},
+    {id:"flower",n:"Blume",p:80},{id:"book",n:"Buch",p:90},{id:"medal",n:"Medaille",p:150,lv:5}]},
+  bg:{t:"Hintergrund", items:[
+    {id:"soft",n:"Standard",p:0},{id:"peach",n:"Pfirsich",v:"#ffd9c2",p:20},{id:"lav",n:"Lavendel",v:"#ddd3ff",p:20},
+    {id:"aqua",n:"Lagune",v:"#c4eefa",p:20},{id:"leaf",n:"Wiese",v:"#cdeec0",p:20},{id:"sunburst",n:"Strahlen",p:120},
+    {id:"stars",n:"Sternenhimmel",p:150},{id:"rainbow",n:"Regenbogen",p:200,lv:6}]},
+  theme:{t:"App-Design", items:[
+    {id:"classic",n:"Klassisch",p:0},{id:"ocean",n:"Ozean",p:150},{id:"berry",n:"Beere",p:150},{id:"violet",n:"Lila",p:150},{id:"sunset",n:"Sonnenuntergang",p:150}]}
+};
+const THEMES = {classic:["#e3ae52","#6ea8ff"], ocean:["#3cc6d6","#0e7490"], berry:["#f472b6","#be185d"], violet:["#a78bfa","#6d28d9"], sunset:["#fb923c","#c2410c"]};
+const AV_DEF = {color:"sun", eyes:"normal", mouth:"smile", hat:"none", extra:"none", bg:"soft"};
+let AV = {...AV_DEF}, OWN = new Set(), THEME = "classic", shopCat = "color", preview = null, avKey = "", shownCoins = -1, coinWelcome = 0;
+const itemOf = (cat,id)=>SHOP[cat] ? SHOP[cat].items.find(x=>x.id===id) : null;
+const owned = (cat,id)=>{ const it = itemOf(cat,id); return !!it && (!it.p || OWN.has(cat+":"+id)); };
+function shade(h, a){
+  const n = parseInt(h.slice(1),16), f = x=>Math.max(0, Math.min(255, Math.round(a<0 ? x*(1+a) : x+(255-x)*a)));
+  return "#"+[n>>16, n>>8&255, n&255].map(x=>f(x).toString(16).padStart(2,"0")).join("");
+}
+function starPts(cx, cy, R, r){
+  const p = [];
+  for(let i=0;i<10;i++){ const a = Math.PI/5*i-Math.PI/2, q = i%2 ? r : R; p.push((cx+q*Math.cos(a)).toFixed(1)+","+(cy+q*Math.sin(a)).toFixed(1)); }
+  return p.join(" ");
+}
+const ln = (d, w)=>`<path d="${d}" stroke="${INK}" stroke-width="${w||3}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+const EYE = x=>`<ellipse cx="${x}" cy="50" rx="6.5" ry="7.5" fill="#fff"/><circle cx="${x+1}" cy="51" r="3.8" fill="${INK}"/><circle cx="${x+2.3}" cy="49.2" r="1.3" fill="#fff"/>`;
+const HEART = x=>`<path d="M${x} 56.5L${x-6.4} 50.3A3.9 3.9 0 0 1 ${x} 44.8A3.9 3.9 0 0 1 ${x+6.4} 50.3Z" fill="#ff4d6d"/>`;
+const STAR = (x,y,R,r,f,st)=>`<polygon points="${starPts(x,y,R,r)}" fill="${f}"${st ? ` stroke="${st}" stroke-width="1" stroke-linejoin="round"` : ""}/>`;
+function eyesSVG(k){
+  switch(k){
+    case "happy": return ln("M33 52Q39 44 45 52M55 52Q61 44 67 52", 3.2);
+    case "sleepy": return ln("M33 49Q39 54.5 45 49M55 49Q61 54.5 67 49", 3.2);
+    case "wink": return EYE(39)+ln("M55 51Q61 45 67 51", 3.2);
+    case "heart": return HEART(39)+HEART(61);
+    case "star": return STAR(39,50,8,3.4,"#ffd23f","#d99a00")+STAR(61,50,8,3.4,"#ffd23f","#d99a00");
+    case "cool": return `<path d="M28 44h18v6a6.5 6.5 0 0 1-6.5 6.5h-5A6.5 6.5 0 0 1 28 50zM54 44h18v6a6.5 6.5 0 0 1-6.5 6.5h-5A6.5 6.5 0 0 1 54 50z" fill="#1d1f2b"/><path d="M46 46.5h8" stroke="#1d1f2b" stroke-width="2.6"/><path d="M31.5 47.5l4-2M57.5 47.5l4-2" stroke="#fff" stroke-width="1.6" opacity=".55" stroke-linecap="round"/>`;
+    default: return EYE(39)+EYE(61);
+  }
+}
+function mouthSVG(k){
+  switch(k){
+    case "grin": return `<path d="M41 60Q50 74 59 60Z" fill="${INK}" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/><path d="M44.8 66Q50 71.2 55.2 66Q50 63.6 44.8 66Z" fill="#ff7a8a"/>`;
+    case "wow": return `<ellipse cx="50" cy="64" rx="4" ry="5" fill="${INK}"/>`;
+    case "cat": return ln("M42.5 61Q46.25 65.5 50 61Q53.75 65.5 57.5 61", 2.6);
+    case "tongue": return `<path d="M47 64h6v3.2a3 3 0 0 1-6 0z" fill="#ff6f8e"/>`+ln("M43.5 62Q50 68 56.5 62");
+    default: return ln("M44 62Q50 68 56 62");
+  }
+}
+function laurel(){
+  let s = "";
+  [[200,262,-25],[278,340,25]].forEach(([a0,a1,tw])=>{
+    for(let i=0;i<5;i++){
+      const a = (a0+(a1-a0)*i/4)*Math.PI/180, x = (50+29*Math.cos(a)).toFixed(1), y = (47+29*Math.sin(a)).toFixed(1), rot = Math.round(a*180/Math.PI+90+tw);
+      s += `<ellipse cx="${x}" cy="${y}" rx="6" ry="2.8" transform="rotate(${rot} ${x} ${y})" fill="${i%2 ? "#4f9a45" : "#6cb85c"}" stroke="#3b7a33" stroke-width=".8"/>`;
+    }
+  });
+  return s+`<circle cx="50" cy="18.5" r="2.4" fill="#e63946"/>`;
+}
+function flower(cx, cy){
+  let s = "";
+  for(let i=0;i<5;i++){ const a = i*72*Math.PI/180-Math.PI/2; s += `<circle cx="${(cx+5*Math.cos(a)).toFixed(1)}" cy="${(cy+5*Math.sin(a)).toFixed(1)}" r="4" fill="#ff8fab"/>`; }
+  return s+`<circle cx="${cx}" cy="${cy}" r="3.2" fill="#ffd23f"/>`;
+}
+function hatSVG(k){
+  switch(k){
+    case "cap": return `<path d="M26 33Q26 12 50 12Q74 12 74 33Z" fill="#e63946"/><path d="M68 30Q86 28 91 34Q80 37.5 66 35Z" fill="#b5172a"/><circle cx="50" cy="12.5" r="2.6" fill="#b5172a"/>`;
+    case "beanie": return `<path d="M25 35Q25 9 50 9Q75 9 75 35Z" fill="#4361ee"/><rect x="23" y="29" width="54" height="9" rx="4.5" fill="#3a0ca3"/><circle cx="50" cy="8" r="5.5" fill="#f72585"/>`;
+    case "party": return `<path d="M37 27L50 2L63 27Z" fill="#7b2cbf"/><circle cx="46" cy="20" r="2" fill="#ffd23f"/><circle cx="54" cy="14" r="2" fill="#4cc9f0"/><circle cx="51" cy="23" r="1.8" fill="#f72585"/><circle cx="50" cy="3.5" r="4" fill="#ffd23f"/>`;
+    case "laurel": return laurel();
+    case "tophat": return `<rect x="35" y="1" width="30" height="23" rx="2.5" fill="#22223b"/><rect x="35" y="16" width="30" height="5" fill="#e63946"/><rect x="25" y="22" width="50" height="6.5" rx="3.2" fill="#22223b"/>`;
+    case "headphones": return `<path d="M19 54Q19 14 50 14Q81 14 81 54" stroke="#2b2d42" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="11" y="44" width="13" height="21" rx="5.5" fill="#ef476f"/><rect x="76" y="44" width="13" height="21" rx="5.5" fill="#ef476f"/>`;
+    case "wizard": return `<path d="M26 31L54 1L74 31Z" fill="#3c096c"/><ellipse cx="50" cy="31" rx="28" ry="5.5" fill="#5a189a"/>`+STAR(52,17,4.5,1.9,"#ffd23f")+`<circle cx="44" cy="25" r="1.4" fill="#ffd23f"/><circle cx="60" cy="24" r="1.2" fill="#ffd23f"/>`;
+    case "grad": return `<path d="M34 23v9q16 7 32 0v-9z" fill="#1b1b2f"/><path d="M17 20L50 7L83 20L50 33Z" fill="#2b2d42"/><circle cx="50" cy="20" r="2" fill="#ffd23f"/><path d="M50 20L77 23v13" stroke="#ffd23f" stroke-width="1.8" fill="none"/><circle cx="77" cy="37.5" r="2.8" fill="#ffd23f"/>`;
+    case "crown": return `<path d="M28 31L30 9L40 19L50 4L60 19L70 9L72 31Z" fill="#ffd23f" stroke="#d99a00" stroke-width="1.6" stroke-linejoin="round"/><circle cx="50" cy="24" r="3.2" fill="#ef476f"/><circle cx="38" cy="26" r="2.3" fill="#4cc9f0"/><circle cx="62" cy="26" r="2.3" fill="#4cc9f0"/>`;
+    default: return "";
+  }
+}
+function extraSVG(k){
+  switch(k){
+    case "bowtie": return `<path d="M50 81L38.5 75V87ZM50 81L61.5 75V87Z" fill="#e63946"/><circle cx="50" cy="81" r="3.2" fill="#b5172a"/>`;
+    case "glasses": return `<g fill="none" stroke="${INK}" stroke-width="2.4"><circle cx="39" cy="50" r="9.5"/><circle cx="61" cy="50" r="9.5"/><path d="M48.5 49Q50 47 51.5 49"/></g>`;
+    case "scarf": return `<path d="M21 71Q50 86 79 71L81 79Q50 95 19 79Z" fill="#e63946"/><path d="M61 82L64 97L72 95L69 81Z" fill="#c1121f"/><path d="M30 77.5L33 79.5M44 81.5L47 82M57 81.5L60 81" stroke="#fff" stroke-width="2" opacity=".6" stroke-linecap="round"/>`;
+    case "flower": return flower(71,28);
+    case "book": return `<g transform="rotate(-14 28 80)"><rect x="15" y="71" width="27" height="19" rx="2.5" fill="#4361ee"/><rect x="18" y="74" width="21" height="2.4" rx="1.2" fill="#fff" opacity=".85"/><rect x="18" y="79" width="14" height="2.4" rx="1.2" fill="#fff" opacity=".6"/><rect x="15" y="86" width="27" height="4" fill="#3a0ca3"/></g>`;
+    case "medal": return `<path d="M43 68L50 78L57 68" stroke="#4361ee" stroke-width="4.5" fill="none" stroke-linejoin="round"/><circle cx="50" cy="81" r="7" fill="#ffd23f" stroke="#d99a00" stroke-width="1.5"/>`+STAR(50,81,3.8,1.6,"#d99a00");
+    default: return "";
+  }
+}
+function bgSVG(k, id){
+  const it = itemOf("bg", k);
+  if(!it) return "";
+  if(it.v) return `<rect width="100" height="100" fill="${it.v}"/>`;
+  if(k==="sunburst"){
+    let s = `<rect width="100" height="100" fill="#ffe08a"/>`;
+    for(let i=0;i<12;i+=2){
+      const a1 = i*Math.PI/6, a2 = (i+1)*Math.PI/6;
+      s += `<path d="M50 50L${(50+80*Math.cos(a1)).toFixed(1)} ${(50+80*Math.sin(a1)).toFixed(1)}L${(50+80*Math.cos(a2)).toFixed(1)} ${(50+80*Math.sin(a2)).toFixed(1)}Z" fill="#ffcd4d"/>`;
+    }
+    return s;
+  }
+  if(k==="stars"){
+    let s = `<rect width="100" height="100" fill="#1d2b53"/>`;
+    [[14,18,1.4],[30,8,1],[88,34,1],[8,44,1.1],[92,62,1.3],[12,76,1],[84,84,1.2],[64,6,1],[40,95,1],[24,30,.8]].forEach(([x,y,r])=>{ s += `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity=".9"/>`; });
+    return s+`<circle cx="80" cy="18" r="7" fill="#ffe8a3"/><circle cx="83.5" cy="15.5" r="6" fill="#1d2b53"/>`;
+  }
+  if(k==="rainbow") return `<defs><linearGradient id="${id}r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffadad"/><stop offset=".25" stop-color="#ffd6a5"/><stop offset=".5" stop-color="#caffbf"/><stop offset=".75" stop-color="#9bf6ff"/><stop offset="1" stop-color="#bdb2ff"/></linearGradient></defs><rect width="100" height="100" fill="url(#${id}r)"/>`;
+  return "";
+}
+let avN = 0;
+function avatarSVG(a, mood){
+  a = Object.assign({}, AV_DEF, a, mood||{});
+  const id = "av"+(++avN), it = itemOf("color", a.color) || SHOP.color.items[0], col = it.v, dk = shade(col, -.3);
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">`
+    + bgSVG(a.bg, id)
+    + `<ellipse cx="37" cy="89" rx="9" ry="5" fill="${dk}"/><ellipse cx="63" cy="89" rx="9" ry="5" fill="${dk}"/>`
+    + `<path d="M50 20C73 20 85 38 85 59C85 79 70 90 50 90C30 90 15 79 15 59C15 38 27 20 50 20Z" fill="${col}" stroke="${dk}" stroke-width="1.4" stroke-opacity=".55"/>`
+    + `<ellipse cx="50" cy="73" rx="21" ry="13" fill="#fff" opacity=".25"/>`
+    + `<path d="M28 42Q31 30 41 25" stroke="#fff" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".35"/>`
+    + (it.shine ? STAR(77,38,4.5,1.6,"#fff")+STAR(23,70,3,1.1,"#fff") : "")
+    + `<ellipse cx="30" cy="61" rx="5.5" ry="3.5" fill="#ff6b8b" opacity=".4"/><ellipse cx="70" cy="61" rx="5.5" ry="3.5" fill="#ff6b8b" opacity=".4"/>`
+    + mouthSVG(a.mouth) + eyesSVG(a.eyes) + extraSVG(a.extra) + hatSVG(a.hat)
+    + `</svg>`;
+}
+function applyTheme(id){ document.documentElement.dataset.skin = THEMES[id] && id!=="classic" ? id : ""; }
+
 /* ================= Hilfsfunktionen ================= */
 const $ = id => document.getElementById(id);
 const show = (id,v)=>{ $(id).hidden = !v; };
@@ -581,6 +830,7 @@ const fit = t=>t.length>36 ? " xs" : t.length>20 ? " s" : "";
 let lang = "la", lessons = [], knownSets = {la:new Set(), en:new Set()}, known = knownSets.la;
 let cards = [], queue = [], flipped = false, dirFw = true, onlyUnknown = false;
 let XP = null, curTab = "l", hsCur = "p", T = null, editRef = null;
+let trouble = {la:{}, en:{}}, troubleMode = false;
 let TS = {dir:"fd", count:"10", type:"mc"};
 
 function parse(text){
@@ -592,9 +842,14 @@ function parse(text){
 const saveKnown = ()=>save("vok_known_"+lang, [...known]);
 
 /* ================= Punkte-System ================= */
-const newXP = ()=>({total:0, days:{}, hit:[], goal:50, cards:0, tests:0, perfect:0, combo:0, bestStreak:0, langs:{la:0,en:0}, badges:[], lt:null});
+const newXP = ()=>({total:0, days:{}, hit:[], goal:50, cards:0, tests:0, perfect:0, combo:0, bestStreak:0, langs:{la:0,en:0}, badges:[], lt:null, coins:0, coinAcc:0, coinsTotal:0, bought:0, daily:null});
 function loadXP(){
-  const x = Object.assign(newXP(), load("vok_xp", {}));
+  const raw = load("vok_xp", {}), x = Object.assign(newXP(), raw);
+  if(typeof raw.coins!=="number"){
+    // Startguthaben für alle, die schon vor dem Shop Punkte gesammelt haben
+    x.coins = x.coinsTotal = Math.floor((+x.total||0)/5) + 20*arr(x.badges).length;
+    coinWelcome = x.coins;
+  }
   x.langs = Object.assign({la:0,en:0}, x.langs);
   x.hit = arr(x.hit); x.badges = arr(x.badges);
   if(!x.days || typeof x.days!=="object") x.days = {};
@@ -618,14 +873,18 @@ function markHit(){
   XP.bestStreak = Math.max(XP.bestStreak||0, streak());
   return true;
 }
+function gainCoins(n){ n = Math.round(n||0); if(n<=0) return; XP.coins += n; XP.coinsTotal = (XP.coinsTotal||0)+n; }
 function addXP(n){
   n = Math.round(n||0); if(n<=0) return;
   const lv0 = lvl(XP.total).lv, d = today();
   XP.total += n; XP.days[d] = (XP.days[d]||0)+n; XP.langs[lang] = (XP.langs[lang]||0)+n;
+  XP.coinAcc = (XP.coinAcc||0)+n; const cc = Math.floor(XP.coinAcc/5); XP.coinAcc -= cc*5; gainCoins(cc);
   const hit = markHit(), lv1 = lvl(XP.total).lv;
+  if(hit) gainCoins(10);
+  if(lv1>lv0) gainCoins(25*(lv1-lv0));
   saveXP(); renderTop(); floatXP(n);
-  if(hit){ const s = streak(); toast("🎯","Tagesziel geschafft!", s>1 ? "🔥 "+s+" Tage in Folge – stark!" : "🔥 Deine Serie hat begonnen. Komm morgen wieder!"); confetti(); }
-  if(lv1>lv0){ toast("🎉","Level "+lv1+" erreicht!", title(lv1)!==title(lv0) ? "Neuer Titel: "+title(lv1) : "Weiter so!"); confetti(); }
+  if(hit){ const s = streak(); toast("🎯","Tagesziel geschafft!", (s>1 ? "🔥 "+s+" Tage in Folge" : "🔥 Deine Serie hat begonnen")+" · +10 Münzen"); confetti(); }
+  if(lv1>lv0){ toast("🎉","Level "+lv1+" erreicht!", (title(lv1)!==title(lv0) ? "Neuer Titel: "+title(lv1) : "Weiter so!")+" · +"+25*(lv1-lv0)+" Münzen"); confetti(); }
   checkBadges(true);
 }
 function learnPts(c, ok){
@@ -641,6 +900,7 @@ const BADGES = [
   {id:"first",   e:"🌱", t:"Erste Schritte",   d:"Erste Karte gelernt",            ok:x=>x.cards>=1},
   {id:"test1",   e:"📝", t:"Erster Test",      d:"Einen Test beendet",             ok:x=>x.tests>=1},
   {id:"xp100",   e:"⭐", t:"Hunderter",        d:"100 Punkte gesammelt",           ok:x=>x.total>=100},
+  {id:"shop1",   e:"🛍️", t:"Erster Einkauf",   d:"Etwas im Shop gekauft",          ok:x=>x.bought>=1},
   {id:"cards100",e:"📚", t:"Fleißig",          d:"100 Karten gelernt",             ok:x=>x.cards>=100},
   {id:"streak3", e:"🔥", t:"Dranbleiben",      d:"3 Tage in Folge das Tagesziel",  ok:x=>x.bestStreak>=3},
   {id:"perfect", e:"💯", t:"Fehlerfrei",       d:"Test ohne Fehler (ab 5 Fragen)", ok:x=>x.perfect>=1},
@@ -648,17 +908,19 @@ const BADGES = [
   {id:"master",  e:"✅", t:"Lektion gemeistert", d:"Alle Vokabeln einer Lektion gewusst", ok:()=>masteredAny()},
   {id:"both",    e:"🌍", t:"Zweisprachig",     d:"Latein und Englisch geübt",      ok:x=>x.langs.la>0 && x.langs.en>0},
   {id:"xp1000",  e:"🌟", t:"Tausender",        d:"1.000 Punkte gesammelt",         ok:x=>x.total>=1000},
+  {id:"shop10",  e:"🎨", t:"Stylist",          d:"10 Sachen im Shop gekauft",      ok:x=>x.bought>=10},
   {id:"streak7", e:"🗓️", t:"Wochenheld",       d:"7 Tage in Folge das Tagesziel",  ok:x=>x.bestStreak>=7},
+  {id:"rich",    e:"💰", t:"Schatzmeister",    d:"1.000 Münzen gesammelt",         ok:x=>x.coinsTotal>=1000},
   {id:"xp5000",  e:"👑", t:"Vokabelkönig",     d:"5.000 Punkte gesammelt",         ok:x=>x.total>=5000}
 ];
 function checkBadges(notify){
   let n = 0;
   BADGES.forEach(b=>{
     if(XP.badges.includes(b.id) || !b.ok(XP)) return;
-    XP.badges.push(b.id); n++;
-    if(notify) toast(b.e, "Neues Abzeichen: "+b.t, b.d);
+    XP.badges.push(b.id); n++; gainCoins(20);
+    if(notify) toast(b.e, "Neues Abzeichen: "+b.t, b.d+" · +20 Münzen");
   });
-  if(n) saveXP();
+  if(n){ saveXP(); if(notify) renderTop(); }
 }
 
 /* ---------- Effekte ---------- */
@@ -698,9 +960,13 @@ function confetti(){
 function renderTop(){
   const L = lvl(XP.total);
   $("lvlNum").textContent = L.lv; $("lvlRing").style.setProperty("--p", Math.round(L.cur/L.need*100));
-  $("lvlSub").textContent = "Level "+L.lv+" · "+title(L.lv);
-  $("lvlRing").title = "Noch "+fmt(L.need-L.cur)+" Punkte bis Level "+(L.lv+1);
+  $("lvlH").textContent = "Level "+L.lv; $("lvlSub").textContent = title(L.lv);
+  $("lvlRing").title = "Dein Avatar · noch "+fmt(L.need-L.cur)+" Punkte bis Level "+(L.lv+1);
+  const ak = JSON.stringify(AV); if(ak!==avKey){ avKey = ak; $("avTop").innerHTML = avatarSVG(AV); }
   $("xpT").textContent = fmt(XP.total);
+  $("coinT").textContent = fmt(XP.coins);
+  if(shownCoins>=0 && XP.coins>shownCoins){ const cc = $("coinChip"); cc.classList.remove("bump"); void cc.offsetWidth; cc.classList.add("bump"); }
+  shownCoins = XP.coins;
   const s = streak(); $("stk").textContent = s;
   $("stkChip").classList.toggle("cold", !hitToday());
   $("stkChip").title = s+(s===1 ? " Tag" : " Tage")+" in Folge"+(hitToday() ? " – heute geschafft" : " – heute noch nicht geschafft");
@@ -733,9 +999,9 @@ function render(){
   ["flec","fnum","fside","blec","bnum","bside","bq","bw","bhint"].forEach(id=>$(id).textContent = "");
   if(empty){
     if(flipped) setFlip(false,false);
-    $("fw").textContent = cards.length ? "Alles gewusst! 🎉" : "Noch keine Vokabeln";
+    $("fw").textContent = cards.length ? "Alles gewusst! 🎉" : troubleMode ? "Fehlerkiste ist leer 🎉" : "Noch keine Vokabeln";
     $("fw").className = "w de";
-    $("fhint").textContent = cards.length ? "Tippe auf „Zurücksetzen“, um neu zu starten." : "Leg im Bereich „Vokabeln“ eine Lektion an.";
+    $("fhint").textContent = cards.length ? "Tippe auf „Zurücksetzen“, um neu zu starten." : troubleMode ? "Hier landen Vokabeln, die du nicht wusstest." : "Leg im Bereich „Vokabeln“ eine Lektion an.";
     return;
   }
   const c = cards[queue[0]];
@@ -765,9 +1031,9 @@ function answer(ok){
   const i = queue.shift(), c = cards[i];
   if(ok) known.add(c.fw); else { known.delete(c.fw); queue.push(i); }
   try{ navigator.vibrate && navigator.vibrate(ok ? 10 : [10,40,10]); }catch(e){}
-  saveKnown();
+  saveKnown(); markTrouble(c, ok);
   XP.cards++; const p = learnPts(c, ok); saveXP();
-  setFlip(false,false); render();
+  setFlip(false,false); render(); renderLessonSel();
   if(p) addXP(p); else checkBadges(true);
 }
 let busy = false, sup = false;
@@ -855,19 +1121,24 @@ $("reset").onclick = ()=>{ if(known.size && !confirm("Alle „gewusst“-Markier
 /* ================= Tabs ================= */
 function tab(v){
   curTab = v;
-  show("learn",v==="l"); show("test",v==="t"); show("hs",v==="h"); show("vok",v==="v");
+  if(v!=="s") clearPreview();
+  show("learn",v==="l"); show("test",v==="t"); show("hs",v==="h"); show("shop",v==="s"); show("vok",v==="v");
   show("lbar", v==="l"||v==="t"); show("langbar", true);
-  ["L","T","H","V"].forEach(x=>{ const on = x.toLowerCase()===v; $("tab"+x).classList.toggle("on",on); $("tab"+x).setAttribute("aria-current", on ? "page" : "false"); });
+  ["L","T","H","S","V"].forEach(x=>{ const on = x.toLowerCase()===v; $("tab"+x).classList.toggle("on",on); $("tab"+x).setAttribute("aria-current", on ? "page" : "false"); });
   if(v==="t"){ show("tsetup",true); show("tplay",false); show("tresult",false); }
   if(v==="h") hsView(hsCur);
+  if(v==="s") renderShop();
   if(v==="v") renderLessons();
+  renderDaily(); renderBuybar();
   window.scrollTo(0,0);
 }
 $("tabL").onclick = ()=>tab("l");
 $("tabT").onclick = ()=>tab("t");
 $("tabH").onclick = ()=>tab("h");
 $("tabV").onclick = ()=>tab("v");
-$("xpChip").onclick = $("stkChip").onclick = $("lvlRing").onclick = ()=>{ hsCur = "p"; tab("h"); };
+$("tabS").onclick = ()=>tab("s");
+$("coinChip").onclick = $("lvlRing").onclick = ()=>tab("s");
+$("xpChip").onclick = $("stkChip").onclick = ()=>{ hsCur = "p"; tab("h"); };
 
 /* ================= Sprache ================= */
 function setLang(l, initial){
@@ -876,6 +1147,7 @@ function setLang(l, initial){
   document.documentElement.dataset.lang = l;
   document.querySelectorAll("#langbar button").forEach(b=>{ const on = b.dataset.lang===l; b.classList.toggle("on",on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
   editRef = null; show("medit",false); show("review",false); $("rtext").value = "";
+  troubleMode = false; $("vsearch").value = ""; $("sres").innerHTML = "";
   try{ window.speechSynthesis && speechSynthesis.cancel(); }catch(e){}
   applyLabels(); renderLessonSel(); rebuildCards();
   if(!initial) tab(curTab);
@@ -921,7 +1193,7 @@ $("vH").onclick = ()=>hsView("h");
 
 function renderAch(){
   const L = lvl(XP.total), p = Math.round(L.cur/L.need*100);
-  $("lvN").textContent = L.lv; $("lvRing").style.setProperty("--p", p);
+  $("lvN").textContent = L.lv; $("lvRing").style.setProperty("--p", p); $("lvAv").innerHTML = avatarSVG(AV);
   $("lvT").textContent = "Level "+L.lv+" · "+title(L.lv);
   $("lvBar").style.width = p+"%";
   $("lvS").textContent = "Noch "+fmt(L.need-L.cur)+" Punkte bis Level "+(L.lv+1);
@@ -934,7 +1206,7 @@ function renderAch(){
     b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
     b.onclick = ()=>{
       XP.goal = +b.dataset.v;
-      if(markHit()){ toast("🎯","Tagesziel geschafft!","Mit deinem neuen Ziel hast du es heute schon erreicht."); }
+      if(markHit()){ gainCoins(10); toast("🎯","Tagesziel geschafft!","Mit dem neuen Ziel hast du es heute schon erreicht · +10 Münzen"); }
       saveXP(); checkBadges(true); renderTop(); renderAch();
     };
   });
@@ -1120,7 +1392,7 @@ function startTest(idxs){
   const fd = TS.dir==="fd", mode = TS.type;
   let pool = idxs ? idxs.slice() : shuffle(cards.map((_,i)=>i));
   if(!idxs && TS.count!=="all") pool = pool.slice(0, +TS.count);
-  T = {q:pool, pos:0, fd, mode, wrong:[], ok:0, pts:0, combo:0, maxCombo:0, retry:!!idxs, lesson:(idxs && T) ? T.lesson : curName(), xp0:XP.total};
+  T = {q:pool, pos:0, fd, mode, wrong:[], ok:0, pts:0, combo:0, maxCombo:0, retry:!!idxs, lesson:(idxs && T) ? T.lesson : curName(), xp0:XP.total, c0:XP.coins};
   show("lbar",false); show("langbar",false); show("tsetup",false); show("tresult",false); show("tplay",true);
   window.scrollTo(0,0);
   ask();
@@ -1230,7 +1502,7 @@ function judge(ok, rightFull, pts, note){
   $("tin").disabled = true; $("tcheck").disabled = true;
   if(T.qt==="type") $("tin").style.borderColor = ok ? "var(--ok)" : "var(--bad)";
   if(ok) known.add(c.fw); else known.delete(c.fw);
-  saveKnown(); render();
+  saveKnown(); markTrouble(c, ok); render();
   $("tnext").textContent = T.pos+1>=T.q.length ? "Ergebnis ansehen" : "Weiter";
   show("tnext",true); $("tnext").focus({preventScroll:true});
   try{ $("tnext").scrollIntoView({block:"nearest", behavior: RM ? "auto" : "smooth"}); }catch(e){}
@@ -1257,7 +1529,7 @@ function finish(){
   show("tplay",false); show("tresult",true); show("langbar",true); show("lbar",true);
   const n = T.q.length, perfect = T.ok===n && n>=5;
   let bonus = 0;
-  if(perfect){ bonus = 20; T.pts += bonus; XP.perfect++; }
+  if(perfect){ bonus = 20; T.pts += bonus; XP.perfect++; gainCoins(10); }
   XP.tests++;
   const rank = T.retry ? -1 : saveHS();
   if(bonus) addXP(bonus); else { saveXP(); checkBadges(true); }
@@ -1265,14 +1537,17 @@ function finish(){
   const r = $("tresult"); r.innerHTML = "";
   const p = pct(T.ok, n), hero = E("div","hero");
   const ring = E("div","bigring"); ring.style.setProperty("--p", p); ring.style.setProperty("--c", p>=80 ? "var(--ok)" : p>=50 ? "var(--acc)" : "var(--bad)");
-  ring.appendChild(E("div","",p+" %")); hero.appendChild(ring);
+  const rav = E("div","av"); rav.innerHTML = avatarSVG(AV, p===100 ? {eyes:"star", mouth:"grin"} : p<50 ? {mouth:"wow"} : null);
+  ring.appendChild(rav); hero.appendChild(ring);
+  hero.appendChild(E("div","pctbig",p+" %"));
   hero.appendChild(E("h2","", p===100 ? "Perfekt! 🎉" : p>=80 ? "Super gemacht!" : p>=50 ? "Gut, weiter so!" : "Übung macht den Meister"));
-  hero.appendChild(E("div","xpgain","⭐ +"+fmt(XP.total-T.xp0)+" Punkte für dein Konto"));
+  const xg = E("div","xpgain","⭐ +"+fmt(XP.total-T.xp0)+" Punkte ·"); xg.appendChild(E("i","coin")); xg.appendChild(document.createTextNode("+"+fmt(XP.coins-T.c0)));
+  hero.appendChild(xg);
   r.appendChild(hero);
   const st = E("div","stats");
   [[fmt(T.pts),"Punkte im Test"],[T.ok+"/"+n,"richtig"],[T.maxCombo,"beste Serie 🔥"]].forEach(([v,l])=>{ const t = E("div","tile"); t.appendChild(E("b","",String(v))); t.appendChild(E("span","",l)); st.appendChild(t); });
   r.appendChild(st);
-  if(bonus) r.appendChild(E("p","small","💯 Fehlerfrei-Bonus: +20 Punkte sind schon dabei."));
+  if(bonus) r.appendChild(E("p","small","💯 Fehlerfrei-Bonus: +20 Punkte und +10 Münzen sind schon dabei."));
   r.appendChild(E("p","small", rank===-1 ? "Fehler-Wiederholung, zählt nicht für die Bestenliste." : rank===1 ? "🏆 Neuer Highscore für „"+T.lesson+"“!" : rank>0 ? "Platz "+rank+" in der Bestenliste für „"+T.lesson+"“." : "Diesmal nicht in den Top 10."));
   if(T.wrong.length){
     r.appendChild(E("div","lh","Das solltest du nochmal lernen"));
@@ -1293,7 +1568,7 @@ function finish(){
 const langLessons = ()=>lessons.filter(l=>l.lang===lang);
 function getSel(){ const a = load("vok_sel_"+lang, []), ll = langLessons(); return arr(a).filter(n=>ll.some(l=>l.name===n)); }
 function setSel(a){ save("vok_sel_"+lang, a); }
-function curName(){ const a = getSel(); return a.length && a.length<langLessons().length ? a.join(" + ") : "Alle Lektionen"; }
+function curName(){ if(troubleMode) return "Fehlerkiste"; const a = getSel(); return a.length && a.length<langLessons().length ? a.join(" + ") : "Alle Lektionen"; }
 function saveLessons(){
   save("vok_lessons", lessons);
   setSel(getSel());
@@ -1301,17 +1576,20 @@ function saveLessons(){
 }
 function renderLessonSel(){
   const box = $("lsel"), sel = getSel(); box.innerHTML = "";
-  const chip = (t, on, f)=>{ const b = E("button","lchip"+(on ? " on" : ""), t); b.setAttribute("aria-pressed", on ? "true" : "false"); b.onclick = f; box.appendChild(b); };
-  chip("Alle", sel.length===0, ()=>{ setSel([]); renderLessonSel(); rebuildCards(); });
-  langLessons().forEach(l=>chip(l.name, sel.includes(l.name), ()=>{
+  const chip = (t, on, f, cls)=>{ const b = E("button","lchip"+(cls ? " "+cls : "")+(on ? " on" : ""), t); b.setAttribute("aria-pressed", on ? "true" : "false"); b.onclick = f; box.appendChild(b); };
+  chip("Alle", !troubleMode && sel.length===0, ()=>{ troubleMode = false; setSel([]); renderLessonSel(); rebuildCards(); });
+  const n = troubleCards().length;
+  if(n || troubleMode) chip("⚠️ Fehlerkiste "+n, troubleMode, ()=>{ troubleMode = !troubleMode; renderLessonSel(); rebuildCards(); }, "tr");
+  langLessons().forEach(l=>chip(l.name, !troubleMode && sel.includes(l.name), ()=>{
     const cur = getSel(), i = cur.indexOf(l.name);
-    if(i>=0) cur.splice(i,1); else cur.push(l.name);
+    if(troubleMode){ troubleMode = false; if(i<0) cur.push(l.name); }
+    else if(i>=0) cur.splice(i,1); else cur.push(l.name);
     setSel(cur); renderLessonSel(); rebuildCards();
   }));
 }
 function rebuildCards(){
   const sel = getSel();
-  cards = langLessons().filter(l=>!sel.length || sel.includes(l.name)).flatMap(l=>parse(l.text).map(c=>({...c, lec:l.name})));
+  cards = troubleMode ? troubleCards() : langLessons().filter(l=>!sel.length || sel.includes(l.name)).flatMap(l=>parse(l.text).map(c=>({...c, lec:l.name})));
   build(true);
 }
 function renderLessons(){
@@ -1328,6 +1606,7 @@ function renderLessons(){
     const mini = E("i","mini"), fill = E("em"); fill.style.width = (cs.length ? kn/cs.length*100 : 0)+"%"; mini.appendChild(fill); t.appendChild(mini);
     const acts = E("span","acts");
     const eb = E("button","","Ändern"); eb.onclick = ()=>openEdit(l); acts.appendChild(eb);
+    const sb = E("button","","Teilen"); sb.onclick = ()=>shareLesson(l); acts.appendChild(sb);
     const db = E("button","","Löschen"); db.onclick = ()=>{ if(confirm("Lektion „"+l.name+"“ löschen?")){ lessons.splice(lessons.indexOf(l),1); show("medit",false); editRef = null; saveLessons(); } }; acts.appendChild(db);
     row.appendChild(t); row.appendChild(acts); box.appendChild(row);
   });
@@ -1397,6 +1676,156 @@ $("rsave").onclick = ()=>{
   $("ocrStatus").textContent = n+(n===1 ? " Vokabel" : " Vokabeln")+" in „"+name+"“ gespeichert. Du kannst jetzt lernen oder testen.";
 };
 
+/* ================= Fehlerkiste ================= */
+const objOr = v=>v && typeof v==="object" && !Array.isArray(v) ? v : {};
+const saveTrouble = ()=>save("vok_trouble_"+lang, trouble[lang]);
+function markTrouble(c, ok){
+  const tb = trouble[lang];
+  if(ok){ if(tb[c.fw]){ tb[c.fw]--; if(tb[c.fw]<=0) delete tb[c.fw]; } }
+  else tb[c.fw] = 2; // muss danach zweimal gewusst werden
+  saveTrouble();
+}
+function allLangCards(){
+  const seen = new Set();
+  return langLessons().flatMap(l=>parse(l.text).map(c=>({...c, lec:l.name}))).filter(c=>{ if(seen.has(c.fw)) return false; seen.add(c.fw); return true; });
+}
+const troubleCards = ()=>allLangCards().filter(c=>trouble[lang][c.fw]);
+
+/* ================= Tägliche Belohnung ================= */
+const DAILY = [10,15,20,25,30,40,50];
+function dailyState(){
+  const d = today(), dl = XP.daily || {};
+  if(dl.d===d) return null;
+  const y = new Date(); y.setDate(y.getDate()-1);
+  const run = dl.d===dkey(y) ? (dl.run||0)+1 : 1;
+  return {run, coins:DAILY[Math.min(run,7)-1]};
+}
+function renderDaily(){
+  const s = dailyState();
+  show("daily", !!s && (curTab==="l" || curTab==="s"));
+  if(s) $("dSub").textContent = (s.run>1 ? "Tag "+s.run+" in Folge · " : "")+s.coins+" Münzen warten auf dich";
+}
+$("dBtn").onclick = ()=>{
+  const s = dailyState(); if(!s) return;
+  XP.daily = {d:today(), run:s.run}; gainCoins(s.coins); saveXP();
+  renderTop(); renderDaily(); if(curTab==="s") renderShop();
+  toast("🎁", "+"+s.coins+" Münzen!", s.run>=7 ? "Volle Belohnung! Komm morgen wieder." : "Morgen gibt es "+DAILY[Math.min(s.run+1,7)-1]+" Münzen.");
+  confetti(); checkBadges(true);
+};
+
+/* ================= Shop ================= */
+function previewCfg(){ const c = {...AV}; if(preview && preview.cat!=="theme") c[preview.cat] = preview.id; return c; }
+function renderShop(){
+  const L = lvl(XP.total);
+  $("avBig").innerHTML = avatarSVG(previewCfg());
+  $("avLv").textContent = "Level "+L.lv+" · "+title(L.lv);
+  $("coinBig").textContent = fmt(XP.coins);
+  const cats = $("catl"); cats.innerHTML = "";
+  Object.keys(SHOP).forEach(k=>{
+    const b = E("button","lchip"+(k===shopCat ? " on" : ""), SHOP[k].t);
+    b.setAttribute("aria-pressed", k===shopCat ? "true" : "false");
+    b.onclick = ()=>{ shopCat = k; clearPreview(); renderShop(); };
+    cats.appendChild(b);
+  });
+  const box = $("items"); box.innerHTML = "";
+  SHOP[shopCat].items.forEach(it=>{
+    const cat = shopCat, has = owned(cat, it.id), on = cat==="theme" ? THEME===it.id : AV[cat]===it.id;
+    const locked = !has && it.lv && L.lv<it.lv, pv = preview && preview.cat===cat && preview.id===it.id;
+    const b = E("button","item"+(on ? " on" : "")+(has ? " own" : "")+(locked ? " lock" : "")+(pv ? " prev" : ""));
+    if(cat==="theme"){ const sw = E("span","sw"), c = THEMES[it.id]; sw.style.background = "conic-gradient("+c[0]+" 0 50%,"+c[1]+" 0)"; b.appendChild(sw); }
+    else { const av = E("span","av"); av.innerHTML = avatarSVG({...AV, [cat]:it.id}); b.appendChild(av); }
+    b.appendChild(E("b","",it.n));
+    const pr = E("span","pr");
+    if(on) pr.textContent = "Angelegt ✓";
+    else if(has) pr.textContent = "Gehört dir";
+    else if(locked) pr.textContent = "🔒 ab Level "+it.lv;
+    else { pr.appendChild(E("i","coin")); pr.appendChild(document.createTextNode(fmt(it.p))); }
+    b.setAttribute("aria-label", it.n+": "+(on ? "angelegt" : has ? "gehört dir" : locked ? "ab Level "+it.lv : it.p+" Münzen"));
+    b.onclick = ()=>pickItem(cat, it);
+    box.appendChild(b);
+  });
+  renderBuybar();
+}
+function pickItem(cat, it){
+  if(owned(cat, it.id)){ clearPreview(); equip(cat, it.id); renderShop(); return; }
+  if(it.lv && lvl(XP.total).lv<it.lv){ toast("🔒", it.n+" gibt es ab Level "+it.lv, "Sammle weiter Punkte!"); return; }
+  if(preview && preview.cat==="theme") applyTheme(THEME);
+  preview = {cat, id:it.id};
+  if(cat==="theme") applyTheme(it.id);
+  renderShop();
+}
+function clearPreview(){ if(preview && preview.cat==="theme") applyTheme(THEME); preview = null; }
+function renderBuybar(){
+  if(!preview || curTab!=="s" || owned(preview.cat, preview.id)){ show("buybar", false); return; }
+  const it = itemOf(preview.cat, preview.id), miss = it.p-XP.coins;
+  show("buybar", true);
+  $("bbN").textContent = it.n;
+  const s = $("bbS"); s.innerHTML = ""; s.appendChild(E("i","coin"));
+  s.appendChild(document.createTextNode(fmt(it.p)+(miss>0 ? " · dir fehlen noch "+fmt(miss) : " Münzen")));
+  $("bbBuy").disabled = miss>0;
+}
+function equip(cat, id){
+  if(cat==="theme"){ THEME = id; store("vok_theme", id); applyTheme(id); }
+  else { AV[cat] = id; save("vok_av", AV); }
+  renderTop();
+}
+$("bbCancel").onclick = ()=>{ clearPreview(); renderShop(); };
+$("bbBuy").onclick = ()=>{
+  if(!preview) return;
+  const {cat, id} = preview, it = itemOf(cat, id);
+  if(!it || owned(cat, id) || XP.coins<it.p) return;
+  XP.coins -= it.p; XP.bought = (XP.bought||0)+1;
+  OWN.add(cat+":"+id); save("vok_own", [...OWN]);
+  preview = null; equip(cat, id); saveXP();
+  toast("🛍️", it.n+" gekauft!", "Steht dir richtig gut.");
+  confetti(); checkBadges(true); renderTop(); renderShop();
+};
+
+/* ================= Suche, Teilen, Backup ================= */
+const norm = s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+$("vsearch").oninput = ()=>{
+  const q = norm($("vsearch").value.trim()), box = $("sres"); box.innerHTML = "";
+  if(!q) return;
+  const hits = langLessons().flatMap(l=>parse(l.text).map(c=>({...c, lec:l.name}))).filter(c=>norm(c.fw).includes(q) || norm(c.de).includes(q));
+  if(!hits.length){ box.appendChild(E("p","small","Nichts gefunden.")); return; }
+  const list = E("div","panel"); list.style.padding = "2px 14px";
+  hits.slice(0,30).forEach(c=>{ const r = E("div","srow"); r.appendChild(E("span","",c.fw+" = "+c.de)); r.appendChild(E("small","",c.lec)); list.appendChild(r); });
+  box.appendChild(list);
+  if(hits.length>30) box.appendChild(E("p","small","… und "+(hits.length-30)+" weitere. Tippe genauer."));
+};
+async function shareLesson(l){
+  const txt = l.name+" ("+LANGS[l.lang].name+")\n"+l.text.trim();
+  if(navigator.share){
+    try{ await navigator.share({title:l.name, text:txt}); return; }
+    catch(e){ if(e && e.name==="AbortError") return; }
+  }
+  try{ await navigator.clipboard.writeText(txt); toast("📋","Lektion kopiert","Schick sie z. B. per Chat. Einfügen geht mit „Selbst eintippen“."); }
+  catch(e){ openEdit(l); toast("📋","Kopieren ging nicht","Markiere den Text im Feld und kopiere ihn selbst."); }
+}
+$("bkOut").onclick = ()=>{
+  const data = {app:"vokabeln", v:2, date:new Date().toISOString(), keys:{}};
+  try{ for(let i=0;i<localStorage.length;i++){ const k = localStorage.key(i); if(k && k.startsWith("vok_")) data.keys[k] = localStorage.getItem(k); } }catch(e){}
+  if(!Object.keys(data.keys).length){ alert("Es gibt noch nichts zu sichern (oder der Browser erlaubt keinen Speicher)."); return; }
+  const a = E("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], {type:"application/json"}));
+  a.download = "vokabeln-backup-"+today()+".json"; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  toast("💾","Backup gespeichert","Die Datei liegt in deinen Downloads.");
+};
+$("bkIn").onclick = ()=>$("bkFile").click();
+$("bkFile").onchange = async e=>{
+  const f = e.target.files[0]; e.target.value = ""; if(!f) return;
+  try{
+    const data = JSON.parse(await f.text());
+    if(!data || data.app!=="vokabeln" || !data.keys || typeof data.keys!=="object") throw new Error("Das ist keine Vokabel-Backup-Datei.");
+    if(!confirm("Backup vom "+dde(String(data.date||"").slice(0,10))+" laden? Alle Daten auf diesem Gerät werden dadurch ersetzt.")) return;
+    const old = [];
+    for(let i=0;i<localStorage.length;i++){ const k = localStorage.key(i); if(k && k.startsWith("vok_")) old.push(k); }
+    old.forEach(k=>localStorage.removeItem(k));
+    Object.entries(data.keys).forEach(([k,v])=>{ if(k.startsWith("vok_") && typeof v==="string") localStorage.setItem(k, v); });
+    location.reload();
+  }catch(err){ alert("Das Backup konnte nicht geladen werden: "+err.message); }
+};
+
 /* ================= Start ================= */
 function migrate(){
   if(store("vok_lessons")!==null) return null;
@@ -1434,6 +1863,13 @@ function init(){
   knownSets.en = new Set(arr(load("vok_known_en", [])));
   XP = loadXP();
   XP.bestStreak = Math.max(XP.bestStreak||0, streak());
+  trouble.la = objOr(load("vok_trouble_la", {})); trouble.en = objOr(load("vok_trouble_en", {}));
+  AV = Object.assign({...AV_DEF}, objOr(load("vok_av", {})));
+  OWN = new Set(arr(load("vok_own", [])));
+  Object.keys(AV_DEF).forEach(k=>{ if(!owned(k, AV[k])) AV[k] = AV_DEF[k]; });
+  Object.keys(AV).forEach(k=>{ if(!(k in AV_DEF)) delete AV[k]; });
+  THEME = store("vok_theme") || "classic"; if(!owned("theme", THEME)) THEME = "classic";
+  applyTheme(THEME);
   TS = Object.assign({dir:"fd", count:"10", type:"mc"}, load("vok_tset", {}));
   if(!["fd","df"].includes(TS.dir)) TS.dir = "fd";
   if(!["10","20","all"].includes(TS.count)) TS.count = "10";
@@ -1444,6 +1880,7 @@ function init(){
   checkBadges(false); saveXP();
   renderTop();
   tab("l");
+  if(coinWelcome>0) setTimeout(()=>toast("💰","Neu: Münzen & Shop!","Du startest mit "+fmt(coinWelcome)+" Münzen. Gestalte deinen Avatar im Shop."), 700);
 }
 init();
 </script>
