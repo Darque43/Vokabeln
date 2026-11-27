@@ -321,6 +321,7 @@ details[open] summary::before{transform:rotate(90deg)}
 .buybar{position:fixed;left:50%;bottom:calc(80px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:29;width:min(444px,calc(100vw - 28px));display:flex;align-items:center;gap:6px;padding:10px 10px 10px 16px;border-radius:18px;background:var(--card2);border:1px solid var(--line);box-shadow:var(--shadow);animation:bbin .22s ease-out}
 @keyframes bbin{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
 .buybar div{flex:1;min-width:0}
+.buybar .bbav{flex:none;width:46px;height:46px;margin-left:-6px}
 .buybar b{display:block;font:600 .95rem var(--disp);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .buybar small{display:flex;align-items:center;gap:4px;color:var(--mute);font-size:.78rem;line-height:1.3}
 .buybar .ghost{padding:10px 8px}
@@ -351,6 +352,71 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
 .rstat.err{background:var(--badbg)}
 .rstat:empty{display:none}
 #rtext{margin-top:0}
+
+/* ---------- Animationen ---------- */
+@property --p{syntax:"<number>";inherits:true;initial-value:0}
+.ring,.bigring{transition:--p .9s cubic-bezier(.3,.8,.3,1)}
+.enter{animation:viewIn .34s cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes viewIn{from{opacity:0;transform:translateY(12px)}}
+.stg>*{animation:itemIn .42s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*45ms)}
+@keyframes itemIn{from{opacity:0;transform:translateY(14px) scale(.97)}}
+.ring .av svg,.avbig svg,.bigring .av svg,.lvav svg{transform-origin:50% 90%;animation:breathe 3.8s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.025,.975)}}
+.ring .eyes,.avbig .eyes,.bigring .eyes,.lvav .eyes{transform-box:fill-box;transform-origin:center;animation:blink 5.5s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.12)}}
+.av.jump svg{animation:jump .7s cubic-bezier(.3,1.5,.5,1)}
+@keyframes jump{0%{transform:none}30%{transform:translateY(-14%) scale(1.04,.96)}55%{transform:translateY(0) scale(1.08,.9)}75%{transform:translateY(-4%)}100%{transform:none}}
+.av.shake svg{animation:shake .45s}
+@keyframes shake{20%{transform:translateX(-7%) rotate(-6deg)}40%{transform:translateX(6%) rotate(5deg)}60%{transform:translateX(-4%) rotate(-3deg)}80%{transform:translateX(2%)}}
+.av.spin svg{animation:spin .8s cubic-bezier(.3,.8,.3,1)}
+@keyframes spin{from{transform:perspective(300px) rotateY(0)}to{transform:perspective(300px) rotateY(360deg)}}
+.qcard.in{animation:qIn .36s cubic-bezier(.2,.8,.2,1)}
+@keyframes qIn{from{opacity:0;transform:translateX(34px) rotate(1deg)}}
+.opt.good{animation:okPop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes okPop{40%{transform:scale(1.04)}}
+.opt.bad,.shakeX{animation:shakeX .4s}
+@keyframes shakeX{20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.chip .ce.fl{display:inline-block}
+.chip:not(.cold) .ce.fl{animation:flicker 1.6s ease-in-out infinite}
+@keyframes flicker{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.14) rotate(3deg)}}
+.goal.done .gbar i{background:linear-gradient(90deg,var(--ok) 0%,#a6efc6 50%,var(--ok) 100%);background-size:200% 100%;animation:shimmer 2.4s linear infinite}
+@keyframes shimmer{to{background-position:-200% 0}}
+.nav button.on svg{animation:navPop .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes navPop{40%{transform:scale(1.2)}}
+.toast .e{animation:ePop .6s cubic-bezier(.3,1.6,.5,1) .08s both}
+@keyframes ePop{from{transform:scale(0) rotate(-30deg)}}
+.burst{position:fixed;left:50%;top:40%;z-index:65;font:800 2.1rem var(--disp);color:var(--acc);text-shadow:0 4px 18px rgba(0,0,0,.35);pointer-events:none;white-space:nowrap;animation:burst 1.15s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes burst{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}25%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}45%{transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-110%) scale(1)}}
+.flycoin{position:fixed;z-index:66;width:18px;height:18px;margin:-9px 0 0 -9px;pointer-events:none}
+.spark{position:fixed;z-index:66;pointer-events:none;font-size:18px;animation:spark .8s ease-out forwards}
+@keyframes spark{from{opacity:1;transform:translate(-50%,-50%) scale(.5)}to{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.2) rotate(40deg)}}
+.daily.open .e{animation:giftOpen .6s ease-out forwards}
+@keyframes giftOpen{30%{transform:scale(1.35) rotate(-12deg)}100%{transform:scale(1.9);opacity:0}}
+.scan{position:relative;margin:12px 0 0;border-radius:14px;overflow:hidden;background:#000}
+.scan img{display:block;width:100%;height:200px;object-fit:cover;opacity:.7}
+.scan i{position:absolute;left:0;right:0;top:0;height:30%;border-bottom:2px solid var(--acc);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--acc) 45%,transparent));animation:scan 1.5s ease-in-out infinite alternate}
+@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(340%)}}
+.lvup{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:rgba(5,8,12,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0}}
+.lvbox{position:relative;width:min(340px,100%);text-align:center;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:30px 22px 22px;box-shadow:var(--shadow);overflow:hidden;animation:boxIn .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes boxIn{from{opacity:0;transform:scale(.7) translateY(24px)}}
+.rays{position:absolute;left:50%;top:92px;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;background:repeating-conic-gradient(var(--soft) 0 10deg,transparent 10deg 20deg);animation:rot 16s linear infinite;pointer-events:none}
+@keyframes rot{to{transform:rotate(360deg)}}
+.lvav{position:relative;width:124px;height:124px;margin:0 auto;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.lvk{position:relative;margin-top:18px;font:600 .78rem var(--disp);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.lvn{position:relative;font:800 3.1rem/1 var(--disp);margin:6px 0 2px}
+.lvbox p{position:relative;color:var(--mute);margin:6px 0 0;font-size:.92rem}
+.lvbox .lvc{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font:600 .95rem var(--disp);background:var(--card2);padding:6px 14px;border-radius:99px;margin-top:12px}
+.lvbox .primary{position:relative;width:100%;margin-top:20px;padding:14px;border-radius:14px}
+.tgl{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line);cursor:pointer;font-size:.95rem}
+.tgl:last-of-type{border-bottom:0}
+.tgl input{position:absolute;opacity:0;pointer-events:none}
+.tgl i{position:relative;flex:none;width:46px;height:28px;border-radius:99px;background:var(--line);transition:background .2s}
+.tgl i::after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+.tgl input:checked+i{background:var(--ok)}
+.tgl input:checked+i::after{transform:translateX(18px)}
+.tgl input:focus-visible+i{outline:2px solid var(--acc);outline-offset:2px}
+html.calm *,html.calm *::before,html.calm *::after{animation:none!important;transition:none!important}
 
 /* ---------- Navigation ---------- */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
@@ -399,7 +465,7 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
   <button class="ring" id="lvlRing" aria-label="Dein Avatar"><span class="av" id="avTop"></span><span class="lvb" id="lvlNum">1</span></button>
   <div class="brand"><h1 id="lvlH">Level 1</h1><small id="lvlSub">Neuling</small></div>
   <div class="chips">
-    <button class="chip" id="stkChip" title="Tage in Folge mit erreichtem Tagesziel"><span class="ce">🔥</span><b id="stk">0</b></button>
+    <button class="chip" id="stkChip" title="Tage in Folge mit erreichtem Tagesziel"><span class="ce fl">🔥</span><b id="stk">0</b></button>
     <button class="chip" id="xpChip" title="Deine Punkte"><span class="ce">⭐</span><b id="xpT">0</b></button>
     <button class="chip" id="coinChip" title="Deine Münzen"><i class="coin ce"></i><b id="coinT">0</b></button>
   </div>
@@ -608,6 +674,7 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
     <input type="file" id="photo" accept="image/*" multiple hidden>
     <p class="small" id="ocrStatus" aria-live="polite"></p>
     <div class="prog" id="ocrProg" hidden><i id="ocrBar"></i></div>
+    <div class="scan" id="scan" hidden><img id="scanImg" alt=""><i></i></div>
     <div id="review" hidden>
       <div class="ph" style="margin:16px 2px 8px"><b id="rTitle">Deine Vokabeln</b><span id="rCount"></span></div>
       <div class="ropts" id="rOpts" hidden>
@@ -648,6 +715,12 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
     <div class="two"><button id="bkOut">💾 Backup speichern</button><button id="bkIn">📂 Backup laden</button></div>
     <input type="file" id="bkFile" accept="application/json,.json" hidden>
   </div>
+  <div class="panel">
+    <div class="ph"><b>⚙️ Einstellungen</b></div>
+    <label class="tgl"><span>Töne</span><input type="checkbox" id="setSound"><i></i></label>
+    <label class="tgl"><span>Vibration</span><input type="checkbox" id="setVib"><i></i></label>
+    <label class="tgl"><span>Weniger Animationen</span><input type="checkbox" id="setCalm"><i></i></label>
+  </div>
   <div class="panel" id="appPanel">
     <div class="ph"><b>📲 Als App aufs Handy</b></div>
     <p class="small" style="margin-top:0" id="appTxt">Dann startet der Trainer mit eigenem Symbol wie eine App, klappt auch ohne Internet, und deine Daten bleiben sicherer gespeichert.</p>
@@ -665,12 +738,25 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
 </div></nav>
 
 <div class="buybar" id="buybar" hidden>
+  <span class="av bbav" id="bbAv"></span>
   <div><b id="bbN"></b><small id="bbS"></small></div>
   <button class="ghost" id="bbCancel">Zurück</button>
   <button class="primary" id="bbBuy">Kaufen</button>
 </div>
 
 <div class="toasts" id="toasts" aria-live="polite"></div>
+
+<div class="lvup" id="lvup" hidden role="dialog" aria-modal="true" aria-labelledby="lvupN">
+  <div class="lvbox">
+    <div class="rays"></div>
+    <div class="av lvav" id="lvupAv"></div>
+    <div class="lvk">Level geschafft</div>
+    <div class="lvn">Level <span id="lvupN">2</span></div>
+    <p id="lvupT"></p>
+    <div class="lvc"><i class="coin"></i><span id="lvupC"></span></div>
+    <button class="primary" id="lvupOk">Weiter</button>
+  </div>
+</div>
 
 <script>
 /* ================= Daten & Sprachen ================= */
@@ -847,7 +933,7 @@ function avatarSVG(a, mood){
     + `<path d="M28 42Q31 30 41 25" stroke="#fff" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".35"/>`
     + (it.shine ? STAR(77,38,4.5,1.6,"#fff")+STAR(23,70,3,1.1,"#fff") : "")
     + `<ellipse cx="30" cy="61" rx="5.5" ry="3.5" fill="#ff6b8b" opacity=".4"/><ellipse cx="70" cy="61" rx="5.5" ry="3.5" fill="#ff6b8b" opacity=".4"/>`
-    + mouthSVG(a.mouth) + eyesSVG(a.eyes) + extraSVG(a.extra) + hatSVG(a.hat)
+    + mouthSVG(a.mouth) + '<g class="eyes">' + eyesSVG(a.eyes) + '</g>' + extraSVG(a.extra) + hatSVG(a.hat)
     + `</svg>`;
 }
 function applyTheme(id){ document.documentElement.dataset.skin = THEMES[id] && id!=="classic" ? id : ""; }
@@ -868,7 +954,8 @@ const pct = (ok,q)=>q ? Math.round(ok/q*100) : 0;
 const pcls = p=>p>=80 ? "g" : p>=50 ? "m" : "b";
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
 function E(tag, cls, text){ const e = document.createElement(tag); if(cls) e.className = cls; if(text!==undefined) e.textContent = text; return e; }
-const RM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+let RM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+const SYS_RM = RM;
 const ttsOK = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
 const fit = t=>t.length>36 ? " xs" : t.length>20 ? " s" : "";
 
@@ -930,7 +1017,7 @@ function addXP(n){
   if(lv1>lv0) gainCoins(25*(lv1-lv0));
   saveXP(); renderTop(); floatXP(n);
   if(hit){ const s = streak(); toast("🎯","Tagesziel geschafft!", (s>1 ? "🔥 "+s+" Tage in Folge" : "🔥 Deine Serie hat begonnen")+" · +10 Münzen"); confetti(); }
-  if(lv1>lv0){ toast("🎉","Level "+lv1+" erreicht!", (title(lv1)!==title(lv0) ? "Neuer Titel: "+title(lv1) : "Weiter so!")+" · +"+25*(lv1-lv0)+" Münzen"); confetti(); }
+  if(lv1>lv0 && !levelUp(lv0, lv1)) toast("🎉","Level "+lv1+" erreicht!", (title(lv1)!==title(lv0) ? "Neuer Titel: "+title(lv1) : "Weiter so!")+" · +"+25*(lv1-lv0)+" Münzen");
   checkBadges(true);
 }
 function learnPts(c, ok){
@@ -966,7 +1053,7 @@ function checkBadges(notify){
     XP.badges.push(b.id); n++; gainCoins(20);
     if(notify) toast(b.e, "Neues Abzeichen: "+b.t, b.d+" · +20 Münzen");
   });
-  if(n){ saveXP(); if(notify) renderTop(); }
+  if(n){ saveXP(); if(notify){ renderTop(); sfx("badge"); } }
 }
 
 /* ---------- Effekte ---------- */
@@ -1003,14 +1090,119 @@ function confetti(){
     document.body.appendChild(c); setTimeout(()=>c.remove(), 3500);
   }
 }
+
+/* ---------- Animationen, Töne & Einstellungen ---------- */
+const SET = Object.assign({sound:true, vib:true, calm:false}, load("vok_set", {}));
+function applySettings(){ RM = SYS_RM || !!SET.calm; document.documentElement.classList.toggle("calm", !!SET.calm); }
+function buzz(p){ if(!SET.vib) return; try{ navigator.vibrate && navigator.vibrate(p); }catch(e){} }
+let AC = null;
+function sfx(kind){
+  if(!SET.sound) return;
+  try{
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    if(AC.state==="suspended") AC.resume();
+    const t0 = AC.currentTime;
+    const tone = (f, at, dur, type, vol)=>{
+      const o = AC.createOscillator(), g = AC.createGain();
+      o.type = type || "sine"; o.frequency.setValueAtTime(f, t0+at);
+      g.gain.setValueAtTime(.0001, t0+at); g.gain.exponentialRampToValueAtTime(vol || .1, t0+at+.015); g.gain.exponentialRampToValueAtTime(.0001, t0+at+dur);
+      o.connect(g); g.connect(AC.destination); o.start(t0+at); o.stop(t0+at+dur+.03);
+    };
+    ({
+      ok:   ()=>{ tone(880,0,.12,"sine",.09); tone(1320,.08,.18,"sine",.09); },
+      bad:  ()=>{ tone(240,0,.16,"triangle",.12); tone(170,.1,.22,"triangle",.1); },
+      flip: ()=>tone(540,0,.07,"sine",.04),
+      coin: ()=>{ tone(1568,0,.07,"square",.025); tone(2093,.06,.14,"square",.025); },
+      level:()=>[523,659,784,1047].forEach((f,i)=>tone(f,i*.1,.24,"triangle",.1)),
+      badge:()=>[784,988,1319].forEach((f,i)=>tone(f,i*.08,.2,"sine",.08)),
+      tap:  ()=>tone(660,0,.05,"sine",.04)
+    }[kind] || (()=>{}))();
+  }catch(e){}
+}
+function anim(el, cls){ if(!el || RM) return; el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+function stagger(box, on){
+  if(!box) return;
+  box.classList.remove("stg");
+  if(!on || RM) return;
+  [...box.children].forEach((c,i)=>c.style.setProperty("--i", Math.min(i, 14)));
+  void box.offsetWidth; box.classList.add("stg");
+}
+function countTo(el, to, suf, dur){
+  if(!el) return;
+  to = Math.round(to||0); suf = suf || "";
+  const from = el._v; el._v = to;
+  cancelAnimationFrame(el._raf);
+  if(RM || from===undefined || from===to){ el.textContent = fmt(to)+suf; return; }
+  const t0 = performance.now(), d = dur || 600;
+  const step = now=>{ const k = Math.min(1, (now-t0)/d), e = 1-Math.pow(1-k, 3); el.textContent = fmt(Math.round(from+(to-from)*e))+suf; if(k<1) el._raf = requestAnimationFrame(step); };
+  el._raf = requestAnimationFrame(step);
+}
+function avReactEl(el, kind){ if(!el || RM) return; el.classList.remove("jump","shake","spin"); void el.offsetWidth; el.classList.add(kind); clearTimeout(el._rt); el._rt = setTimeout(()=>el.classList.remove(kind), 900); }
+function avReact(kind){ ["avTop","avBig"].forEach(id=>{ const el = $(id); if(el && el.offsetParent) avReactEl(el, kind); }); }
+function burst(text){ if(RM) return; const b = E("div","burst",text); document.body.appendChild(b); setTimeout(()=>b.remove(), 1200); }
+function sparkle(el, n){
+  if(RM || !el) return;
+  n = n || 10;
+  const r = el.getBoundingClientRect(), cx = r.left+r.width/2, cy = r.top+r.height/2;
+  for(let i=0;i<n;i++){
+    const sp = E("span","spark",["✨","⭐","💫"][i%3]), a = Math.PI*2*i/n;
+    sp.style.left = cx+"px"; sp.style.top = cy+"px";
+    sp.style.setProperty("--dx", Math.cos(a)*r.width*.75+"px"); sp.style.setProperty("--dy", Math.sin(a)*r.height*.75+"px");
+    document.body.appendChild(sp); setTimeout(()=>sp.remove(), 850);
+  }
+}
+// Münzen fliegen von einer Stelle zum Münzzähler oben
+function flyCoins(from, n){
+  const chip = $("coinChip");
+  if(RM || !from || !chip || !chip.animate){ sfx("coin"); return; }
+  const a = from.getBoundingClientRect(), b = chip.getBoundingClientRect();
+  if(!a.width && !a.height){ sfx("coin"); return; }
+  const x0 = a.left+a.width/2, y0 = a.top+a.height/2, dx = b.left+16-x0, dy = b.top+b.height/2-y0;
+  const k = Math.max(3, Math.min(10, Math.round(n/3)));
+  for(let i=0;i<k;i++){
+    const c = E("i","coin flycoin"); c.style.left = x0+"px"; c.style.top = y0+"px"; document.body.appendChild(c);
+    const mx = Math.random()*140-70, my = -50-Math.random()*90;
+    const an = c.animate([
+      {transform:"translate(0,0) scale(.5)", opacity:0},
+      {transform:"translate("+mx+"px,"+my+"px) scale(1.15)", opacity:1, offset:.35},
+      {transform:"translate("+dx+"px,"+dy+"px) scale(.7)", opacity:.9}
+    ], {duration:750+i*40, delay:i*60, easing:"cubic-bezier(.5,0,.4,1)", fill:"both"});
+    an.onfinish = ()=>{ c.remove(); if(i%2===0) sfx("coin"); if(i===k-1){ const cc = $("coinChip"); cc.classList.remove("bump"); void cc.offsetWidth; cc.classList.add("bump"); } };
+  }
+}
+// Level-Aufstieg: großes Fenster (während eines Tests erst danach)
+let pendingLv = null, holdLv = false;
+function levelUp(lv0, lv1){
+  if(pendingLv) lv0 = Math.min(lv0, pendingLv.lv0);
+  if(holdLv || !$("tplay").hidden){ pendingLv = {lv0, lv1}; return false; }
+  showLevelUp(lv0, lv1); return true;
+}
+function showLevelUp(lv0, lv1){
+  pendingLv = null;
+  $("lvupN").textContent = lv1;
+  $("lvupT").textContent = title(lv1)!==title(lv0) ? "Neuer Titel: "+title(lv1)+" 🎓" : "Stark, weiter so!";
+  $("lvupC").textContent = "+"+25*(lv1-lv0)+" Münzen";
+  $("lvupAv").innerHTML = avatarSVG(AV, {eyes:"star", mouth:"grin"});
+  show("lvup", true); avReactEl($("lvupAv"), "jump");
+  sfx("level"); confetti(); buzz([20,60,20]);
+  setTimeout(()=>{ try{ $("lvupOk").focus({preventScroll:true}); }catch(e){} }, 50);
+}
+function closeLevelUp(){ if($("lvup").hidden) return; flyCoins($("lvupOk"), 25); show("lvup", false); }
+$("lvupOk").onclick = closeLevelUp;
+$("lvup").addEventListener("click", e=>{ if(e.target===$("lvup")) closeLevelUp(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeLevelUp(); });
+[["setSound","sound"],["setVib","vib"],["setCalm","calm"]].forEach(([id,k])=>{
+  const el = $(id); el.checked = !!SET[k];
+  el.onchange = ()=>{ SET[k] = el.checked; save("vok_set", SET); applySettings(); if(k==="sound" && SET.sound) sfx("ok"); if(k==="vib" && SET.vib) buzz(30); };
+});
+applySettings();
 function renderTop(){
   const L = lvl(XP.total);
   $("lvlNum").textContent = L.lv; $("lvlRing").style.setProperty("--p", Math.round(L.cur/L.need*100));
   $("lvlH").textContent = "Level "+L.lv; $("lvlSub").textContent = title(L.lv);
   $("lvlRing").title = "Dein Avatar · noch "+fmt(L.need-L.cur)+" Punkte bis Level "+(L.lv+1);
   const ak = JSON.stringify(AV); if(ak!==avKey){ avKey = ak; $("avTop").innerHTML = avatarSVG(AV); }
-  $("xpT").textContent = fmt(XP.total);
-  $("coinT").textContent = fmt(XP.coins);
+  countTo($("xpT"), XP.total); countTo($("coinT"), XP.coins);
   if(shownCoins>=0 && XP.coins>shownCoins){ const cc = $("coinChip"); cc.classList.remove("bump"); void cc.offsetWidth; cc.classList.add("bump"); }
   shownCoins = XP.coins;
   const s = streak(); $("stk").textContent = s;
@@ -1079,16 +1271,18 @@ function answer(ok){
   const i = queue.shift(), c = cards[i];
   undo = {i, ok, wasKnown:known.has(c.fw), tr:trouble[lang][c.fw]||0};
   if(ok) known.add(c.fw); else { known.delete(c.fw); queue.push(i); }
-  try{ navigator.vibrate && navigator.vibrate(ok ? 10 : [10,40,10]); }catch(e){}
+  buzz(ok ? 10 : [10,40,10]); sfx(ok ? "ok" : "flip");
   saveKnown(); markTrouble(c, ok);
   XP.cards++; const p = learnPts(c, ok); saveXP();
   setFlip(false,false); render(); renderLessonSel(); show("undo", true);
+  if(ok) avReact("jump");
+  if(!queue.length && cards.length) setTimeout(()=>{ burst("Runde geschafft! 🎉"); confetti(); sfx("level"); }, 260);
   if(p) addXP(p); else checkBadges(true);
 }
 let busy = false, sup = false;
 function flip(){
   if(!queue.length || busy) return;
-  setFlip(!flipped, true);
+  setFlip(!flipped, true); sfx("flip");
   if(flipped){ const c = cards[queue[0]]; $("srCard").textContent = dirFw ? c.de : c.fw; }
 }
 function fly(ok){
@@ -1192,6 +1386,10 @@ function tab(v){
   if(v==="s") renderShop();
   if(v==="v") renderLessons();
   renderDaily(); renderBuybar();
+  anim($({l:"learn", t:"test", h:"hs", s:"shop", v:"vok"}[v]), "enter");
+  if(v==="s") stagger($("items"), true);
+  if(v==="v") stagger($("llist"), true);
+  if(pendingLv && v!=="t") setTimeout(()=>{ if(pendingLv && $("tplay").hidden) showLevelUp(pendingLv.lv0, pendingLv.lv1); }, 500);
   window.scrollTo(0,0);
 }
 $("tabL").onclick = ()=>tab("l");
@@ -1249,6 +1447,7 @@ function hsView(v){
   show("hsPts",v==="p"); show("hsBest",v==="b"); show("hsHist",v==="h");
   [["vP","p"],["vB","b"],["vH","h"]].forEach(([id,k])=>$(id).classList.toggle("on", k===v));
   if(v==="p") renderAch(); else if(v==="b") renderHS(); else renderHist();
+  stagger(v==="p" ? $("badges") : v==="b" ? $("hslist") : $("histbody"), true);
 }
 $("vP").onclick = ()=>hsView("p");
 $("vB").onclick = ()=>hsView("b");
@@ -1273,7 +1472,7 @@ function renderAch(){
       saveXP(); checkBadges(true); renderTop(); renderAch();
     };
   });
-  const box = $("badges"); box.innerHTML = "";
+  const box = $("badges"); box.innerHTML = ""; stagger(box, false);
   BADGES.forEach(b=>{
     const has = XP.badges.includes(b.id), x = E("div","badge"+(has ? "" : " lock"));
     x.appendChild(E("span","e",b.e)); x.appendChild(E("b","",b.t)); x.appendChild(E("small","",b.d));
@@ -1317,7 +1516,7 @@ $("xpclear").onclick = ()=>{
 };
 
 function renderHS(){
-  const hs = getHS(), box = $("hslist"); box.innerHTML = "";
+  const hs = getHS(), box = $("hslist"); box.innerHTML = ""; stagger(box, false);
   $("hsempty").hidden = hs.length>0; $("hsclear").hidden = !hs.length;
   const groups = {};
   hs.forEach(e=>{ const k = e.l || "Ohne Lektion"; (groups[k] = groups[k] || []).push(e); });
@@ -1343,7 +1542,7 @@ function prow(t, sub, val, p){
   row.appendChild(tt); row.appendChild(E("span","pv",val)); return row;
 }
 function renderHist(){
-  const h = getHist(), box = $("histbody"); box.innerHTML = "";
+  const h = getHist(), box = $("histbody"); box.innerHTML = ""; stagger(box, false);
   $("histempty").hidden = h.length>0; $("histclear").hidden = h.length===0;
   if(!h.length) return;
   const ps = h.map(x=>pct(x.ok,x.q));
@@ -1457,6 +1656,7 @@ function startTest(idxs){
   if(!idxs && TS.count!=="all") pool = pool.slice(0, +TS.count);
   T = {q:pool, pos:0, fd, mode, wrong:[], ok:0, pts:0, combo:0, maxCombo:0, retry:!!idxs, lesson:(idxs && T) ? T.lesson : curName(), xp0:XP.total, c0:XP.coins};
   show("lbar",false); show("langbar",false); show("tsetup",false); show("tresult",false); show("tplay",true);
+  $("tscore")._v = 0; $("tscore").textContent = "0 P"; anim($("tplay"), "enter");
   window.scrollTo(0,0);
   ask();
 }
@@ -1466,7 +1666,7 @@ function ask(){
   if(qt==="mix") qt = Math.random()<.5 ? "mc" : "type";
   if(qt==="mc" && cards.length<3) qt = "type";
   T.qt = qt; T.done = false;
-  prog();
+  prog(); anim(document.querySelector("#tplay .qcard"), "in");
   $("tl").textContent = T.lesson;
   $("tm").textContent = ({mc:"Multiple Choice", type:"Eintippen", form:L.formLabel})[qt] || "";
   $("ts").textContent = T.fd ? L.name+" → Deutsch" : "Deutsch → "+L.name;
@@ -1492,6 +1692,7 @@ function ask(){
     b.onclick = ()=>{ if(T.done) return; if(t!==right) b.classList.add("bad"); judge(t===right, null, t===right ? 5 : 0); };
     o.appendChild(b);
   });
+  stagger(o, true);
 }
 function buildFields(c){
   const p = parseFw(c.fw), box = $("tfields"), L = LANGS[lang]; box.innerHTML = "";
@@ -1541,7 +1742,7 @@ function checkForm(){
 }
 function prog(){
   $("tprog").textContent = "Frage "+(T.pos+1)+" von "+T.q.length;
-  $("tscore").textContent = fmt(T.pts)+" P";
+  countTo($("tscore"), T.pts, " P", 450);
   $("tpb").style.width = ((T.pos+(T.done ? 1 : 0))/T.q.length*100)+"%";
   const cb = $("tcombo");
   cb.textContent = T.combo>=2 ? "🔥 "+T.combo+" in Folge"+(T.combo>=3 ? " · +2 Bonus" : "") : "";
@@ -1555,6 +1756,9 @@ function judge(ok, rightFull, pts, note){
   else { T.combo = 0; T.wrong.push(i); }
   XP.combo = Math.max(XP.combo||0, T.combo);
   const tot = pts+bonus; T.pts += tot; prog();
+  sfx(ok ? "ok" : "bad"); avReact(ok ? "jump" : "shake");
+  if(!ok && T.qt==="type") anim($("tin"), "shakeX");
+  if(ok && T.combo>=5 && T.combo%5===0) burst("🔥 "+T.combo+" in Folge!");
   if(T.combo>=3){ const cb = $("tcombo"); cb.classList.remove("bump"); void cb.offsetWidth; cb.classList.add("bump"); }
   const fb = $("tfb"); fb.innerHTML = ""; fb.className = "fb "+(ok ? "yes" : "no");
   const hd = E("div","fbh"); hd.appendChild(E("b","", ok ? "Richtig! ✓" : "Nicht ganz.")); if(tot) hd.appendChild(E("span","fbp","+"+tot+" P")); fb.appendChild(hd);
@@ -1569,7 +1773,7 @@ function judge(ok, rightFull, pts, note){
   $("tnext").textContent = T.pos+1>=T.q.length ? "Ergebnis ansehen" : "Weiter";
   show("tnext",true); $("tnext").focus({preventScroll:true});
   try{ $("tnext").scrollIntoView({block:"nearest", behavior: RM ? "auto" : "smooth"}); }catch(e){}
-  try{ navigator.vibrate && navigator.vibrate(ok ? 10 : [10,40,10]); }catch(e){}
+  buzz(ok ? 10 : [10,40,10]);
   if(tot) addXP(tot); else saveXP();
 }
 function check(){
@@ -1589,6 +1793,7 @@ $("tnext").onclick = ()=>{ T.pos++; if(T.pos>=T.q.length) finish(); else ask(); 
 $("tstart").onclick = ()=>startTest();
 $("tquit").onclick = ()=>{ if(confirm("Test abbrechen? Deine Punkte bis hierhin bleiben auf deinem Konto.")) tab("t"); };
 function finish(){
+  holdLv = true;
   show("tplay",false); show("tresult",true); show("langbar",true); show("lbar",true);
   const n = T.q.length, perfect = T.ok===n && n>=5;
   let bonus = 0;
@@ -1599,16 +1804,17 @@ function finish(){
   render();
   const r = $("tresult"); r.innerHTML = "";
   const p = pct(T.ok, n), hero = E("div","hero");
-  const ring = E("div","bigring"); ring.style.setProperty("--p", p); ring.style.setProperty("--c", p>=80 ? "var(--ok)" : p>=50 ? "var(--acc)" : "var(--bad)");
+  const ring = E("div","bigring"); ring.style.setProperty("--p", RM ? p : 0); ring.style.setProperty("--c", p>=80 ? "var(--ok)" : p>=50 ? "var(--acc)" : "var(--bad)");
   const rav = E("div","av"); rav.innerHTML = avatarSVG(AV, p===100 ? {eyes:"star", mouth:"grin"} : p<50 ? {mouth:"wow"} : null);
   ring.appendChild(rav); hero.appendChild(ring);
-  hero.appendChild(E("div","pctbig",p+" %"));
+  const pc = E("div","pctbig",(RM ? p : 0)+" %"); pc._v = RM ? p : 0; hero.appendChild(pc);
   hero.appendChild(E("h2","", p===100 ? "Perfekt! 🎉" : p>=80 ? "Super gemacht!" : p>=50 ? "Gut, weiter so!" : "Übung macht den Meister"));
   const xg = E("div","xpgain","⭐ +"+fmt(XP.total-T.xp0)+" Punkte ·"); xg.appendChild(E("i","coin")); xg.appendChild(document.createTextNode("+"+fmt(XP.coins-T.c0)));
   hero.appendChild(xg);
   r.appendChild(hero);
   const st = E("div","stats");
-  [[fmt(T.pts),"Punkte im Test"],[T.ok+"/"+n,"richtig"],[T.maxCombo,"beste Serie 🔥"]].forEach(([v,l])=>{ const t = E("div","tile"); t.appendChild(E("b","",String(v))); t.appendChild(E("span","",l)); st.appendChild(t); });
+  [[RM ? fmt(T.pts) : "0","Punkte im Test"],[T.ok+"/"+n,"richtig"],[T.maxCombo,"beste Serie 🔥"]].forEach(([v,l])=>{ const t = E("div","tile"); t.appendChild(E("b","",String(v))); t.appendChild(E("span","",l)); st.appendChild(t); });
+  const ptsEl = st.querySelector("b"); ptsEl._v = RM ? T.pts : 0;
   r.appendChild(st);
   if(bonus) r.appendChild(E("p","small","💯 Fehlerfrei-Bonus: +20 Punkte und +10 Münzen sind schon dabei."));
   r.appendChild(E("p","small", rank===-1 ? "Fehler-Wiederholung, zählt nicht für die Bestenliste." : rank===1 ? "🏆 Neuer Highscore für „"+T.lesson+"“!" : rank>0 ? "Platz "+rank+" in der Bestenliste für „"+T.lesson+"“." : "Diesmal nicht in den Top 10."));
@@ -1633,7 +1839,13 @@ function finish(){
   const vb = E("button","","Verlauf ansehen"); vb.onclick = ()=>{ hsCur = "h"; tab("h"); }; bar.appendChild(vb);
   r.appendChild(bar);
   window.scrollTo(0,0);
+  stagger(st, true);
+  const gained = XP.coins-T.c0;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ ring.style.setProperty("--p", p); countTo(pc, p, " %", 900); countTo(ptsEl, T.pts, "", 900); }));
+  setTimeout(()=>{ avReactEl(rav, p>=50 ? "jump" : "shake"); if(gained>0) flyCoins(xg, gained); if(p>=80) sfx("level"); }, RM ? 0 : 750);
   if(perfect) confetti();
+  holdLv = false;
+  if(pendingLv) setTimeout(()=>{ if(pendingLv) showLevelUp(pendingLv.lv0, pendingLv.lv1); }, RM ? 300 : 1900);
 }
 
 /* ================= Lektionen ================= */
@@ -1666,7 +1878,7 @@ function rebuildCards(){
   build(true);
 }
 function renderLessons(){
-  const box = $("llist"); box.innerHTML = "";
+  const box = $("llist"); box.innerHTML = ""; stagger(box, false);
   const ll = langLessons(), dl = $("vnames"); dl.innerHTML = "";
   ll.forEach(l=>{ const o = E("option"); o.value = l.name; dl.appendChild(o); });
   if(!ll.length){ box.appendChild(E("p","small","Noch keine "+LANGS[lang].name+"-Lektion. Leg oben eine an.")); return; }
@@ -1833,6 +2045,7 @@ async function runOCR(files){
     const raw = [];
     for(cur=0; cur<files.length; cur++){
       st.textContent = "Bereite Foto "+(cur+1)+" von "+files.length+" vor …";
+      try{ if($("scanImg").src) URL.revokeObjectURL($("scanImg").src); $("scanImg").src = URL.createObjectURL(files[cur]); show("scan", true); }catch(e){}
       const img = await prepImage(files[cur]);
       const r = await worker.recognize(img, {rotateAuto:true});
       raw.push(...extractRows(r.data));
@@ -1849,11 +2062,13 @@ async function runOCR(files){
     renderReview(); saveDraft();
     st.textContent = "✓ "+neu+(neu===1 ? " Vokabel" : " Vokabeln")+" erkannt"+(miss ? ", bei "+miss+" fehlt noch die Bedeutung (rot)" : "")+". Prüfe kurz alles und tippe dann auf „In Lektion speichern“.";
     $("review").scrollIntoView({block:"start", behavior: RM ? "auto" : "smooth"});
+    stagger($("rrows"), true); sfx("ok");
   }catch(err){
     st.textContent = "Das Foto konnte nicht gelesen werden: "+((err && err.message) || err)+" "+OCR_TIP;
   }finally{
     if(worker) worker.terminate().catch(()=>{});
-    ocrBusy = false; $("photoBtn").disabled = false; show("ocrProg", false);
+    ocrBusy = false; $("photoBtn").disabled = false; show("ocrProg", false); show("scan", false);
+    try{ if($("scanImg").src){ URL.revokeObjectURL($("scanImg").src); $("scanImg").removeAttribute("src"); } }catch(e){}
   }
 }
 
@@ -1972,7 +2187,7 @@ $("rsave").onclick = ()=>{
   saveLessons();
   try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){}
   const n = good.length, msg = n+(n===1 ? " Vokabel" : " Vokabeln")+" in „"+name+"“ gespeichert";
-  toast("✅", msg, "Du kannst jetzt lernen oder testen.");
+  toast("✅", msg, "Du kannst jetzt lernen oder testen."); sfx("badge");
   if(bad.length){
     RV.rows = bad; RV.base = []; RV.raw = null; RV.mode = "rows";
     renderReview(); saveDraft();
@@ -2015,9 +2230,10 @@ function renderDaily(){
 $("dBtn").onclick = ()=>{
   const s = dailyState(); if(!s) return;
   XP.daily = {d:today(), run:s.run}; gainCoins(s.coins); saveXP();
-  renderTop(); renderDaily(); if(curTab==="s") renderShop();
+  const gift = $("daily").querySelector(".e");
+  anim($("daily"), "open"); flyCoins(gift, s.coins); buzz(20);
   toast("🎁", "+"+s.coins+" Münzen!", s.run>=7 ? "Volle Belohnung! Komm morgen wieder." : "Morgen gibt es "+DAILY[Math.min(s.run+1,7)-1]+" Münzen.");
-  confetti(); checkBadges(true);
+  setTimeout(()=>{ $("daily").classList.remove("open"); renderTop(); renderDaily(); if(curTab==="s") renderShop(); confetti(); checkBadges(true); }, RM ? 0 : 700);
 };
 
 /* ================= Shop ================= */
@@ -2031,10 +2247,10 @@ function renderShop(){
   Object.keys(SHOP).forEach(k=>{
     const b = E("button","lchip"+(k===shopCat ? " on" : ""), SHOP[k].t);
     b.setAttribute("aria-pressed", k===shopCat ? "true" : "false");
-    b.onclick = ()=>{ shopCat = k; clearPreview(); renderShop(); };
+    b.onclick = ()=>{ shopCat = k; clearPreview(); renderShop(); stagger($("items"), true); };
     cats.appendChild(b);
   });
-  const box = $("items"); box.innerHTML = "";
+  const box = $("items"); box.innerHTML = ""; stagger(box, false);
   SHOP[shopCat].items.forEach(it=>{
     const cat = shopCat, has = owned(cat, it.id), on = cat==="theme" ? THEME===it.id : AV[cat]===it.id;
     const locked = !has && it.lv && L.lv<it.lv, pv = preview && preview.cat===cat && preview.id===it.id;
@@ -2054,18 +2270,19 @@ function renderShop(){
   renderBuybar();
 }
 function pickItem(cat, it){
-  if(owned(cat, it.id)){ clearPreview(); equip(cat, it.id); renderShop(); return; }
+  if(owned(cat, it.id)){ clearPreview(); equip(cat, it.id); renderShop(); avReact("jump"); sfx("tap"); return; }
   if(it.lv && lvl(XP.total).lv<it.lv){ toast("🔒", it.n+" gibt es ab Level "+it.lv, "Sammle weiter Punkte!"); return; }
   if(preview && preview.cat==="theme") applyTheme(THEME);
   preview = {cat, id:it.id};
   if(cat==="theme") applyTheme(it.id);
-  renderShop();
+  renderShop(); avReact("jump"); sfx("tap");
 }
 function clearPreview(){ if(preview && preview.cat==="theme") applyTheme(THEME); preview = null; }
 function renderBuybar(){
   if(!preview || curTab!=="s" || owned(preview.cat, preview.id)){ show("buybar", false); return; }
   const it = itemOf(preview.cat, preview.id), miss = it.p-XP.coins;
   show("buybar", true);
+  $("bbAv").innerHTML = avatarSVG(previewCfg()); avReactEl($("bbAv"), "jump");
   $("bbN").textContent = it.n;
   const s = $("bbS"); s.innerHTML = ""; s.appendChild(E("i","coin"));
   s.appendChild(document.createTextNode(fmt(it.p)+(miss>0 ? " · dir fehlen noch "+fmt(miss) : " Münzen")));
@@ -2086,6 +2303,9 @@ $("bbBuy").onclick = ()=>{
   preview = null; equip(cat, id); saveXP();
   toast("🛍️", it.n+" gekauft!", "Steht dir richtig gut.");
   confetti(); checkBadges(true); renderTop(); renderShop();
+  sfx("coin"); buzz(20);
+  window.scrollTo({top:0, behavior: RM ? "auto" : "smooth"});
+  setTimeout(()=>{ avReact("spin"); sparkle($("avBig"), 12); }, RM ? 0 : 450);
 };
 
 /* ================= Suche, Teilen, Backup ================= */
