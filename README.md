@@ -21,6 +21,8 @@ Vokabeltrainer für **Latein** und **Englisch** in einer einzigen HTML-Datei (`l
 - **Vokabeln**: Lektionen per Foto einlesen (Texterkennung) oder selbst eintippen – eine Vokabel pro Zeile, z. B.
   - `amor, amoris m. = die Liebe`
   - `to go, went, gone = gehen`
+  - Beim Foto werden die Spalten der Vokabelliste automatisch erkannt (Fremdwort | Deutsch | Notizen). Danach kommt eine Prüfliste, in der man Fehler korrigiert, Zeilen löscht oder die Seiten tauscht. Vollständige Vokabeln werden gespeichert, unvollständige bleiben zum Ergänzen stehen. Ein angefangener Import bleibt auch nach dem Neuladen erhalten.
+- **Als App installieren**: Auf dem Handy über „Zum Home-Bildschirm“ (iPhone) bzw. „App installieren“ (Android). Läuft dann auch offline.
 - **Suche** über alle Lektionen, Lektionen **teilen** (z. B. per Chat) und **Backup** speichern/laden, um auf ein anderes Gerät umzuziehen.
 - Helles und dunkles Design (folgt der Systemeinstellung).
 
