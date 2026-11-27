@@ -753,9 +753,9 @@ body:has(#buybar:not([hidden])) :is(.mplayer,.mpfab){opacity:0;pointer-events:no
 
 .lchip.due{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 45%,var(--line))}
 .lchip.due.on{background:var(--acc);color:var(--accInk);border-color:transparent}
-.stg{display:inline-flex;gap:3px;align-items:center}
-.stg i{width:6px;height:6px;border-radius:50%;background:color-mix(in srgb,currentColor 25%,transparent)}
-.stg i.on{background:var(--acc)}
+.sdots{display:inline-flex;gap:3px;align-items:center}
+.sdots i{width:6px;height:6px;border-radius:50%;background:color-mix(in srgb,currentColor 25%,transparent)}
+.sdots i.on{background:var(--acc)}
 .stgnew{font-size:.72rem;font-weight:600;color:var(--acc)}
 .vbar{display:flex;gap:3px;height:16px;border-radius:99px;overflow:hidden;margin:8px 0 10px;background:var(--card2)}
 .vbar i{display:block;min-width:6px;transition:flex-grow .6s}
@@ -763,6 +763,49 @@ body:has(#buybar:not([hidden])) :is(.mplayer,.mpfab){opacity:0;pointer-events:no
 .vleg span{display:inline-flex;align-items:center;gap:5px}
 .vleg i{width:10px;height:10px;border-radius:3px;border:1px solid var(--line)}
 .vleg b{color:var(--ink)}
+/* ---------- Profil ---------- */
+.prof{position:relative;overflow:hidden;padding:30px 16px 16px;background:var(--card)}
+.pban{position:absolute;left:0;right:0;top:0;height:118px;background:radial-gradient(circle at 2px 2px,rgba(255,255,255,.22) 1.3px,transparent 1.6px) 0 0/15px 15px,linear-gradient(135deg,var(--acc),color-mix(in srgb,var(--acc) 50%,#6a3df0))}
+.pban::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(transparent,var(--card))}
+.prof>*:not(.pban){position:relative}
+.prof .avframe{background:var(--card);box-shadow:0 0 0 4px var(--card)}
+.prof .pnb{margin-top:12px}
+.ptitle{display:inline-flex;align-items:center;gap:5px;margin-top:2px;padding:4px 12px;border-radius:99px;background:var(--soft);color:var(--acc);font:600 .8rem var(--disp)}
+.plv{width:100%;max-width:300px;margin:12px auto 0}
+.plvbar{height:9px;border-radius:99px;background:var(--card2);overflow:hidden}
+.plvbar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--acc),color-mix(in srgb,var(--acc) 55%,#fff));transition:width .9s cubic-bezier(.3,.8,.3,1)}
+.plv small{display:block;margin-top:5px;font-size:.75rem;color:var(--mute)}
+.pstats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%;margin-top:14px}
+.pstats div{padding:10px 3px 8px;border-radius:14px;background:var(--card2);text-align:center;min-width:0}
+.pstats b{display:block;font:700 1.05rem var(--disp);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pstats em{font-style:normal;display:inline-flex}
+.pstats span{display:flex;align-items:center;justify-content:center;gap:3px;margin-top:2px;font-size:.68rem;color:var(--mute);white-space:nowrap}
+.pstats .coin{width:11px;height:11px}
+@media (max-width:380px){.pstats span{font-size:.64rem}.pstats span em{display:none}.pstats b{font-size:.98rem}}
+body[data-tab=s] :is(#langbar,#goal){display:none}
+.catgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cat{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 5px 10px;border-radius:16px;background:var(--card);border:1px solid var(--line);min-width:0;color:var(--ink)}
+.cat:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+.cat .ci{font-size:1.75rem;line-height:1.25}
+.cat b{font-size:.8rem;font-weight:600;line-height:1.15;text-align:center;overflow-wrap:anywhere;hyphens:auto}
+.cat small{font-size:.7rem;color:var(--mute);font-variant-numeric:tabular-nums}
+.cat .cbar{width:64%;height:4px;margin-top:4px;border-radius:9px;background:var(--card2);overflow:hidden}
+.cat .cbar i{display:block;height:100%;border-radius:inherit;background:var(--acc)}
+.cat .cnew{position:absolute;top:6px;right:6px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--acc);color:var(--accInk);font:700 .66rem/18px var(--disp)}
+.cat.done{border-color:color-mix(in srgb,var(--ok) 55%,var(--line))}
+.cat.done .cbar i{background:var(--ok)}
+.ihead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ihead button{flex:none;padding:9px 13px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-weight:600}
+.ihead b{flex:1;min-width:0;font:700 1.1rem var(--disp);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ihead span{flex:none;font-size:.8rem;color:var(--mute)}
+#ifilt{margin-bottom:12px}
+#itemsEmpty{text-align:center;padding:18px 0}
+.fscroll{position:fixed;right:1px;width:13px;z-index:27;touch-action:none;cursor:pointer;-webkit-user-select:none;user-select:none}
+.fscroll::before{content:"";position:absolute;right:4.5px;top:0;bottom:0;width:3px;border-radius:4px;background:color-mix(in srgb,var(--ink) 12%,transparent)}
+.fthumb{position:absolute;right:2px;top:0;width:8px;border-radius:99px;background:var(--acc);box-shadow:0 2px 8px rgba(0,0,0,.28);transition:width .15s,right .15s}
+.fthumb::before{content:"";position:absolute;inset:-8px -4px -8px -22px}
+.fthumb::after{content:"";position:absolute;left:50%;top:50%;width:4px;height:10px;margin:-5px 0 0 -2px;background:repeating-linear-gradient(var(--accInk) 0 1.5px,transparent 1.5px 4px);opacity:.55}
+.fscroll.drag .fthumb{width:12px;right:0}
 /* ---------- Navigation ---------- */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
 @supports ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
@@ -848,7 +891,7 @@ body:has(#buybar:not([hidden])) :is(.mplayer,.mpfab){opacity:0;pointer-events:no
   <div class="card" id="card" role="button" tabindex="0" aria-label="Karteikarte, antippen zum Umdrehen">
     <div class="flip" id="flip">
       <div class="face front" id="ffront">
-        <div class="ctop"><span id="flec"></span><span class="stg" id="fstg"></span><span id="fnum"></span></div>
+        <div class="ctop"><span id="flec"></span><span class="sdots" id="fstg"></span><span id="fnum"></span></div>
         <div class="cmid"><div class="w" id="fw"></div><div class="fsub" id="fsub"></div><div class="hint" id="fhint"></div></div>
         <div class="cside" id="fside"></div>
       </div>
@@ -1096,16 +1139,28 @@ body:has(#buybar:not([hidden])) :is(.mplayer,.mpfab){opacity:0;pointer-events:no
 
 <!-- ======== Shop ======== -->
 <section id="shop" hidden>
-  <div class="panel avstage">
+  <div class="panel avstage prof">
+    <div class="pban" aria-hidden="true"></div>
     <div class="avframe" id="avFrame"><div class="av avbig" id="avBig"></div><span class="pet" id="petBig" hidden></span><span class="aura" id="aura"></span></div>
     <button class="pnb" id="pNameBtn" aria-label="Namen ändern"><span class="pname" id="pName">Dein Name</span><span class="pen">✏️</span></button>
-    <small id="avLv">Level 1 · Neuling</small>
-    <div class="coinbar"><i class="coin"></i><span id="coinBig">0</span><span style="font-weight:500;color:var(--mute);font-size:.85rem">Münzen</span></div>
+    <span class="ptitle" id="avLv">Level 1 · Neuling</span>
+    <div class="plv"><div class="plvbar"><i id="pLvFill"></i></div><small id="pLvTxt"></small></div>
+    <div class="pstats">
+      <div><b id="coinBig">0</b><span><em><i class="coin"></i></em>Münzen</span></div>
+      <div><b id="pPts">0</b><span><em>⭐</em>Punkte</span></div>
+      <div><b id="pBdg">0</b><span><em>🏅</em>Abzeichen</span></div>
+      <div><b id="pCol">0</b><span><em>🎒</em>Sammlung</span></div>
+    </div>
   </div>
   <div class="seg" id="pv"><button data-v="shop">🛍️ Shop</button><button data-v="design">🎨 Design</button><button data-v="set">⚙️ Mehr</button></div>
   <div id="pShop">
-    <div id="cats"><div class="lchips" id="catl" role="group" aria-label="Kategorien"></div></div>
-    <div class="items" id="items"></div>
+    <div class="catgrid" id="catGrid" role="group" aria-label="Kategorien"></div>
+    <div id="catView" hidden>
+      <div class="ihead"><button id="catBack" aria-label="Zurück zu allen Kategorien">‹ Alle</button><b id="catTitle"></b><span id="catCount"></span></div>
+      <div class="seg" id="ifilt"><button data-v="all">Alle</button><button data-v="own">Meine</button><button data-v="buy">Kaufbar</button></div>
+      <div class="items" id="items"></div>
+      <p class="small" id="itemsEmpty" hidden></p>
+    </div>
     <details>
       <summary>So bekommst du Münzen</summary>
       <ul class="plist">
@@ -1302,6 +1357,8 @@ body:has(#buybar:not([hidden])) :is(.mplayer,.mpfab){opacity:0;pointer-events:no
   </div>
 </div>
 
+<div class="fscroll" id="fscroll" hidden aria-hidden="true"><div class="fthumb" id="fthumb"></div></div>
+
 <div class="mplayer min" id="mplayer" hidden>
   <div class="mphead"><span id="mpTitle">Musik</span><span id="mpTimer"></span><button id="mpMin" aria-label="Player verkleinern">▾</button><button id="mpClose" aria-label="Musik und Timer beenden">✕</button></div>
   <div id="mpBody"></div>
@@ -1445,6 +1502,7 @@ const AURA = {bubbles:["🫧","○","◦"], sparkle:["✨"], hearts:["💖","�
 const THEMES = {classic:["#e3ae52","#6ea8ff"], ocean:["#3cc6d6","#0e7490"], berry:["#f472b6","#be185d"], violet:["#a78bfa","#6d28d9"], sunset:["#fb923c","#c2410c"]};
 const AV_DEF = {color:"sun", eyes:"normal", mouth:"smile", hat:"none", extra:"none", bg:"soft", pet:"none", frame:"none", aura:"none", title:"none", name:"none", card:"standard", appbg:"none", confetti:"classic", sound:"classic"};
 const AVATAR_CATS = ["color","eyes","mouth","hat","extra","bg"];
+let shopView = "cats", shopFilt = "all";
 let AV = {...AV_DEF}, OWN = new Set(), shopCat = "color", preview = null, avKey = "", shownCoins = -1, coinWelcome = 0;
 const itemOf = (cat,id)=>SHOP[cat] ? SHOP[cat].items.find(x=>x.id===id) : null;
 const owned = (cat,id)=>{ const it = itemOf(cat,id); return !!it && (!it.p || OWN.has(cat+":"+id)); };
@@ -2189,10 +2247,11 @@ function tab(v){
   if(v==="v") renderLessons();
   renderDaily(); renderBuybar();
   anim($({l:"learn", t:"test", h:"hs", s:"shop", v:"vok"}[v]), "enter");
-  if(v==="s") stagger($("items"), true);
+  if(v==="s") stagger($(shopView==="cats" ? "catGrid" : "items"), true);
   if(v==="v") stagger($("llist"), true);
   if(pendingLv && v!=="t") setTimeout(()=>{ if(pendingLv && $("tplay").hidden) showLevelUp(pendingLv.lv0, pendingLv.lv1); }, 500);
   window.scrollTo(0,0);
+  document.body.dataset.tab = v; fsUpdate();
 }
 $("tabL").onclick = ()=>tab("l");
 $("tabT").onclick = ()=>tab("t");
@@ -3247,16 +3306,45 @@ function renderShop(){
   $("pName").textContent = pName() || "Gib dir einen Namen";
   $("pName").className = "pname ne-"+(cfg.name || "none");
   $("avLv").textContent = "Level "+L.lv+" · "+myTitle(cfg);
-  $("coinBig").textContent = fmt(XP.coins);
-  const cats = $("catl"); cats.innerHTML = "";
-  Object.keys(SHOP).forEach(k=>{
-    const b = E("button","lchip"+(k===shopCat ? " on" : ""), SHOP[k].t);
-    b.setAttribute("aria-pressed", k===shopCat ? "true" : "false");
-    b.onclick = ()=>{ shopCat = k; clearPreview(); renderShop(); stagger($("items"), true); };
-    cats.appendChild(b);
-  });
+  $("pLvFill").style.width = Math.round(L.cur/L.need*100)+"%";
+  $("pLvTxt").textContent = "Noch "+fmt(L.need-L.cur)+" Punkte bis Level "+(L.lv+1);
+  $("coinBig").textContent = fmtK(XP.coins); $("pPts").textContent = fmtK(XP.total);
+  $("pBdg").textContent = XP.badges.length+"/"+BADGES.length;
+  const paid = Object.entries(SHOP).flatMap(([k,c])=>c.items.filter(it=>it.p).map(it=>k+":"+it.id));
+  $("pCol").textContent = paid.filter(k=>OWN.has(k)).length+"/"+paid.length;
+  show("catGrid", shopView==="cats"); show("catView", shopView==="items");
+  if(shopView==="cats"){
+    const grid = $("catGrid"); grid.innerHTML = "";
+    Object.keys(SHOP).forEach(k=>{
+      const its = SHOP[k].items, buyable = its.filter(it=>it.p);
+      const got = buyable.filter(it=>OWN.has(k+":"+it.id)).length;
+      const afford = buyable.filter(it=>!OWN.has(k+":"+it.id) && it.p<=XP.coins && !(it.lv && L.lv<it.lv)).length;
+      const b = E("button","cat"+(buyable.length && got===buyable.length ? " done" : ""));
+      b.appendChild(E("span","ci", CAT_ICON[k] || "🛍️"));
+      b.appendChild(E("b","", SHOP[k].t));
+      b.appendChild(E("small","", got+" / "+buyable.length));
+      const bar = E("span","cbar"), fill = E("i"); fill.style.width = (buyable.length ? got/buyable.length*100 : 0)+"%"; bar.appendChild(fill); b.appendChild(bar);
+      if(afford){ const n = E("span","cnew", String(afford)); n.title = afford+" Sachen kannst du dir leisten"; b.appendChild(n); }
+      b.setAttribute("aria-label", SHOP[k].t+": "+got+" von "+buyable.length+" gesammelt"+(afford ? ", "+afford+" kaufbar" : ""));
+      b.onclick = ()=>openCat(k);
+      grid.appendChild(b);
+    });
+    renderBuybar(); return;
+  }
+  const its = SHOP[shopCat].items, buyable = its.filter(it=>it.p);
+  $("catTitle").textContent = (CAT_ICON[shopCat] || "")+" "+SHOP[shopCat].t;
+  $("catCount").textContent = buyable.filter(it=>OWN.has(shopCat+":"+it.id)).length+" / "+buyable.length+" gesammelt";
+  $("ifilt").querySelectorAll("button").forEach(b=>{ const on = b.dataset.v===shopFilt; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
   const box = $("items"); box.innerHTML = ""; stagger(box, false);
-  SHOP[shopCat].items.forEach(it=>{
+  const list = its.filter(it=>{
+    const has = owned(shopCat, it.id);
+    if(shopFilt==="own") return has;
+    if(shopFilt==="buy") return !has && it.p<=XP.coins && !(it.lv && L.lv<it.lv);
+    return true;
+  });
+  show("itemsEmpty", !list.length);
+  $("itemsEmpty").textContent = shopFilt==="buy" ? "Gerade kannst du dir hier nichts Neues leisten – sammle weiter Münzen! 🪙" : "Hier hast du noch nichts.";
+  list.forEach(it=>{
     const cat = shopCat, has = owned(cat, it.id), on = AV[cat]===it.id;
     const locked = !has && it.lv && L.lv<it.lv, pv = preview && preview.cat===cat && preview.id===it.id;
     const b = E("button","item"+(on ? " on" : "")+(has ? " own" : "")+(locked ? " lock" : "")+(pv ? " prev" : ""));
@@ -3268,12 +3356,25 @@ function renderShop(){
     else if(has) pr.textContent = "Gehört dir";
     else if(locked) pr.textContent = "🔒 ab Level "+it.lv;
     else { pr.appendChild(E("i","coin")); pr.appendChild(document.createTextNode(fmt(it.p))); }
+    b.appendChild(pr);
     b.setAttribute("aria-label", SHOP[cat].t+" "+it.n+": "+(on ? "angelegt" : has ? "gehört dir" : locked ? "ab Level "+it.lv : it.p+" Münzen"));
     b.onclick = ()=>pickItem(cat, it);
     box.appendChild(b);
   });
   renderBuybar();
 }
+const CAT_ICON = {color:"🎨", eyes:"👀", mouth:"👄", hat:"🎩", extra:"🧣", bg:"🏞️", pet:"🐾", frame:"⭕", aura:"✨", title:"🏷️", name:"✍️", card:"🃏", appbg:"🌌", confetti:"🎉", sound:"🔔"};
+function openCat(k){
+  shopCat = k; shopView = "items"; shopFilt = "all"; clearPreview(); renderShop(); stagger($("items"), true); sfx("tap");
+  const r = $("catView").getBoundingClientRect(), top = document.querySelector(".top").getBoundingClientRect().bottom;
+  if(r.top<top || r.top>innerHeight*.55) window.scrollTo({top:Math.max(0, scrollY+r.top-top-10), behavior: RM ? "auto" : "smooth"});
+}
+$("catBack").onclick = ()=>{
+  shopView = "cats"; clearPreview(); renderShop(); stagger($("catGrid"), true); sfx("tap");
+  const r = $("catGrid").getBoundingClientRect(), top = document.querySelector(".top").getBoundingClientRect().bottom;
+  if(r.top<top) window.scrollTo({top:Math.max(0, scrollY+r.top-top-10), behavior: RM ? "auto" : "smooth"});
+};
+$("ifilt").querySelectorAll("button").forEach(b=>b.onclick = ()=>{ shopFilt = b.dataset.v; clearPreview(); renderShop(); stagger($("items"), true); sfx("tap"); });
 function pickItem(cat, it){
   if(owned(cat, it.id)){ clearPreview(); equip(cat, it.id); renderShop(); avReact("jump"); sfx(cat==="sound" ? "level" : "tap"); if(cat==="confetti") confetti(it.id, true); return; }
   if(it.lv && lvl(XP.total).lv<it.lv){ toast("🔒", it.n+" gibt es ab Level "+it.lv, "Sammle weiter Punkte!"); return; }
@@ -3285,6 +3386,7 @@ function pickItem(cat, it){
 }
 function clearPreview(){ if(preview){ preview = null; applyCosmetics(AV); } }
 function renderBuybar(){
+  setTimeout(fsUpdate, 0);
   if(!preview || curTab!=="s" || pvCur!=="shop" || owned(preview.cat, preview.id)){ show("buybar", false); return; }
   const it = itemOf(preview.cat, preview.id), miss = it.p-XP.coins;
   show("buybar", true);
@@ -3555,6 +3657,41 @@ $("hwBtn").onclick = ()=>{ troubleMode = true; dueMode = false; LM = "cards"; sa
 
 const mmssMs = ms=>{ const t = Math.max(0, Math.ceil(ms/1000)); return Math.floor(t/60)+":"+pad(t%60); };
 
+/* ================= Schieberegler zum schnellen Scrollen (Profil) ================= */
+const FS = {drag:false, off:0, max:1, size:44};
+function fsUpdate(){
+  const el = $("fscroll"), h = document.documentElement.scrollHeight, vh = innerHeight;
+  const on = curTab==="s" && h>vh*1.25;
+  if(el.hidden===on) el.hidden = !on;
+  if(!on) return;
+  const top = Math.max(0, document.querySelector(".top").getBoundingClientRect().bottom);
+  const nav = Math.min(...[document.querySelector(".nav"), $("buybar"), $("mpFab")].filter(x=>x && !x.hidden).map(x=>x.getBoundingClientRect().top).filter(y=>y>top+120));
+  const th = Math.max(80, nav-top-20);
+  el.style.top = (top+10)+"px"; el.style.height = th+"px";
+  const size = Math.max(44, Math.min(th*.45, th*vh/h)), max = Math.max(1, th-size), k = Math.min(1, Math.max(0, scrollY/Math.max(1, h-vh)));
+  const t = $("fthumb"); t.style.height = size+"px"; t.style.transform = "translateY("+(k*max).toFixed(1)+"px)";
+  FS.max = max; FS.size = size;
+}
+function fsTo(y){
+  const r = $("fscroll").getBoundingClientRect(), k = Math.min(1, Math.max(0, (y-r.top-FS.off)/FS.max));
+  window.scrollTo(0, k*(document.documentElement.scrollHeight-innerHeight));
+}
+$("fscroll").addEventListener("pointerdown", e=>{
+  e.preventDefault();
+  const t = $("fthumb").getBoundingClientRect();
+  FS.off = e.clientY>=t.top-8 && e.clientY<=t.bottom+8 ? Math.min(FS.size, Math.max(0, e.clientY-t.top)) : FS.size/2;
+  FS.drag = true; $("fscroll").classList.add("drag");
+  try{ $("fscroll").setPointerCapture(e.pointerId); }catch(err){}
+  fsTo(e.clientY);
+});
+$("fscroll").addEventListener("pointermove", e=>{ if(FS.drag) fsTo(e.clientY); });
+const fsEnd = ()=>{ FS.drag = false; $("fscroll").classList.remove("drag"); };
+$("fscroll").addEventListener("pointerup", fsEnd);
+$("fscroll").addEventListener("pointercancel", fsEnd);
+addEventListener("scroll", ()=>{ if(curTab==="s") fsUpdate(); }, {passive:true});
+addEventListener("resize", ()=>fsUpdate());
+if(window.ResizeObserver) new ResizeObserver(()=>fsUpdate()).observe(document.body);
+
 /* ================= Musik & Fokus ================= */
 const SP_PRESETS = [
   {n:"☕ Lofi Beats", u:"https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn"},
@@ -3569,6 +3706,7 @@ function spEmbed(url){
   return m ? "https://open.spotify.com/embed/"+m[1]+"/"+m[2]+"?utm_source=generator&theme=0" : null;
 }
 function updPlayer(){
+  setTimeout(fsUpdate, 0);
   const active = !!MU.kind || !!FT;
   show("mplayer", active); show("mpFab", active && $("mplayer").classList.contains("min"));
   $("mpTitle").textContent = MU.kind ? MU.title : "⏱ Fokus-Timer";

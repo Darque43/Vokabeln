@@ -26,7 +26,7 @@ Vokabeltrainer für **Latein** und **Englisch** in einer einzigen HTML-Datei (`l
   - Der Mini-Player läuft beim Wechseln der Bereiche weiter und lässt sich zu einem kleinen Knopf verkleinern.
 - **Tagesaufgaben** 📋: Jeden Tag drei neue Aufgaben (z. B. „15 Lernkarten beantworten“, „Einen Test mit mindestens 80 %“) mit Münzen als Belohnung, +40 Bonus für alle drei.
 - **Lernkalender** der letzten 12 Wochen und eine Liste deiner **schwierigsten Wörter** zum gezielten Üben.
-- **Profil** 👤: eigener Name (steht oben, beim Avatar und in der Bestenliste), Shop, Design und Einstellungen.
+- **Profil** 👤: Profilkarte mit Avatar, Name (steht auch oben und in der Bestenliste), Titel, Level-Balken und Werten (Münzen, Punkte, Abzeichen, Sammlung). Darunter Shop, Design und Einstellungen. Im Shop stehen die Kategorien als Kacheln (3 pro Reihe) mit „gesammelt“-Anzeige und der Zahl der Sachen, die du dir leisten kannst; tippt man eine an, erscheinen ihre Sachen mit Preis, ebenfalls 3 pro Reihe, filterbar nach „Alle“, „Meine“ und „Kaufbar“. Ein **Schieberegler** am rechten Rand bringt dich schnell nach unten und wieder nach oben.
 - **Münzen & Shop** 🪙
   - Münzen gibt es für Punkte (1 je 5 Punkte), das Tagesziel, Level-Aufstiege, Abzeichen, fehlerfreie Tests und die **tägliche Belohnung** 🎁 (steigt jeden Tag bis 50 Münzen)
   - Eigener **Avatar** zum Anpassen: Farbe, Augen, Mund, Kopfbedeckung, Extras und Hintergrund. Alles lässt sich vor dem Kauf anprobieren, manches gibt es erst ab einem bestimmten Level
