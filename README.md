@@ -5,6 +5,7 @@ Vokabeltrainer für **Latein** und **Englisch** in einer einzigen HTML-Datei (`l
 ## Funktionen
 
 - **Lernen** mit Karteikarten: vorne das Wort mit allen Formen und dem Geschlecht (farbige Marke m/f/n), hinten die deutsche Bedeutung. Antippen zum Umdrehen, nach rechts wischen = gewusst, nach links = nochmal (am Computer: Pfeiltasten und Leertaste). Englische Wörter können vorgelesen werden 🔊.
+- **Intelligente Wiederholung** 🔁: Die App merkt sich für jedes Wort, wie sicher du es kannst (Stufe 1–5, als Punkte oben auf der Lernkarte). Weißt du ein Wort, kommt es erst nach 1, 3, 7, 14 und 30 Tagen wieder; weißt du es nicht, wird es gleich nochmal geübt. Fällige Wörter findest du beim Lernen unter „🔁 Wiederholen“. Lernkarten, alle Lernarten und Tests zählen mit. Unter Erfolge zeigt „Dein Wortschatz“, wie viele Wörter neu, wackelig, am Lernen, sicher oder gemeistert sind.
 - **Weitere Lernarten** im Bereich „Lernen“:
   - 🎤 **Sprechen**: Die deutsche Bedeutung wird angezeigt, du sagst das Wort. Bei Englisch gibt es eine Aussprache-Note (Prozent und Sterne, je nachdem wie sicher die Spracherkennung dich verstanden hat), bei Latein wird nur geprüft, ob das Wort stimmt. Braucht Chrome oder Safari und Internet.
   - 🎧 **Hören** (Englisch): Ein Wort wird vorgelesen (auch langsam), du schreibst es auf.
@@ -17,8 +18,7 @@ Vokabeltrainer für **Latein** und **Englisch** in einer einzigen HTML-Datei (`l
   - Test: Multiple Choice +5, Schreiben +10, jede richtige Form bzw. Geschlecht +5, jede weitere Bedeutung +5
   - Serienbonus +2 ab der 3. richtigen Antwort in Folge, fehlerfreier Test +20
   - Level mit Titeln, Tagesziel, 🔥 Serie (Tage in Folge mit erreichtem Tagesziel), Wochenübersicht
-  - 21 Abzeichen, darunter auch welche fürs Einkaufen, Sprechen, Paare, Blitz, Tagesaufgaben und den Fokus-Timer
-- **Leben** ❤️: Im Test kostet jeder Fehler ein Leben (5 Stück). Leben kommen alle 30 Minuten von selbst zurück, beim Üben (5 richtige Übungsantworten = 1 Leben), beim Level-Aufstieg oder für 40 Münzen. Sind alle weg, kann man den Test beenden (das Ergebnis zählt trotzdem) oder auffüllen. Mit Münzen lassen sich ein Extra-Herz (bis 8) und schnellere Erholung (bis alle 10 Minuten) kaufen. Abschaltbar in den Einstellungen.
+  - 22 Abzeichen, darunter auch welche fürs Einkaufen, Sprechen, Paare, Blitz, Tagesaufgaben, den Fokus-Timer und gefestigte Wörter
 - **Musik & Fokus** 🎵 (Profil → Mehr):
   - **Spotify** direkt in der App: fertige Lern-Playlists (Lofi, Deep Focus, Klavier, Brain Food) oder einen eigenen Spotify-Link einfügen (Playlist, Album, Song, Podcast). Ganze Songs gibt es, wenn man im Browser bei Spotify angemeldet ist, sonst Vorschauen.
   - **Lern-Klänge** ohne Internet und ohne Konto: Regen, Meer, Kaminfeuer, Wind, Weltraum und Rauschen, mit eigener Lautstärke.
@@ -31,7 +31,7 @@ Vokabeltrainer für **Latein** und **Englisch** in einer einzigen HTML-Datei (`l
   - Münzen gibt es für Punkte (1 je 5 Punkte), das Tagesziel, Level-Aufstiege, Abzeichen, fehlerfreie Tests und die **tägliche Belohnung** 🎁 (steigt jeden Tag bis 50 Münzen)
   - Eigener **Avatar** zum Anpassen: Farbe, Augen, Mund, Kopfbedeckung, Extras und Hintergrund. Alles lässt sich vor dem Kauf anprobieren, manches gibt es erst ab einem bestimmten Level
   - Über 260 Sachen zu unterschiedlichen Preisen, darunter **Titel** (z. B. Bücherwurm, Lateinlegende, Imperator – stehen oben unter dem Namen), **Auren** (Sterne, Herzen, Musiknoten, Feuer … kreisen um den Avatar), Frisuren (Afro, Irokese, Zöpfe, Dutt), Römerschild und Gladius, neue Begleiter (Löwe, Tiger, Koala, Igel, Wal, Roboter, Alien …), **Begleiter** (Haustiere wie Katze, Panda oder Drache, die auf der Lernkarte sitzen und mitfreuen), **Rahmen** für den Avatar (Gold, Lorbeer, Regenbogen, Feuer, Diamant …) und **Töne-Pakete** (Sanft, Retro, Glocken, Weltall). Außerdem: Avatar (Farben, Augen, Münder, Hüte wie Römerhelm oder Astronautenhelm, Extras wie Toga oder Umhang, Hintergründe wie Kolosseum oder London), Namenseffekte (Gold, Feuer, Regenbogen …), Karten-Designs (Papier, Schultafel, Neon, Galaxie …), bewegte App-Hintergründe (Sternenhimmel, Schneefall, Polarlicht …) und Konfetti-Arten
-- **Einstellungen** ⚙️: Lautstärke, automatisches Vorlesen, Sprechtempo, britische oder amerikanische Aussprache, Spracherkennung für Latein (Italienisch/Deutsch), Tippfehler-Toleranz (streng/normal/locker), Zeitlimit pro Testfrage, Leben-System an/aus, Konfetti an/aus, Startbereich, Lernstand zurücksetzen oder alles löschen.
+- **Einstellungen** ⚙️: Lautstärke, automatisches Vorlesen, Sprechtempo, britische oder amerikanische Aussprache, Spracherkennung für Latein (Italienisch/Deutsch), Tippfehler-Toleranz (streng/normal/locker), Zeitlimit pro Testfrage, Konfetti an/aus, Startbereich, Lernstand zurücksetzen oder alles löschen.
 - **Design** 🎨 (kostenlos): Hintergrundfarbe (auch hell/dunkel oder eigene Farbe), Akzentfarbe, Schriftart, Schriftgröße und Ecken selbst einstellen, außerdem ein **eigenes Hintergrundbild** (z. B. ein Foto) mit einstellbarem Abdunkeln
 - **Fehlerkiste** ⚠️: Vokabeln, die du nicht wusstest, landen automatisch darin und bleiben drin, bis du sie zweimal gewusst hast.
 - **Erfolge**: Punkte & Abzeichen, Bestenliste und Verlauf (je Sprache).
