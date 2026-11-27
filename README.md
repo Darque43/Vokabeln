@@ -17,16 +17,22 @@ Vokabeltrainer für **Latein** und **Englisch** in einer einzigen HTML-Datei (`l
   - Test: Multiple Choice +5, Schreiben +10, jede richtige Form bzw. Geschlecht +5, jede weitere Bedeutung +5
   - Serienbonus +2 ab der 3. richtigen Antwort in Folge, fehlerfreier Test +20
   - Level mit Titeln, Tagesziel, 🔥 Serie (Tage in Folge mit erreichtem Tagesziel), Wochenübersicht
-  - 20 Abzeichen, darunter auch welche fürs Einkaufen, Sprechen, Paare, Blitz und Tagesaufgaben
+  - 21 Abzeichen, darunter auch welche fürs Einkaufen, Sprechen, Paare, Blitz, Tagesaufgaben und den Fokus-Timer
+- **Leben** ❤️: Im Test kostet jeder Fehler ein Leben (5 Stück). Leben kommen alle 30 Minuten von selbst zurück, beim Üben (5 richtige Übungsantworten = 1 Leben), beim Level-Aufstieg oder für 40 Münzen. Sind alle weg, kann man den Test beenden (das Ergebnis zählt trotzdem) oder auffüllen. Mit Münzen lassen sich ein Extra-Herz (bis 8) und schnellere Erholung (bis alle 10 Minuten) kaufen. Abschaltbar in den Einstellungen.
+- **Musik & Fokus** 🎵 (Profil → Mehr):
+  - **Spotify** direkt in der App: fertige Lern-Playlists (Lofi, Deep Focus, Klavier, Brain Food) oder einen eigenen Spotify-Link einfügen (Playlist, Album, Song, Podcast). Ganze Songs gibt es, wenn man im Browser bei Spotify angemeldet ist, sonst Vorschauen.
+  - **Lern-Klänge** ohne Internet und ohne Konto: Regen, Meer, Kaminfeuer, Wind, Weltraum und Rauschen, mit eigener Lautstärke.
+  - **Fokus-Timer** (10, 25 oder 45 Minuten) mit Münzen als Belohnung.
+  - Der Mini-Player läuft beim Wechseln der Bereiche weiter und lässt sich zu einem kleinen Knopf verkleinern.
 - **Tagesaufgaben** 📋: Jeden Tag drei neue Aufgaben (z. B. „15 Lernkarten beantworten“, „Einen Test mit mindestens 80 %“) mit Münzen als Belohnung, +40 Bonus für alle drei.
 - **Lernkalender** der letzten 12 Wochen und eine Liste deiner **schwierigsten Wörter** zum gezielten Üben.
 - **Profil** 👤: eigener Name (steht oben, beim Avatar und in der Bestenliste), Shop, Design und Einstellungen.
 - **Münzen & Shop** 🪙
   - Münzen gibt es für Punkte (1 je 5 Punkte), das Tagesziel, Level-Aufstiege, Abzeichen, fehlerfreie Tests und die **tägliche Belohnung** 🎁 (steigt jeden Tag bis 50 Münzen)
   - Eigener **Avatar** zum Anpassen: Farbe, Augen, Mund, Kopfbedeckung, Extras und Hintergrund. Alles lässt sich vor dem Kauf anprobieren, manches gibt es erst ab einem bestimmten Level
-  - Fast 190 Sachen zu unterschiedlichen Preisen, darunter **Begleiter** (Haustiere wie Katze, Panda oder Drache, die auf der Lernkarte sitzen und mitfreuen), **Rahmen** für den Avatar (Gold, Lorbeer, Regenbogen, Feuer, Diamant …) und **Töne-Pakete** (Sanft, Retro, Glocken, Weltall). Außerdem: Avatar (Farben, Augen, Münder, Hüte wie Römerhelm oder Astronautenhelm, Extras wie Toga oder Umhang, Hintergründe wie Kolosseum oder London), Namenseffekte (Gold, Feuer, Regenbogen …), Karten-Designs (Papier, Schultafel, Neon, Galaxie …), bewegte App-Hintergründe (Sternenhimmel, Schneefall, Polarlicht …) und Konfetti-Arten
-- **Einstellungen** ⚙️: Lautstärke, automatisches Vorlesen, Sprechtempo, britische oder amerikanische Aussprache, Spracherkennung für Latein (Italienisch/Deutsch), Tippfehler-Toleranz (streng/normal/locker), Zeitlimit pro Testfrage, Konfetti an/aus, Startbereich, Lernstand zurücksetzen oder alles löschen.
-- **Design** 🎨 (kostenlos): Hintergrundfarbe (auch hell/dunkel oder eigene Farbe), Akzentfarbe, Schriftart, Schriftgröße und Ecken selbst einstellen
+  - Über 260 Sachen zu unterschiedlichen Preisen, darunter **Titel** (z. B. Bücherwurm, Lateinlegende, Imperator – stehen oben unter dem Namen), **Auren** (Sterne, Herzen, Musiknoten, Feuer … kreisen um den Avatar), Frisuren (Afro, Irokese, Zöpfe, Dutt), Römerschild und Gladius, neue Begleiter (Löwe, Tiger, Koala, Igel, Wal, Roboter, Alien …), **Begleiter** (Haustiere wie Katze, Panda oder Drache, die auf der Lernkarte sitzen und mitfreuen), **Rahmen** für den Avatar (Gold, Lorbeer, Regenbogen, Feuer, Diamant …) und **Töne-Pakete** (Sanft, Retro, Glocken, Weltall). Außerdem: Avatar (Farben, Augen, Münder, Hüte wie Römerhelm oder Astronautenhelm, Extras wie Toga oder Umhang, Hintergründe wie Kolosseum oder London), Namenseffekte (Gold, Feuer, Regenbogen …), Karten-Designs (Papier, Schultafel, Neon, Galaxie …), bewegte App-Hintergründe (Sternenhimmel, Schneefall, Polarlicht …) und Konfetti-Arten
+- **Einstellungen** ⚙️: Lautstärke, automatisches Vorlesen, Sprechtempo, britische oder amerikanische Aussprache, Spracherkennung für Latein (Italienisch/Deutsch), Tippfehler-Toleranz (streng/normal/locker), Zeitlimit pro Testfrage, Leben-System an/aus, Konfetti an/aus, Startbereich, Lernstand zurücksetzen oder alles löschen.
+- **Design** 🎨 (kostenlos): Hintergrundfarbe (auch hell/dunkel oder eigene Farbe), Akzentfarbe, Schriftart, Schriftgröße und Ecken selbst einstellen, außerdem ein **eigenes Hintergrundbild** (z. B. ein Foto) mit einstellbarem Abdunkeln
 - **Fehlerkiste** ⚠️: Vokabeln, die du nicht wusstest, landen automatisch darin und bleiben drin, bis du sie zweimal gewusst hast.
 - **Erfolge**: Punkte & Abzeichen, Bestenliste und Verlauf (je Sprache).
 - **Vokabeln**: Lektionen per Foto einlesen (Texterkennung) oder selbst eintippen – eine Vokabel pro Zeile, z. B.
