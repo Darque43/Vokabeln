@@ -597,8 +597,8 @@ main{position:relative;z-index:1}
 .slot.win{border-style:solid;border-color:var(--ok);background:var(--okbg);animation:jumpS .5s backwards;animation-delay:calc(var(--i,0)*55ms)}
 @keyframes jumpS{40%{transform:translateY(-12px)}}
 .tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:14px 0}
-.tile{width:44px;height:48px;padding:0;border-radius:12px;background:var(--card);border:1px solid var(--line);font:600 1.3rem var(--serif);box-shadow:0 3px 0 var(--line)}
-.tile:active:not(:disabled){transform:translateY(2px);box-shadow:none}
+.ltile{width:44px;height:48px;padding:0;border-radius:12px;background:var(--card);border:1px solid var(--line);font:600 1.3rem var(--serif);box-shadow:0 3px 0 var(--line)}
+.ltile:active:not(:disabled){transform:translateY(2px);box-shadow:none}
 .blcard{min-height:180px}
 .blcard .cmid{gap:2px}
 .bleq{color:var(--mute);font:700 1.2rem var(--disp)}
@@ -609,6 +609,96 @@ main{position:relative;z-index:1}
 #blYes{background:var(--ok);color:var(--okInk)}
 #blNo{background:var(--badbg);color:var(--bad)}
 .blbig{font:800 3rem/1 var(--disp);color:var(--acc)}
+
+/* ---------- Mehr Kosmetik ---------- */
+.ne-shadow{text-shadow:2px 2px 0 var(--acc),4px 4px 0 color-mix(in srgb,var(--acc) 45%,transparent)}
+.ne-pastel{background:linear-gradient(90deg,#ffafcc,#bde0fe,#cdb4db,#ffc8dd);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ne-glitch{position:relative;text-shadow:2px 0 #ff2bd6,-2px 0 #00e5ff;animation:glitch 1.6s steps(1) infinite}
+@keyframes glitch{0%,86%,100%{text-shadow:2px 0 #ff2bd6,-2px 0 #00e5ff;transform:none}88%{text-shadow:-3px 1px #ff2bd6,3px -1px #00e5ff;transform:translateX(1px)}92%{text-shadow:3px -1px #ff2bd6,-3px 1px #00e5ff;transform:translateX(-1px)}}
+:root[data-card=notebook] :is(.face,.qcard),.cprev[data-c=notebook]{background:linear-gradient(90deg,transparent 30px,rgba(230,57,70,.5) 30px 32px,transparent 32px),linear-gradient(#e3ecf7 1px,transparent 1px),linear-gradient(90deg,#e3ecf7 1px,transparent 1px),#fff;background-size:auto,16px 16px,16px 16px,auto;border-color:#d6e2ef;--ink:#1f2a44;--mute:#6a768c;color:var(--ink)}
+:root[data-card=pastel] :is(.face,.qcard),.cprev[data-c=pastel]{background:linear-gradient(135deg,#ffd6e8,#d6e4ff 50%,#d9f7e8);border-color:#e8d5f0;--ink:#3b2f4a;--mute:#7a6c8a;color:var(--ink)}
+:root[data-card=dusk] :is(.face,.qcard),.cprev[data-c=dusk]{background:linear-gradient(160deg,#ffb88c,#ff6f91 55%,#845ec2);border-color:#d65db1;--ink:#fff;--mute:#ffe4ef;color:var(--ink);text-shadow:0 1px 3px rgba(0,0,0,.25)}
+:root:is([data-card=dusk]) :is(.face,.qcard) .cside{color:var(--ink);background:rgba(255,255,255,.18)}
+:root:is([data-card=notebook],[data-card=pastel]) :is(.face,.qcard) .cside{color:var(--ink);background:rgba(0,0,0,.07)}
+.bg-gradient{background:linear-gradient(120deg,rgba(255,154,158,.22),rgba(161,140,209,.22),rgba(132,250,176,.22),rgba(251,194,235,.22));background-size:400% 400%;animation:gradMove 18s ease infinite}
+@keyframes gradMove{50%{background-position:100% 50%}}
+.bg-confetti span{top:-14px;width:7px;height:11px;border-radius:2px;opacity:.65;animation:snow linear infinite}
+.bg-leaves span{top:-30px;opacity:.6;animation:leaf linear infinite}
+@keyframes leaf{to{transform:translate(70px,112vh) rotate(540deg)}}
+.bg-fireflies span{width:6px;height:6px;border-radius:50%;background:#ffe066;box-shadow:0 0 10px 3px rgba(255,224,102,.7);animation:fly 9s ease-in-out infinite alternate}
+@keyframes fly{25%{transform:translate(30px,-40px);opacity:.3}50%{transform:translate(-20px,-80px);opacity:1}75%{transform:translate(40px,-30px);opacity:.4}100%{transform:translate(-10px,20px);opacity:.9}}
+.bprev.bg-gradient{background:linear-gradient(120deg,#ff9a9e,#a18cd1,#84fab0)}
+.bprev.bg-fireflies{background:#1b2133;color:#ffe066}
+.prop{transform-box:fill-box;transform-origin:center}
+.avbig .prop,.lvav .prop,.ring .prop{animation:propSpin .5s linear infinite}
+@keyframes propSpin{50%{transform:scaleX(.15)}}
+.avbig .wing{transform-box:fill-box;transform-origin:100% 60%;animation:flap 1.6s ease-in-out infinite}
+.avbig .wing.r{transform-origin:0 60%}
+@keyframes flap{50%{transform:rotate(-8deg)}}
+.avbig .wing.r{animation-name:flapR}
+@keyframes flapR{50%{transform:rotate(8deg)}}
+/* Rahmen und Begleiter */
+.avframe{position:relative;display:grid;place-items:center;border-radius:50%;padding:7px}
+.avframe::before{content:"";position:absolute;inset:0;border-radius:50%;z-index:0}
+.avframe>.av{position:relative;z-index:1}
+.avframe.mini{padding:4px}
+.avframe.mini .av{width:54px;height:54px}
+.avframe[data-f=bronze]::before{background:conic-gradient(#cd7f32,#8c5523,#e0a060,#8c5523,#cd7f32)}
+.avframe[data-f=silver]::before{background:conic-gradient(#e0e0e0,#9e9e9e,#f5f5f5,#bdbdbd,#e0e0e0)}
+.avframe[data-f=gold]::before{background:conic-gradient(#f6d365,#c99a2e,#ffe29f,#d4a017,#f6d365)}
+.avframe[data-f=leaves]::before{background:repeating-conic-gradient(#4f9a45 0 7deg,#6cb85c 7deg 14deg)}
+.avframe[data-f=neon]::before{border:3px solid #ff2bd6;box-shadow:0 0 12px #ff2bd6,inset 0 0 12px #ff2bd6;animation:neonP 1.4s ease-in-out infinite alternate}
+@keyframes neonP{to{box-shadow:0 0 22px #ff2bd6,inset 0 0 18px #ff2bd6}}
+.avframe[data-f=stars]::before{background:repeating-conic-gradient(#ffd23f 0 5deg,transparent 5deg 15deg);animation:rot 10s linear infinite}
+.avframe[data-f=rainbow]::before{background:conic-gradient(#ff5f6d,#ffc371,#47e891,#3fa7ff,#c56cf0,#ff5f6d);animation:rot 4s linear infinite}
+.avframe[data-f=fire]::before{background:conic-gradient(#ff3d00,#ffd600,#ff9100,#ff3d00,#ffd600,#ff3d00);animation:rot 2.4s linear infinite;box-shadow:0 0 18px #ff6d00}
+.avframe[data-f=diamond]::before{background:conic-gradient(#b9f2ff,#ffffff,#a0e7ff,#e0c3fc,#b9f2ff);animation:rot 6s linear infinite;box-shadow:0 0 22px rgba(185,242,255,.8)}
+.pet{position:absolute;font-size:2.2rem;line-height:1;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));animation:petBob 2.4s ease-in-out infinite;z-index:4}
+#petBig{right:-18px;bottom:-6px;font-size:3rem}
+.pcard{right:12px;top:-24px;font-size:2rem}
+@keyframes petBob{50%{transform:translateY(-5px) rotate(-5deg)}}
+.pet.hop{animation:petHop .65s cubic-bezier(.3,1.6,.5,1)}
+@keyframes petHop{40%{transform:translateY(-20px) rotate(12deg)}}
+.petp{animation:petBob 2.4s ease-in-out infinite}
+/* Einstellungen */
+.rng{display:flex;align-items:center;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line);font-size:.95rem}
+.rng span{flex:1}
+.rng input{flex:1.3;accent-color:var(--acc)}
+.rng b{min-width:40px;text-align:right;font:600 .9rem var(--disp)}
+#pSet .seg button{font-size:.84rem;padding:8px 6px}
+.danger{color:var(--bad)!important}
+.ttbar{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin:-2px 0 10px}
+.ttbar i{display:block;height:100%;width:100%;border-radius:99px;background:var(--acc)}
+.ttbar.low i{background:var(--bad);animation:lowP .5s ease-in-out infinite alternate}
+@keyframes lowP{to{opacity:.45}}
+/* Tagesaufgaben, Kalender */
+.qstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:-6px 0 14px}
+.qpill{position:relative;overflow:hidden;display:flex;align-items:center;gap:6px;padding:8px 10px 10px;border-radius:14px;border:1px solid var(--line);background:var(--card);font:600 .82rem var(--disp);text-align:left}
+.qpill .qe{font-size:1.1rem}
+.qpill i{position:absolute;left:0;bottom:0;height:3px;width:calc(var(--p,0)*1%);background:var(--acc);transition:width .5s}
+.qpill.done{border-color:var(--ok);background:var(--okbg)}
+.qpill.done i{background:var(--ok)}
+.qrow{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.qrow:last-child{border-bottom:0}
+.qrow .qe{font-size:1.5rem;flex:none}
+.qrow .qt{flex:1;min-width:0}
+.qrow .qt b{display:block;font-size:.92rem;font-weight:600}
+.qrow .mini{margin-top:6px}
+.qrow .qr{flex:none;font:600 .85rem var(--disp);display:inline-flex;align-items:center;gap:4px;color:var(--mute)}
+.qrow.done .qr{color:var(--ok)}
+.cal{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;margin-top:6px}
+.cal i{display:block;aspect-ratio:1;border-radius:4px;background:var(--card2);cursor:pointer}
+:is(.cal,.calleg) i.l1{background:color-mix(in srgb,var(--acc) 30%,var(--card2))}
+:is(.cal,.calleg) i.l2{background:color-mix(in srgb,var(--acc) 55%,var(--card2))}
+:is(.cal,.calleg) i.l3{background:color-mix(in srgb,var(--acc) 80%,var(--card2))}
+:is(.cal,.calleg) i.l4{background:var(--acc)}
+.cal i.now{outline:2px solid var(--ink);outline-offset:1px}
+.cal i.fut{visibility:hidden}
+.calleg{display:flex;align-items:center;justify-content:flex-end;gap:4px;font-size:.7rem;color:var(--mute);margin-top:8px}
+.calleg i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.hwrow{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.hwrow:last-of-type{border-bottom:0}
+.hwrow small{color:var(--bad);font-weight:600;white-space:nowrap}
 
 /* ---------- Navigation ---------- */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
@@ -669,6 +759,7 @@ main{position:relative;z-index:1}
   <button data-lang="en"><span class="lg">EN</span>Englisch</button>
 </div>
 <div class="goal" id="goal"><span>Tagesziel</span><div class="gbar"><i id="gfill"></i></div><b id="gtxt">0 / 50</b></div>
+<div class="qstrip" id="qstrip" hidden></div>
 
 <div class="daily" id="daily" hidden>
   <span class="e">🎁</span>
@@ -703,6 +794,7 @@ main{position:relative;z-index:1}
         <div class="cside" id="bside"></div>
       </div>
     </div>
+    <span class="pet pcard" id="petCard" aria-hidden="true" hidden></span>
     <span class="stamp yes" id="stY">Gewusst</span>
     <span class="stamp no" id="stN">Nochmal</span>
     <button class="say" id="say" aria-label="Vorlesen" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19.5 5.5a9 9 0 0 1 0 13"/></svg></button>
@@ -837,6 +929,7 @@ main{position:relative;z-index:1}
       <div class="prog"><i id="tpb"></i></div>
       <span class="tscore" id="tscore">0 P</span>
     </div>
+    <div class="ttbar" id="ttbar" hidden><i></i></div>
     <div class="tmeta"><span id="tprog"></span><span class="combo" id="tcombo"></span></div>
     <div class="qcard">
       <div class="ctop"><span id="tl"></span><span id="tm"></span></div>
@@ -862,6 +955,11 @@ main{position:relative;z-index:1}
   <div class="seg" id="hsv" style="margin-bottom:16px"><button id="vP" class="on">Punkte</button><button id="vB">Bestenliste</button><button id="vH">Verlauf</button></div>
 
   <div id="hsPts">
+    <div class="panel" id="qpanel">
+      <div class="ph"><b>📋 Tagesaufgaben</b><span id="qsum"></span></div>
+      <div id="qlist"></div>
+      <p class="small" id="qfoot" style="margin-bottom:0"></p>
+    </div>
     <div class="panel lvcard">
       <div class="ring big" id="lvRing"><span class="av" id="lvAv"></span><span class="lvb" id="lvN">1</span></div>
       <div class="lvi"><small>Dein Level</small><h2 id="lvT">Neuling</h2><div class="prog"><i id="lvBar"></i></div><p id="lvS"></p></div>
@@ -876,6 +974,17 @@ main{position:relative;z-index:1}
       <div class="ph"><b>Diese Woche</b><span id="wsum"></span></div>
       <div class="chart" id="week"></div>
       <p class="cap" id="wcap"></p>
+    </div>
+    <div class="panel">
+      <div class="ph"><b>🗓️ Lernkalender</b><span id="calSum"></span></div>
+      <div class="cal" id="cal"></div>
+      <div class="calleg">weniger <i style="background:var(--card2)"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i> mehr</div>
+      <p class="cap" id="calCap"></p>
+    </div>
+    <div class="panel" id="hwPanel" hidden>
+      <div class="ph"><b>😬 Deine schwierigsten Wörter</b><span>Fehler</span></div>
+      <div id="hwList"></div>
+      <button class="primary wide" id="hwBtn" style="margin-top:12px">In der Fehlerkiste üben</button>
     </div>
     <div class="panel">
       <div class="ph"><b>Tagesziel</b><span>Punkte pro Tag</span></div>
@@ -917,7 +1026,7 @@ main{position:relative;z-index:1}
 <!-- ======== Shop ======== -->
 <section id="shop" hidden>
   <div class="panel avstage">
-    <div class="av avbig" id="avBig"></div>
+    <div class="avframe" id="avFrame"><div class="av avbig" id="avBig"></div><span class="pet" id="petBig" hidden></span></div>
     <button class="pnb" id="pNameBtn" aria-label="Namen ändern"><span class="pname" id="pName">Dein Name</span><span class="pen">✏️</span></button>
     <small id="avLv">Level 1 · Neuling</small>
     <div class="coinbar"><i class="coin"></i><span id="coinBig">0</span><span style="font-weight:500;color:var(--mute);font-size:.85rem">Münzen</span></div>
@@ -963,12 +1072,44 @@ main{position:relative;z-index:1}
   </div>
   <div id="pSet" hidden>
     <div class="panel">
-      <div class="ph"><b>⚙️ Einstellungen</b></div>
+      <div class="ph"><b>🔊 Töne &amp; Vibration</b></div>
       <label class="tgl"><span>Töne</span><input type="checkbox" id="setSound"><i></i></label>
+      <div class="rng"><span>Lautstärke</span><input type="range" id="setVol" min="0" max="100" step="5" aria-label="Lautstärke"><b id="setVolV"></b></div>
       <label class="tgl"><span>Vibration</span><input type="checkbox" id="setVib"><i></i></label>
-      <label class="tgl"><span>Weniger Animationen</span><input type="checkbox" id="setCalm"><i></i></label>
+      <p class="small" style="margin-bottom:0">Andere Töne (Retro, Glocken, Weltall …) gibt es im Shop.</p>
     </div>
-    <p class="small">Backup, Teilen und „Als App installieren“ findest du unter „Vokabeln“.</p>
+    <div class="panel">
+      <div class="ph"><b>🗣️ Vorlesen &amp; Sprechen</b></div>
+      <label class="tgl"><span>Englische Wörter automatisch vorlesen</span><input type="checkbox" id="setAuto"><i></i></label>
+      <div class="lbl">Sprechtempo</div>
+      <div class="seg" data-set="rate"><button data-v="s">Langsam</button><button data-v="n">Normal</button><button data-v="f">Schnell</button></div>
+      <div class="lbl">Englische Aussprache</div>
+      <div class="seg" data-set="accent"><button data-v="en-GB">Britisch</button><button data-v="en-US">Amerikanisch</button></div>
+      <div class="lbl">Spracherkennung für Latein</div>
+      <div class="seg" data-set="laRec"><button data-v="it-IT">Italienisch</button><button data-v="de-DE">Deutsch</button></div>
+      <p class="small">Geräte kennen kein Latein. Italienisch passt meistens am besten – klappt „Sprechen“ bei dir schlecht, probier Deutsch.</p>
+      <button id="setTry">🔊 Probe hören</button>
+    </div>
+    <div class="panel">
+      <div class="ph"><b>📝 Test</b></div>
+      <div class="lbl" style="margin-top:4px">Tippfehler</div>
+      <div class="seg" data-set="typo"><button data-v="s">Streng</button><button data-v="n">Normal</button><button data-v="l">Locker</button></div>
+      <div class="lbl">Zeitlimit pro Frage</div>
+      <div class="seg" data-set="tlimit"><button data-v="0">Aus</button><button data-v="30">30 s</button><button data-v="15">15 s</button><button data-v="8">8 s</button></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><b>✨ Anzeige</b></div>
+      <label class="tgl"><span>Weniger Animationen</span><input type="checkbox" id="setCalm"><i></i></label>
+      <label class="tgl"><span>Konfetti</span><input type="checkbox" id="setConf"><i></i></label>
+      <label class="tgl"><span>Tagesaufgaben beim Lernen zeigen</span><input type="checkbox" id="setQuest"><i></i></label>
+      <div class="lbl">Beim Öffnen starten mit</div>
+      <div class="seg" data-set="start"><button data-v="l">Lernen</button><button data-v="t">Test</button><button data-v="h">Erfolge</button><button data-v="s">Profil</button></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><b>🗑️ Daten</b></div>
+      <p class="small" style="margin-top:0">Backup, Teilen und „Als App installieren“ findest du unter „Vokabeln“.</p>
+      <div class="two"><button id="resProg">Lernstand zurücksetzen</button><button id="resAll" class="danger">Alles löschen</button></div>
+    </div>
   </div>
 </section>
 
@@ -1129,49 +1270,64 @@ const SHOP = {
     {id:"ice",n:"Eis",v:"#9fdcff",g:["#e6f9ff","#8fd3fe"],p:150},
     {id:"lava",n:"Lava",v:"#ff5f45",g:["#ffb347","#ff512f","#dd2476"],p:220},
     {id:"gold",n:"Gold",v:"#f2c14e",p:300,lv:10,shine:true},
+    {id:"forest",n:"Wald",v:"#4caf6e",g:["#a8e063","#2f8f4e"],p:150},{id:"sea",n:"Ozean",v:"#3a9ad9",g:["#7fe0f5","#1e6fd9"],p:150},
+    {id:"candy",n:"Zuckerwatte",v:"#ffb3d9",g:["#ffc3e6","#c3d9ff"],p:180},{id:"dusk",n:"Abendrot",v:"#ff8a65",g:["#ffd194","#ff6f61","#b24592"],p:200},
     {id:"galaxy",n:"Galaxie",v:"#5a3fc0",g:["#8e54e9","#4776e6","#2b1055"],stars:true,p:450,lv:12},
     {id:"rainbow",n:"Regenbogen",v:"#ff9a9e",g:["#ff6b6b","#ffd93d","#6bcb77","#4d96ff","#b983ff"],p:800,lv:15}]},
   eyes:{t:"Augen", items:[
     {id:"normal",n:"Normal",p:0},{id:"happy",n:"Fröhlich",p:30},{id:"sleepy",n:"Verträumt",p:30},{id:"angry",n:"Grimmig",p:40},
     {id:"wink",n:"Zwinkern",p:50},{id:"kawaii",n:"Kulleraugen",p:90},{id:"heart",n:"Verliebt",p:100},{id:"spiral",n:"Schwindelig",p:110},
-    {id:"star",n:"Sterne",p:120},{id:"pirate",n:"Augenklappe",p:140},{id:"cool",n:"Sonnenbrille",p:150},{id:"laser",n:"Laser-Blick",p:400,lv:10}]},
+    {id:"star",n:"Sterne",p:120},{id:"pirate",n:"Augenklappe",p:140},{id:"cool",n:"Sonnenbrille",p:150},{id:"sparkle",n:"Glitzeraugen",p:130},{id:"robot",n:"Roboter",p:200},{id:"laser",n:"Laser-Blick",p:400,lv:10}]},
   mouth:{t:"Mund", items:[
     {id:"smile",n:"Lächeln",p:0},{id:"grin",n:"Grinsen",p:30},{id:"wow",n:"Staunen",p:30},{id:"cat",n:"Katze",p:50},{id:"tongue",n:"Zunge",p:50},
-    {id:"tooth",n:"Zahnlücke",p:60},{id:"kiss",n:"Kussmund",p:70},{id:"fangs",n:"Vampir",p:90},{id:"mustache",n:"Schnurrbart",p:120}]},
+    {id:"tooth",n:"Zahnlücke",p:60},{id:"kiss",n:"Kussmund",p:70},{id:"bubble",n:"Kaugummi",p:80},{id:"fangs",n:"Vampir",p:90},{id:"mustache",n:"Schnurrbart",p:120},{id:"beard",n:"Bart",p:150}]},
   hat:{t:"Kopf", items:[
-    {id:"none",n:"Nichts",p:0},{id:"cap",n:"Kappe",p:60},{id:"beanie",n:"Mütze",p:70},{id:"party",n:"Partyhut",p:80},
+    {id:"none",n:"Nichts",p:0},{id:"cap",n:"Kappe",p:60},{id:"beanie",n:"Mütze",p:70},{id:"party",n:"Partyhut",p:80},{id:"bow",n:"Schleife",p:60},{id:"sunhat",n:"Sonnenhut",p:110},{id:"santa",n:"Weihnachtsmütze",p:120},{id:"sailor",n:"Matrosenmütze",p:130},{id:"hardhat",n:"Bauhelm",p:140},
     {id:"laurel",n:"Lorbeerkranz",p:100},{id:"tophat",n:"Zylinder",p:120},{id:"chef",n:"Kochmütze",p:120},{id:"flowers",n:"Blumenkranz",p:130},
-    {id:"bunny",n:"Hasenohren",p:150},{id:"cat",n:"Katzenohren",p:150},{id:"headphones",n:"Kopfhörer",p:150},{id:"horns",n:"Teufelshörner",p:180},
+    {id:"bunny",n:"Hasenohren",p:150},{id:"cat",n:"Katzenohren",p:150},{id:"headphones",n:"Kopfhörer",p:150},{id:"horns",n:"Teufelshörner",p:180},{id:"ninja",n:"Ninja-Band",p:160},{id:"propeller",n:"Propellermütze",p:180},
     {id:"wizard",n:"Zauberhut",p:200},{id:"cowboy",n:"Cowboyhut",p:200},{id:"pirate",n:"Piratenhut",p:220},{id:"grad",n:"Doktorhut",p:250,lv:8},
     {id:"viking",n:"Wikingerhelm",p:260},{id:"helmet",n:"Römerhelm",p:300,lv:6},{id:"halo",n:"Heiligenschein",p:350,lv:10},
     {id:"crown",n:"Krone",p:400,lv:12},{id:"unicorn",n:"Einhorn",p:450,lv:12},{id:"astro",n:"Astronautenhelm",p:600,lv:15}]},
   extra:{t:"Extras", items:[
     {id:"none",n:"Nichts",p:0},{id:"bowtie",n:"Fliege",p:50},{id:"tie",n:"Krawatte",p:60},{id:"glasses",n:"Brille",p:60},
-    {id:"balloon",n:"Luftballon",p:70},{id:"scarf",n:"Schal",p:70},{id:"flower",n:"Blume",p:80},{id:"book",n:"Buch",p:90},
-    {id:"medal",n:"Medaille",p:150,lv:5},{id:"necklace",n:"Goldkette",p:160},{id:"wand",n:"Zauberstab",p:180},
-    {id:"toga",n:"Toga",p:250,lv:4},{id:"cape",n:"Heldenumhang",p:300}]},
+    {id:"balloon",n:"Luftballon",p:70},{id:"lollipop",n:"Lolli",p:70},{id:"scarf",n:"Schal",p:70},{id:"flower",n:"Blume",p:80},{id:"book",n:"Buch",p:90},{id:"backpack",n:"Rucksack",p:90},{id:"mic",n:"Mikrofon",p:120},{id:"monocle",n:"Monokel",p:140},
+    {id:"medal",n:"Medaille",p:150,lv:5},{id:"necklace",n:"Goldkette",p:160},{id:"wand",n:"Zauberstab",p:180},{id:"mask",n:"Heldenmaske",p:200},
+    {id:"toga",n:"Toga",p:250,lv:4},{id:"cape",n:"Heldenumhang",p:300},{id:"wings",n:"Engelsflügel",p:350,lv:6}]},
   bg:{t:"Avatar-Hintergrund", items:[
     {id:"soft",n:"Standard",p:0},{id:"peach",n:"Pfirsich",v:"#ffd9c2",p:20},{id:"lav",n:"Lavendel",v:"#ddd3ff",p:20},
     {id:"aqua",n:"Lagune",v:"#c4eefa",p:20},{id:"leaf",n:"Wiese",v:"#cdeec0",p:20},{id:"hearts",n:"Herzen",p:100},
-    {id:"confetti",n:"Konfetti",p:120},{id:"sunburst",n:"Strahlen",p:120},{id:"sunset",n:"Abendrot",p:140},{id:"stars",n:"Sternenhimmel",p:150},
-    {id:"mountains",n:"Berge",p:160},{id:"ocean",n:"Unterwasser",p:180},{id:"rainbow",n:"Regenbogen",p:200,lv:6},
+    {id:"confetti",n:"Konfetti",p:120},{id:"pixel",n:"Pixel",p:100},{id:"autumn",n:"Herbst",p:120},{id:"winter",n:"Winter",p:120},{id:"sunburst",n:"Strahlen",p:120},{id:"sunset",n:"Abendrot",p:140},{id:"beach",n:"Strand",p:140},{id:"stars",n:"Sternenhimmel",p:150},
+    {id:"mountains",n:"Berge",p:160},{id:"library",n:"Bibliothek",p:160},{id:"ocean",n:"Unterwasser",p:180},{id:"rainbow",n:"Regenbogen",p:200,lv:6},
     {id:"colosseum",n:"Kolosseum",p:220},{id:"london",n:"London",p:220},{id:"space",n:"Weltall",p:260,lv:8}]},
+  pet:{t:"Begleiter", items:[
+    {id:"none",n:"Keiner",p:0},{id:"frog",n:"Frosch",p:90},{id:"bee",n:"Biene",p:100},{id:"cat",n:"Katze",p:120},{id:"dog",n:"Hund",p:120},
+    {id:"bunny",n:"Hase",p:140},{id:"hamster",n:"Hamster",p:140},{id:"turtle",n:"Schildkröte",p:160},{id:"fox",n:"Fuchs",p:200},
+    {id:"panda",n:"Panda",p:220},{id:"penguin",n:"Pinguin",p:220},{id:"octopus",n:"Krake",p:300},{id:"dino",n:"Dino",p:400},
+    {id:"unicorn",n:"Einhorn",p:500,lv:10},{id:"dragon",n:"Drache",p:650,lv:14}]},
+  frame:{t:"Rahmen", items:[
+    {id:"none",n:"Ohne",p:0},{id:"bronze",n:"Bronze",p:60},{id:"silver",n:"Silber",p:100},{id:"gold",n:"Gold",p:150},
+    {id:"leaves",n:"Lorbeer",p:250},{id:"neon",n:"Neon",p:250,anim:true},{id:"stars",n:"Sterne",p:350,anim:true},
+    {id:"rainbow",n:"Regenbogen",p:400,lv:6,anim:true},{id:"fire",n:"Feuer",p:450,lv:8,anim:true},{id:"diamond",n:"Diamant",p:800,lv:14,anim:true}]},
   name:{t:"Namenseffekt", items:[
-    {id:"none",n:"Normal",p:0},{id:"gold",n:"Gold",p:150},{id:"ice",n:"Eis",p:200},{id:"fire",n:"Feuer",p:250,anim:true},
-    {id:"neon",n:"Neon",p:300},{id:"rainbow",n:"Regenbogen",p:500,lv:8,anim:true},{id:"galaxy",n:"Galaxie",p:700,lv:12,anim:true}]},
+    {id:"none",n:"Normal",p:0},{id:"shadow",n:"3D-Schatten",p:80},{id:"pastel",n:"Pastell",p:120},{id:"gold",n:"Gold",p:150},{id:"ice",n:"Eis",p:200},{id:"fire",n:"Feuer",p:250,anim:true},
+    {id:"neon",n:"Neon",p:300},{id:"glitch",n:"Glitch",p:400,anim:true},{id:"rainbow",n:"Regenbogen",p:500,lv:8,anim:true},{id:"galaxy",n:"Galaxie",p:700,lv:12,anim:true}]},
   card:{t:"Karten-Design", items:[
-    {id:"standard",n:"Standard",p:0},{id:"paper",n:"Papier",p:120},{id:"wood",n:"Holz",p:180},{id:"chalk",n:"Schultafel",p:200},
+    {id:"standard",n:"Standard",p:0},{id:"notebook",n:"Schulheft",p:100},{id:"paper",n:"Papier",p:120},{id:"pastel",n:"Pastell",p:150},{id:"wood",n:"Holz",p:180},{id:"chalk",n:"Schultafel",p:200},{id:"dusk",n:"Abendrot",p:220},
     {id:"neon",n:"Neon",p:280},{id:"marble",n:"Marmor",p:300},{id:"galaxy",n:"Galaxie",p:450,lv:10}]},
   appbg:{t:"App-Hintergrund", items:[
-    {id:"none",n:"Schlicht",p:0},{id:"dots",n:"Punkte",p:80},{id:"grid",n:"Karopapier",p:80},{id:"waves",n:"Wellen",p:150},
-    {id:"bubbles",n:"Seifenblasen",p:300,anim:true},{id:"hearts",n:"Herzen",p:300,anim:true},{id:"stars",n:"Sternenhimmel",p:350,anim:true},
-    {id:"snow",n:"Schneefall",p:400,anim:true},{id:"aurora",n:"Polarlicht",p:500,lv:8,anim:true}]},
+    {id:"none",n:"Schlicht",p:0},{id:"dots",n:"Punkte",p:80},{id:"grid",n:"Karopapier",p:80},{id:"waves",n:"Wellen",p:150},{id:"gradient",n:"Farbverlauf",p:250,anim:true},
+    {id:"bubbles",n:"Seifenblasen",p:300,anim:true},{id:"hearts",n:"Herzen",p:300,anim:true},{id:"confetti",n:"Konfetti-Regen",p:300,anim:true},{id:"stars",n:"Sternenhimmel",p:350,anim:true},{id:"leaves",n:"Blätterfall",p:350,anim:true},
+    {id:"snow",n:"Schneefall",p:400,anim:true},{id:"fireflies",n:"Glühwürmchen",p:450,anim:true},{id:"aurora",n:"Polarlicht",p:500,lv:8,anim:true}]},
   confetti:{t:"Konfetti", items:[
-    {id:"classic",n:"Bunt",p:0},{id:"stars",n:"Sterne",p:100},{id:"hearts",n:"Herzen",p:100},{id:"leaves",n:"Blätter",p:120},
-    {id:"books",n:"Schulsachen",p:150},{id:"coins",n:"Münzregen",p:200},{id:"fireworks",n:"Feuerwerk",p:350,lv:7,anim:true}]}
+    {id:"classic",n:"Bunt",p:0},{id:"stars",n:"Sterne",p:100},{id:"hearts",n:"Herzen",p:100},{id:"leaves",n:"Blätter",p:120},{id:"flowers",n:"Blumen",p:120},{id:"music",n:"Musik",p:120},
+    {id:"books",n:"Schulsachen",p:150},{id:"sweets",n:"Süßigkeiten",p:140},{id:"coins",n:"Münzregen",p:200},{id:"fireworks",n:"Feuerwerk",p:350,lv:7,anim:true}]},
+  sound:{t:"Töne", items:[
+    {id:"classic",n:"Standard",p:0},{id:"soft",n:"Sanft",p:80},{id:"retro",n:"Retro",p:150},{id:"bells",n:"Glocken",p:180},{id:"space",n:"Weltall",p:220}]}
 };
+const PET = {frog:"🐸", bee:"🐝", cat:"🐱", dog:"🐶", bunny:"🐰", hamster:"🐹", turtle:"🐢", fox:"🦊", panda:"🐼", penguin:"🐧", octopus:"🐙", dino:"🦖", unicorn:"🦄", dragon:"🐉"};
+const SOUND_ICON = {classic:"🔔", soft:"🌙", retro:"👾", bells:"🛎️", space:"🚀"};
 const THEMES = {classic:["#e3ae52","#6ea8ff"], ocean:["#3cc6d6","#0e7490"], berry:["#f472b6","#be185d"], violet:["#a78bfa","#6d28d9"], sunset:["#fb923c","#c2410c"]};
-const AV_DEF = {color:"sun", eyes:"normal", mouth:"smile", hat:"none", extra:"none", bg:"soft", name:"none", card:"standard", appbg:"none", confetti:"classic"};
+const AV_DEF = {color:"sun", eyes:"normal", mouth:"smile", hat:"none", extra:"none", bg:"soft", pet:"none", frame:"none", name:"none", card:"standard", appbg:"none", confetti:"classic", sound:"classic"};
 const AVATAR_CATS = ["color","eyes","mouth","hat","extra","bg"];
 let AV = {...AV_DEF}, OWN = new Set(), shopCat = "color", preview = null, avKey = "", shownCoins = -1, coinWelcome = 0;
 const itemOf = (cat,id)=>SHOP[cat] ? SHOP[cat].items.find(x=>x.id===id) : null;
@@ -1205,6 +1361,8 @@ function eyesSVG(k){
     case "star": return STAR(39,50,8,3.4,"#ffd23f","#d99a00")+STAR(61,50,8,3.4,"#ffd23f","#d99a00");
     case "pirate": return EYE(61)+`<path d="M17 38L83 33" stroke="#1d1f2b" stroke-width="2.2"/><ellipse cx="39" cy="50" rx="8.2" ry="8.6" fill="#1d1f2b"/>`;
     case "cool": return `<path d="M28 44h18v6a6.5 6.5 0 0 1-6.5 6.5h-5A6.5 6.5 0 0 1 28 50zM54 44h18v6a6.5 6.5 0 0 1-6.5 6.5h-5A6.5 6.5 0 0 1 54 50z" fill="#1d1f2b"/><path d="M46 46.5h8" stroke="#1d1f2b" stroke-width="2.6"/><path d="M31.5 47.5l4-2M57.5 47.5l4-2" stroke="#fff" stroke-width="1.6" opacity=".55" stroke-linecap="round"/>`;
+    case "sparkle": { const sp = x=>`<ellipse cx="${x}" cy="51" rx="7" ry="8.5" fill="#3a2f6b"/>`+STAR(x+2.2,47.8,3,1.2,"#fff")+`<circle cx="${x-2.4}" cy="54.5" r="1.2" fill="#fff"/>`; return sp(39)+sp(61); }
+    case "robot": return `<rect x="31" y="45" width="16" height="10" rx="3" fill="#0b132b"/><rect x="53" y="45" width="16" height="10" rx="3" fill="#0b132b"/><rect x="34" y="48" width="10" height="4" rx="2" fill="#4cc9f0"/><rect x="56" y="48" width="10" height="4" rx="2" fill="#4cc9f0"/>`;
     case "laser": return `<path d="M39 50L2 70M61 50L98 70" stroke="#ff1744" stroke-width="2.6" opacity=".5" stroke-linecap="round"/>`+las(39)+las(61);
     default: return EYE(39)+EYE(61);
   }
@@ -1218,6 +1376,8 @@ function mouthSVG(k){
     case "tooth": return `<path d="M42 60Q50 71 58 60Z" fill="${INK}" stroke="${INK}" stroke-width="1.4" stroke-linejoin="round"/><rect x="45.2" y="60.2" width="4" height="3.6" rx=".8" fill="#fff"/><rect x="50.8" y="60.2" width="4" height="3.6" rx=".8" fill="#fff"/>`;
     case "kiss": return `<ellipse cx="50" cy="63" rx="3.6" ry="2.9" fill="#ff5d8f"/><path d="M46.6 63h6.8" stroke="#c9184a" stroke-width="1"/>`;
     case "fangs": return ln("M43 61Q50 67 57 61")+`<path d="M45.6 62.6l1.6 3.8 1.6-3.4zM51.2 63.3l1.6 3.4 1.6-3.8z" fill="#fff" stroke="${INK}" stroke-width=".7"/>`;
+    case "bubble": return ln("M44.5 61.5Q47.5 64 50.5 61.5", 2.4)+`<circle cx="55.5" cy="64" r="6.5" fill="#ff8fc7" opacity=".92"/><circle cx="53.5" cy="62" r="1.8" fill="#fff" opacity=".7"/>`;
+    case "beard": return `<path d="M27 62Q30 87 50 89Q70 87 73 62Q66 71 50 72Q34 71 27 62Z" fill="#6b4226"/>`+ln("M45 66Q50 69 55 66", 2.4, "#f8f0e3");
     case "mustache": return `<path d="M50 59.5c-3-3.2-8.5-4-12.3-1-2 1.8-.8 4 1.2 3 3.4-1.8 7.4-1.2 11.1 1 3.7-2.2 7.7-2.8 11.1-1 2 1 3.2-1.2 1.2-3-3.8-3-9.3-2.2-12.3 1z" fill="#5a3a22"/>`+ln("M46 65Q50 67.5 54 65", 2.2);
     default: return ln("M44 62Q50 68 56 62");
   }
@@ -1259,12 +1419,21 @@ function hatSVG(k, col){
     case "halo": return `<ellipse cx="50" cy="9" rx="19" ry="5.5" fill="none" stroke="#ffe066" stroke-width="7" opacity=".35"/><ellipse cx="50" cy="9" rx="19" ry="5.5" fill="none" stroke="#ffd23f" stroke-width="3"/>`;
     case "crown": return `<path d="M28 31L30 9L40 19L50 4L60 19L70 9L72 31Z" fill="#ffd23f" stroke="#d99a00" stroke-width="1.6" stroke-linejoin="round"/><circle cx="50" cy="24" r="3.2" fill="#ef476f"/><circle cx="38" cy="26" r="2.3" fill="#4cc9f0"/><circle cx="62" cy="26" r="2.3" fill="#4cc9f0"/>`;
     case "unicorn": return `<path d="M58 21Q66 17 71 26Q65 24 61 28Q60 24 58 21Z" fill="#c77dff"/><path d="M62 25Q72 24 75 34Q69 31 65 34Z" fill="#7bdff2"/><path d="M44.5 22L50 0L55.5 22Z" fill="#fff0f6" stroke="#f7a8c8" stroke-width="1"/><path d="M46 16.5L54 15M47.3 10.5L53 9.5M48.6 4.8L51.6 4.3" stroke="#e598c0" stroke-width="1.4" stroke-linecap="round"/>`;
+    case "bow": return `<path d="M64 21L54 13V29Z M64 21L74 13V29Z" fill="#ff5d8f"/><circle cx="64" cy="21" r="3.6" fill="#e63973"/>`;
+    case "sunhat": return `<ellipse cx="50" cy="30" rx="38" ry="8" fill="#e9c46a" stroke="#cfa94d" stroke-width="1"/><path d="M31 30Q31 10 50 10Q69 10 69 30Z" fill="#f4d58d"/><rect x="31" y="24" width="38" height="5" fill="#e76f51"/>`;
+    case "santa": return `<path d="M27 31Q33 6 58 6Q76 8 82 24L72 26Q64 16 56 16Z" fill="#d62828"/><rect x="23" y="27" width="54" height="9" rx="4.5" fill="#fff"/><circle cx="82" cy="25" r="5" fill="#fff"/>`;
+    case "sailor": return `<ellipse cx="50" cy="27" rx="23" ry="7" fill="#fff" stroke="#d6d9de"/><path d="M32 27Q32 14 50 14Q68 14 68 27Z" fill="#fff" stroke="#d6d9de"/><rect x="31.5" y="22" width="37" height="4.5" fill="#1d4ed8"/>`;
+    case "hardhat": return `<path d="M24 33Q24 10 50 10Q76 10 76 33Z" fill="#ffc300"/><rect x="18" y="30" width="64" height="6" rx="3" fill="#e0a800"/><path d="M50 10V30" stroke="#e0a800" stroke-width="4"/>`;
+    case "ninja": return `<path d="M18 34Q50 26 82 34L82 40Q50 32 18 40Z" fill="#1d1f2b"/><path d="M81 36L95 29L93 37L97 44L83 40Z" fill="#1d1f2b"/><rect x="45" y="29.5" width="10" height="5" rx="1" fill="#adb5bd"/>`;
+    case "propeller": return `<path d="M26 33Q26 11 50 11Q74 11 74 33Z" fill="#ffd166"/><path d="M50 11Q36 13 28 25L50 33Z" fill="#ef476f"/><path d="M50 11Q64 13 72 25L50 33Z" fill="#118ab2"/><path d="M50 11V4" stroke="#495057" stroke-width="2"/><g class="prop"><ellipse cx="41" cy="3.5" rx="9" ry="2.2" fill="#06d6a0"/><ellipse cx="59" cy="3.5" rx="9" ry="2.2" fill="#ef476f"/></g>`;
     case "astro": return `<circle cx="50" cy="54" r="41" fill="#cfe8ff" fill-opacity=".18" stroke="#e9ecef" stroke-width="4.5"/><path d="M22 42Q26 24 42 17" stroke="#fff" stroke-width="3.5" opacity=".75" fill="none" stroke-linecap="round"/><path d="M50 13V5" stroke="#adb5bd" stroke-width="2.2"/><circle cx="50" cy="4.5" r="2.8" fill="#ef476f"/>`;
     default: return "";
   }
 }
 function extraBackSVG(k){
   if(k==="cape") return `<path d="M24 52Q8 82 12 99L88 99Q92 82 76 52Z" fill="#c1121f"/><path d="M24 52Q8 82 12 99L21 99Q19 80 31 56Z" fill="#9d0208"/>`;
+  if(k==="wings") return `<g class="wing"><path d="M24 58Q2 38 3 62Q5 78 25 73Z" fill="#fff" stroke="#d6d9de" stroke-width="1.2"/><path d="M9 56Q14 62 21 62M8 66Q14 69 22 68" stroke="#d6d9de" stroke-width="1" fill="none"/></g><g class="wing r"><path d="M76 58Q98 38 97 62Q95 78 75 73Z" fill="#fff" stroke="#d6d9de" stroke-width="1.2"/><path d="M91 56Q86 62 79 62M92 66Q86 69 78 68" stroke="#d6d9de" stroke-width="1" fill="none"/></g>`;
+  if(k==="backpack") return `<rect x="66" y="48" width="24" height="32" rx="8" fill="#ef476f"/><rect x="70" y="62" width="16" height="10" rx="3" fill="#c9184a"/>`;
   return "";
 }
 function extraSVG(k){
@@ -1280,6 +1449,12 @@ function extraSVG(k){
     case "necklace": return `<path d="M30 69Q50 86 70 69" stroke="#ffd23f" stroke-width="2.6" fill="none" stroke-dasharray="3 1.6"/>`+STAR(50,80,4.6,2,"#ffd23f","#d99a00");
     case "wand": return `<path d="M72 94L87 64" stroke="#3c096c" stroke-width="3.6" stroke-linecap="round"/><path d="M85.6 66.8L87 64" stroke="#fff" stroke-width="3.6" stroke-linecap="round"/>`+STAR(88.5,59,7,3,"#ffd23f","#d99a00")+`<circle cx="80" cy="54" r="1.3" fill="#ffd23f"/><circle cx="95" cy="66" r="1.1" fill="#ffd23f"/>`;
     case "toga": return `<path d="M16 64Q34 66 60 92H46Q30 74 18 72Z" fill="#fdfdfd" stroke="#d9d9d9" stroke-width="1"/><path d="M62 92Q66 74 84 62L85 70Q74 78 74 92Z" fill="#fdfdfd" stroke="#d9d9d9" stroke-width="1"/><path d="M18 68Q36 70 58 92" stroke="#7b2cbf" stroke-width="2.4" fill="none"/><circle cx="24" cy="68" r="2.6" fill="#ffd23f" stroke="#d99a00" stroke-width=".8"/>`;
+    case "lollipop": return `<path d="M76 92L82 72" stroke="#f1f3f5" stroke-width="2.4" stroke-linecap="round"/><circle cx="83" cy="66" r="8" fill="#ff5d8f"/><path d="M78 66a5 5 0 0 1 10 0a3.4 3.4 0 0 1-6.8 0a1.8 1.8 0 0 1 3.6 0" stroke="#fff" stroke-width="1.4" fill="none"/>`;
+    case "backpack": return `<path d="M32 52Q29 66 34 81M68 52Q71 66 66 81" stroke="#c9184a" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+    case "mic": return `<path d="M74 94L80 75" stroke="#2b2d42" stroke-width="3.4" stroke-linecap="round"/><circle cx="81.5" cy="69" r="6.5" fill="#adb5bd" stroke="#6c757d" stroke-width="1"/><path d="M76.5 67h10M76.5 70h10" stroke="#6c757d" stroke-width=".8"/>`;
+    case "monocle": return `<circle cx="61" cy="50" r="9.5" fill="#cfe8ff" fill-opacity=".25" stroke="#d4a017" stroke-width="2.2"/><path d="M68.5 56Q73 70 66 84" stroke="#d4a017" stroke-width="1.2" fill="none"/>`;
+    case "mask": return `<path d="M25 44Q38 39 50 45Q62 39 75 44Q77 55 66 57Q56 58 50 52Q44 58 34 57Q23 55 25 44Z" fill="#1d1f2b"/><ellipse cx="39" cy="50" rx="5" ry="4" fill="#fff"/><ellipse cx="61" cy="50" rx="5" ry="4" fill="#fff"/><circle cx="40" cy="50" r="2.2" fill="#1d1f2b"/><circle cx="62" cy="50" r="2.2" fill="#1d1f2b"/>`;
+    case "wings": return "";
     case "cape": return `<path d="M28 68Q50 80 72 68" stroke="#9d0208" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="50" cy="75" r="3.6" fill="#ffd23f" stroke="#d99a00" stroke-width="1"/>`;
     default: return "";
   }
@@ -1313,6 +1488,11 @@ function bgSVG(k, id){
       return s+`<rect y="84" width="100" height="16" fill="#e9c46a"/>`;
     }
     case "london": return R("#9ec9ff")+`<path d="M84 100V30l6-14 6 14v70z" fill="#5c677d"/><circle cx="90" cy="36" r="3.4" fill="#fff6d5"/><rect x="2" y="68" width="14" height="32" fill="#5c677d"/><path d="M2 68l7-8 7 8z" fill="#5c677d"/><rect x="2" y="86" width="22" height="10" rx="2" fill="#d00000"/><circle cx="7" cy="96" r="2" fill="#222"/><circle cx="19" cy="96" r="2" fill="#222"/>`;
+    case "pixel": return `<defs><pattern id="${id}p" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#b8c0ff"/><rect x="10" y="10" width="10" height="10" fill="#b8c0ff"/></pattern></defs>`+R("#e7c6ff")+`<rect width="100" height="100" fill="url(#${id}p)"/>`;
+    case "autumn": return R("#ffe8cc")+[[12,14,"#e76f51",30],[86,18,"#f4a261",-20],[8,52,"#e63946",60],[92,50,"#f4a261",10],[16,86,"#e76f51",-40],[84,88,"#e9c46a",25],[50,6,"#e63946",80]].map(([x,y,c,r])=>`<ellipse cx="${x}" cy="${y}" rx="5" ry="2.8" fill="${c}" transform="rotate(${r} ${x} ${y})"/>`).join("");
+    case "winter": return R("#dbeafe")+[[12,14,1.6],[84,12,1.2],[6,46,1.3],[94,40,1.6],[20,30,1],[78,28,1.1],[50,5,1.2]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/>`).join("")+`<path d="M0 86Q25 80 50 86T100 84V100H0Z" fill="#fff"/>`;
+    case "beach": return R("#8ecae6")+`<circle cx="82" cy="18" r="9" fill="#ffd166"/><rect y="56" width="100" height="16" fill="#219ebc"/><path d="M0 72Q25 68 50 72T100 70V100H0Z" fill="#ffd6a5"/>`;
+    case "library": { let x = R("#7f5539"); [12,44,76].forEach((y,r)=>{ let px = 2; [7,5,9,6,8,5,7,9,6,7,5,8,6].forEach((w,k)=>{ if(px+w>98) return; x += `<rect x="${px}" y="${y+(k%3)*2}" width="${w-1}" height="${22-(k%3)*2}" rx="1" fill="${["#e63946","#457b9d","#2a9d8f","#e9c46a","#8338ec","#f4a261"][(k+r)%6]}"/>`; px += w; }); x += `<rect y="${y+22}" width="100" height="3" fill="#4a2c17"/>`; }); return x; }
     case "space": return R("#0b0624")+[[10,40,1],[24,90,1.2],[92,20,1],[86,60,1.4],[60,6,.9],[4,70,.8],[94,92,1]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/>`).join("")+`<circle cx="18" cy="18" r="8" fill="#ff9e00"/><ellipse cx="18" cy="18" rx="14" ry="3.6" fill="none" stroke="#ffd166" stroke-width="1.6" transform="rotate(-20 18 18)"/>`;
     default: return "";
   }
@@ -1417,6 +1597,7 @@ function addXP(n){
   if(hit) gainCoins(10);
   if(lv1>lv0) gainCoins(25*(lv1-lv0));
   saveXP(); renderTop(); floatXP(n);
+  questEvent("points", n); if(hit) questEvent("goal");
   if(hit){ const s = streak(); toast("🎯","Tagesziel geschafft!", (s>1 ? "🔥 "+s+" Tage in Folge" : "🔥 Deine Serie hat begonnen")+" · +10 Münzen"); confetti(); }
   if(lv1>lv0 && !levelUp(lv0, lv1)) toast("🎉","Level "+lv1+" erreicht!", (title(lv1)!==title(lv0) ? "Neuer Titel: "+title(lv1) : "Weiter so!")+" · +"+25*(lv1-lv0)+" Münzen");
   checkBadges(true);
@@ -1448,6 +1629,8 @@ const BADGES = [
   {id:"speak10", e:"🎤", t:"Gut gesprochen",   d:"10 Wörter richtig gesagt",       ok:x=>(x.spoken||0)>=10},
   {id:"pairs0",  e:"🧩", t:"Gedächtnisprofi",  d:"Paare-Runde ohne Fehler",        ok:x=>(x.pairsPerfect||0)>=1},
   {id:"blitz20", e:"🏃", t:"Blitzmerker",      d:"20 Punkte in einer Blitzrunde",  ok:x=>(x.blitzMax||0)>=20},
+  {id:"quest10", e:"📋", t:"Aufgabenheld",     d:"10 Tagesaufgaben geschafft",     ok:x=>(x.questsDone||0)>=10},
+  {id:"pet",     e:"🐾", t:"Tierfreund",       d:"Einen Begleiter gekauft",        ok:()=>[...OWN].some(k=>k.startsWith("pet:"))},
   {id:"xp5000",  e:"👑", t:"Vokabelkönig",     d:"5.000 Punkte gesammelt",         ok:x=>x.total>=5000}
 ];
 function checkBadges(notify){
@@ -1483,9 +1666,9 @@ function floatXP(n){
   document.body.appendChild(f); setTimeout(()=>f.remove(), 950);
 }
 let lastCf = 0;
-const CONF = {stars:["⭐","🌟","✨"], hearts:["❤️","💖","💜","💛","💙"], leaves:["🍃","🍂","🌿","🍁"], books:["📚","✏️","📝","🎓","📐"]};
+const CONF = {flowers:["🌸","🌼","🌷","🌻"], sweets:["🍭","🍬","🍩","🧁"], music:["🎵","🎶","🎸","🎹"], stars:["⭐","🌟","✨"], hearts:["❤️","💖","💜","💛","💙"], leaves:["🍃","🍂","🌿","🍁"], books:["📚","✏️","📝","🎓","📐"]};
 function confetti(style, force){
-  if(RM || (!force && Date.now()-lastCf<1500)) return; lastCf = Date.now();
+  if(RM || (!SET.conf && !force) || (!force && Date.now()-lastCf<1500)) return; lastCf = Date.now();
   style = style || AV.confetti || "classic";
   if(style==="fireworks"){ fireworks(); return; }
   const acc = getComputedStyle(document.documentElement).getPropertyValue("--acc").trim() || "#e3ae52";
@@ -1515,21 +1698,29 @@ function fireworks(){
 }
 
 /* ---------- Animationen, Töne & Einstellungen ---------- */
-const SET = Object.assign({sound:true, vib:true, calm:false}, load("vok_set", {}));
+const SET_DEF = {sound:true, vib:true, calm:false, vol:70, auto:false, rate:"n", accent:"en-GB", laRec:"it-IT", typo:"n", tlimit:"0", conf:true, quest:true, start:"l"};
+const SET = Object.assign({}, SET_DEF, load("vok_set", {}));
 function applySettings(){ RM = SYS_RM || !!SET.calm; document.documentElement.classList.toggle("calm", !!SET.calm); }
 function buzz(p){ if(!SET.vib) return; try{ navigator.vibrate && navigator.vibrate(p); }catch(e){} }
 let AC = null;
+const PACKS = {classic:{}, soft:{type:"sine", vol:.6, mul:.5}, retro:{type:"square", vol:.45, dur:.8}, bells:{type:"triangle", dur:2.4, harm:1}, space:{sweep:1, dur:1.5, vol:.8}};
+let curSound = "classic";
 function sfx(kind){
   if(!SET.sound) return;
   try{
     AC = AC || new (window.AudioContext || window.webkitAudioContext)();
     if(AC.state==="suspended") AC.resume();
     const t0 = AC.currentTime;
+    const pk = PACKS[curSound] || {}, V = Math.max(0, SET.vol==null ? 70 : +SET.vol)/70;
     const tone = (f, at, dur, type, vol)=>{
+      f *= pk.mul || 1; dur *= pk.dur || 1; vol = (vol || .1)*(pk.vol || 1)*V;
+      if(vol<.0003) return;
       const o = AC.createOscillator(), g = AC.createGain();
-      o.type = type || "sine"; o.frequency.setValueAtTime(f, t0+at);
-      g.gain.setValueAtTime(.0001, t0+at); g.gain.exponentialRampToValueAtTime(vol || .1, t0+at+.015); g.gain.exponentialRampToValueAtTime(.0001, t0+at+dur);
+      o.type = pk.type || type || "sine"; o.frequency.setValueAtTime(f, t0+at);
+      if(pk.sweep) o.frequency.exponentialRampToValueAtTime(f*1.6, t0+at+dur);
+      g.gain.setValueAtTime(.0001, t0+at); g.gain.exponentialRampToValueAtTime(vol, t0+at+.015); g.gain.exponentialRampToValueAtTime(.0001, t0+at+dur);
       o.connect(g); g.connect(AC.destination); o.start(t0+at); o.stop(t0+at+dur+.03);
+      if(pk.harm){ const o2 = AC.createOscillator(), g2 = AC.createGain(); o2.type = "sine"; o2.frequency.setValueAtTime(f*2.76, t0+at); g2.gain.setValueAtTime(.0001, t0+at); g2.gain.exponentialRampToValueAtTime(vol*.35, t0+at+.01); g2.gain.exponentialRampToValueAtTime(.0001, t0+at+dur*.6); o2.connect(g2); g2.connect(AC.destination); o2.start(t0+at); o2.stop(t0+at+dur); }
     };
     ({
       ok:   ()=>{ tone(880,0,.12,"sine",.09); tone(1320,.08,.18,"sine",.09); },
@@ -1561,7 +1752,10 @@ function countTo(el, to, suf, dur){
   el._raf = requestAnimationFrame(step);
 }
 function avReactEl(el, kind){ if(!el || RM) return; el.classList.remove("jump","shake","spin","tilt","peek"); void el.offsetWidth; el.classList.add(kind); clearTimeout(el._rt); el._rt = setTimeout(()=>el.classList.remove(kind), 900); }
-function avReact(kind){ ["avTop","avBig"].forEach(id=>{ const el = $(id); if(el && el.offsetParent) avReactEl(el, kind); }); }
+function avReact(kind){
+  ["avTop","avBig"].forEach(id=>{ const el = $(id); if(el && el.offsetParent) avReactEl(el, kind); });
+  if(kind==="jump" && !RM) ["petBig","petCard"].forEach(id=>{ const el = $(id); if(el && !el.hidden){ el.classList.remove("hop"); void el.offsetWidth; el.classList.add("hop"); clearTimeout(el._ht); el._ht = setTimeout(()=>el.classList.remove("hop"), 700); } });
+}
 function burst(text){ if(RM) return; const b = E("div","burst",text); document.body.appendChild(b); setTimeout(()=>b.remove(), 1200); }
 function sparkle(el, n){
   if(RM || !el) return;
@@ -1614,10 +1808,35 @@ function closeLevelUp(){ if($("lvup").hidden) return; flyCoins($("lvupOk"), 25);
 $("lvupOk").onclick = closeLevelUp;
 $("lvup").addEventListener("click", e=>{ if(e.target===$("lvup")) closeLevelUp(); });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeLevelUp(); });
-[["setSound","sound"],["setVib","vib"],["setCalm","calm"]].forEach(([id,k])=>{
+[["setSound","sound"],["setVib","vib"],["setCalm","calm"],["setAuto","auto"],["setConf","conf"],["setQuest","quest"]].forEach(([id,k])=>{
   const el = $(id); el.checked = !!SET[k];
-  el.onchange = ()=>{ SET[k] = el.checked; save("vok_set", SET); applySettings(); if(k==="sound" && SET.sound) sfx("ok"); if(k==="vib" && SET.vib) buzz(30); };
+  el.onchange = ()=>{ SET[k] = el.checked; save("vok_set", SET); applySettings(); if(k==="sound" && SET.sound) sfx("ok"); if(k==="vib" && SET.vib) buzz(30); if(k==="quest") renderQuests(); if(k==="conf" && SET.conf) confetti(null, true); };
 });
+function segSet(){
+  document.querySelectorAll(".seg[data-set]").forEach(sg=>{
+    const k = sg.dataset.set;
+    sg.querySelectorAll("button").forEach(b=>{
+      const on = String(SET[k])===b.dataset.v; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.onclick = ()=>{ SET[k] = b.dataset.v; save("vok_set", SET); segSet(); sfx("tap"); if(k==="rate" || k==="accent") setTimeout(()=>$("setTry").click(), 100); };
+    });
+  });
+}
+segSet();
+$("setVol").value = SET.vol; $("setVolV").textContent = SET.vol+" %";
+$("setVol").oninput = e=>{ SET.vol = +e.target.value; $("setVolV").textContent = SET.vol+" %"; save("vok_set", SET); };
+$("setVol").onchange = ()=>sfx("ok");
+$("setTry").onclick = ()=>{ const was = lang; if(!ttsOK){ toast("🔇","Vorlesen geht hier nicht","Dein Gerät hat keine Sprachausgabe."); return; } lang = "en"; speak("Hello! This is how English words will sound."); lang = was; };
+$("resProg").onclick = ()=>{
+  if(!confirm("Lernstand zurücksetzen? „Gewusst“-Markierungen, Fehlerkiste und Fehlerstatistik werden gelöscht. Lektionen, Punkte, Münzen und Avatar bleiben.")) return;
+  ["la","en"].forEach(l=>{ knownSets[l].clear(); trouble[l] = {}; save("vok_known_"+l, []); save("vok_trouble_"+l, {}); });
+  XP.miss = {}; saveXP(); troubleMode = false; renderLessonSel(); rebuildCards(); toast("🧹","Lernstand zurückgesetzt","");
+};
+$("resAll").onclick = ()=>{
+  if(!confirm("Wirklich ALLES löschen? Lektionen, Punkte, Münzen, Avatar, Bestenliste – alles ist danach weg.")) return;
+  if(!confirm("Letzte Frage: Bist du ganz sicher? Das kann man nicht rückgängig machen.")) return;
+  try{ Object.keys(localStorage).filter(k=>/^(vok_|lat_)/.test(k)).forEach(k=>localStorage.removeItem(k)); }catch(e){}
+  location.reload();
+};
 applySettings();
 function renderTop(){
   const L = lvl(XP.total);
@@ -1654,6 +1873,8 @@ function setFlip(v, anim){
   $("ffront").setAttribute("aria-hidden", v ? "true" : "false");
   $("fback").setAttribute("aria-hidden", v ? "false" : "true");
 }
+let autoKey = "";
+function autoSay(key, text){ if(!SET.auto || lang!=="en" || !ttsOK || key===autoKey) return; autoKey = key; setTimeout(()=>speak(text), 250); }
 function render(){
   const done = cards.filter(c=>known.has(c.fw)).length, L = LANGS[lang];
   $("pb").style.width = cards.length ? (done/cards.length*100)+"%" : "0";
@@ -1686,6 +1907,7 @@ function render(){
   $("fnum").textContent = $("bnum").textContent = queue.length+" offen";
   $("fside").textContent = dirFw ? L.name : "Deutsch";
   $("bside").textContent = dirFw ? "Deutsch" : L.name;
+  if(dirFw && curTab==="l" && LM==="cards") autoSay("c|"+c.fw+"|"+queue.length, c.fw);
 }
 const GN = {m:"maskulin", f:"feminin", n:"neutrum"};
 function fwSub(el, P){
@@ -1711,6 +1933,7 @@ function answer(ok){
   buzz(ok ? 10 : [10,40,10]); sfx(ok ? "ok" : "flip");
   saveKnown(); markTrouble(c, ok);
   XP.cards++; const p = learnPts(c, ok); saveXP();
+  questEvent("cards"); if(ok) questEvent("known");
   setFlip(false,false); render(); renderLessonSel(); show("undo", true);
   if(ok) avReact("jump");
   if(!queue.length && cards.length) setTimeout(()=>{ burst("Runde geschafft! 🎉"); confetti(); sfx("level"); }, 260);
@@ -1720,6 +1943,7 @@ let busy = false, sup = false;
 function flip(){
   if(!queue.length || busy) return;
   setFlip(!flipped, true); sfx("flip");
+  if(flipped && !dirFw){ const c = cards[queue[0]]; autoSay("b|"+c.fw+"|"+queue.length, c.fw); }
   if(flipped){ const c = cards[queue[0]]; $("srCard").textContent = dirFw ? c.de : c.fw; }
 }
 function fly(ok){
@@ -1771,7 +1995,7 @@ function speak(t, rate, onend){
   try{
     const s = window.speechSynthesis; s.cancel();
     const txt = t.replace(/\([^)]*\)/g," ").replace(/\bsb\b\.?/gi,"somebody").replace(/\bsth\b\.?/gi,"something");
-    const u = new SpeechSynthesisUtterance(txt); u.lang = LANGS[lang].tts; u.rate = rate || .9;
+    const u = new SpeechSynthesisUtterance(txt); u.lang = lang==="en" ? SET.accent : LANGS[lang].tts; u.rate = (rate || .9)*({s:.75, n:1, f:1.25}[SET.rate] || 1);
     if(onend){ u.onend = onend; u.onerror = onend; }
     const vs = s.getVoices(), v = vs.find(v=>(v.lang||"").replace("_","-")===u.lang) || vs.find(v=>/^en/i.test(v.lang||""));
     if(v) u.voice = v;
@@ -1817,7 +2041,8 @@ function tab(v){
   curTab = v;
   if(v!=="s") clearPreview();
   show("learn",v==="l"); show("test",v==="t"); show("hs",v==="h"); show("shop",v==="s"); show("vok",v==="v");
-  show("lbar", v==="l"||v==="t"); show("langbar", true); show("lmodesw", v==="l");
+  show("lbar", v==="l"||v==="t"); show("langbar", true); show("lmodesw", v==="l"); show("qstrip", v==="l" && !!SET.quest);
+  if(v!=="t") clearInterval(qTimer);
   if(v!=="l") stopAllModes(); else showLModes(true);
   ["L","T","H","S","V"].forEach(x=>{ const on = x.toLowerCase()===v; $("tab"+x).classList.toggle("on",on); $("tab"+x).setAttribute("aria-current", on ? "page" : "false"); });
   if(v==="t"){ show("tsetup",true); show("tplay",false); show("tresult",false); }
@@ -1902,7 +2127,7 @@ function renderAch(){
   const s = streak(); XP.bestStreak = Math.max(XP.bestStreak||0, s);
   $("aT").textContent = fmt(XP.total); $("aS").textContent = s; $("aR").textContent = XP.bestStreak;
   $("aL").textContent = "Latein: "+fmt(XP.langs.la)+" P · Englisch: "+fmt(XP.langs.en)+" P · "+fmt(XP.cards)+(XP.cards===1 ? " Karte" : " Karten")+" gelernt · "+fmt(XP.tests)+(XP.tests===1 ? " Test" : " Tests");
-  renderWeek();
+  renderWeek(); renderQuests(); renderCal(); renderHard();
   $("gseg").querySelectorAll("button").forEach(b=>{
     const on = +b.dataset.v===XP.goal;
     b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
@@ -2055,7 +2280,7 @@ function lev(a,b){
   }
   return p[n];
 }
-const tol = s=>s.length<=3 ? 0 : s.length<=7 ? 1 : 2;
+const tol = s=>SET.typo==="s" ? 0 : SET.typo==="l" ? (s.length<=3 ? 1 : s.length<=6 ? 2 : 3) : (s.length<=3 ? 0 : s.length<=7 ? 1 : 2);
 const close = (a,b)=>!!a && !!b && (a===b || lev(a,b)<=tol(b));
 function meanings(c){ return [...new Set(c.de.replace(/\([^)]*\)/g,"").split(/[;,]/).map(nDe).filter(Boolean))]; }
 function gradeDe(c, v){
@@ -2115,6 +2340,8 @@ function ask(){
   $("tsub").innerHTML = "";
   if(T.fd && qt!=="table") fwSub($("tsub"), P);
   show("tsay", T.fd && !!L.tts && ttsOK);
+  if(T.fd) autoSay("t|"+T.pos+"|"+c.fw, P.head);
+  startQTimer();
   $("tfb").innerHTML = ""; $("tfb").className = "fb";
   show("tnext",false); show("topts",qt==="mc"); show("tform",qt==="type"); show("tfields",qt==="table");
   const o = $("topts"); o.innerHTML = "";
@@ -2214,8 +2441,28 @@ function prog(){
   const cb = $("tcombo");
   cb.textContent = T.combo>=2 ? "🔥 "+T.combo+" in Folge"+(T.combo>=3 ? " · +2 Bonus" : "") : "";
 }
+let qTimer = null;
+function startQTimer(){
+  clearInterval(qTimer);
+  const lim = +SET.tlimit || 0; show("ttbar", lim>0); if(!lim) return;
+  const t0 = Date.now(), bar = $("ttbar").firstElementChild; let lastS = 99;
+  $("ttbar").classList.remove("low"); bar.style.width = "100%";
+  qTimer = setInterval(()=>{
+    if(!T || T.done || $("tplay").hidden){ clearInterval(qTimer); return; }
+    const left = lim*1000-(Date.now()-t0); bar.style.width = Math.max(0, left/(lim*1000)*100)+"%";
+    $("ttbar").classList.toggle("low", left<3000);
+    const sec = Math.ceil(left/1000); if(sec<=3 && sec>0 && sec<lastS){ lastS = sec; sfx("tap"); }
+    if(left<=0){ clearInterval(qTimer); timeUp(); }
+  }, 100);
+}
+function timeUp(){
+  if(!T || T.done) return;
+  document.querySelectorAll("#tfields input, #tfields button, #topts .opt").forEach(x=>x.disabled = true);
+  const c = cards[T.q[T.pos]];
+  judge(false, T.qt==="table" ? c.fw+" = "+c.de : null, 0, "⏰ Die Zeit ist abgelaufen.");
+}
 function judge(ok, rightFull, pts, note){
-  if(T.done) return; T.done = true;
+  if(T.done) return; T.done = true; clearInterval(qTimer);
   const i = T.q[T.pos], c = cards[i];
   const right = rightFull || (T.fd ? c.de : c.fw);
   pts = pts || 0; let bonus = 0;
@@ -2267,6 +2514,7 @@ function finish(){
   let bonus = 0;
   if(perfect){ bonus = 20; T.pts += bonus; XP.perfect++; gainCoins(10); }
   XP.tests++;
+  questEvent("test"); if(pct(T.ok, n)>=80) questEvent("test80");
   const rank = T.retry ? -1 : saveHS();
   if(bonus) addXP(bonus); else { saveXP(); checkBadges(true); }
   render();
@@ -2687,7 +2935,7 @@ const saveTrouble = ()=>save("vok_trouble_"+lang, trouble[lang]);
 function markTrouble(c, ok){
   const tb = trouble[lang];
   if(ok){ if(tb[c.fw]){ tb[c.fw]--; if(tb[c.fw]<=0) delete tb[c.fw]; } }
-  else tb[c.fw] = 2; // muss danach zweimal gewusst werden
+  else { tb[c.fw] = 2; XP.miss = objOr(XP.miss); const mk = lang+"|"+c.fw; XP.miss[mk] = (XP.miss[mk]||0)+1; } // muss danach zweimal gewusst werden
   saveTrouble();
 }
 function allLangCards(){
@@ -2743,21 +2991,24 @@ $("pNameBtn").onclick = ()=>showWelcome(true);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && !$("welcome").hidden){ store("vok_welcomed","1"); show("welcome", false); } });
 
 /* ================= Shop ================= */
-const CONF_ICON = {classic:"🎉", stars:"⭐", hearts:"💖", leaves:"🍃", books:"📚", coins:"💰", fireworks:"🎆"};
-const BG_ICON = {bubbles:"◦○◯", hearts:"♥ ♡", stars:"✦ ✧", snow:"❄ ❅", aurora:""};
+const CONF_ICON = {classic:"🎉", stars:"⭐", hearts:"💖", leaves:"🍃", flowers:"🌸", music:"🎵", books:"📚", sweets:"🍭", coins:"💰", fireworks:"🎆"};
+const BG_ICON = {bubbles:"◦○◯", hearts:"♥ ♡", stars:"✦ ✧", snow:"❄ ❅", aurora:"", gradient:"", confetti:"▮ ▪ ▮", leaves:"🍂", fireflies:"• ·"};
 function previewCfg(){ const c = {...AV}; if(preview) c[preview.cat] = preview.id; return c; }
 function itemPreview(cat, id){
   if(AVATAR_CATS.includes(cat)){ const x = E("span","av"); x.innerHTML = avatarSVG({...AV, [cat]:id}); return x; }
   if(cat==="name"){ const x = E("span","nprev"); x.appendChild(E("span","pname ne-"+id, pName() || "Name")); return x; }
   if(cat==="card"){ const x = E("span","cprev"); x.dataset.c = id; x.appendChild(E("b","w","amō")); return x; }
   if(cat==="appbg"){ return E("span","bprev bg-"+id, BG_ICON[id] || ""); }
+  if(cat==="pet") return E("span","fprev"+(PET[id] ? " petp" : ""), PET[id] || "–");
+  if(cat==="frame"){ const f = E("span","avframe mini"); f.dataset.f = id; const a = E("span","av"); a.innerHTML = avatarSVG(AV); f.appendChild(a); return f; }
+  if(cat==="sound") return E("span","fprev", SOUND_ICON[id] || "🔔");
   return E("span","fprev", CONF_ICON[id] || "🎉");
 }
 let bgfxCur = null;
 function renderBgfx(id){
   if(id===bgfxCur) return; bgfxCur = id;
   const fx = $("bgfx"); fx.className = "bgfx"+(id && id!=="none" ? " bg-"+id : ""); fx.innerHTML = "";
-  const n = {bubbles:14, stars:46, snow:42, hearts:12}[id];
+  const n = {bubbles:14, stars:46, snow:42, hearts:12, confetti:30, leaves:12, fireflies:16}[id];
   if(!n || RM) return;
   for(let i=0;i<n;i++){
     const sp = E("span"), r = Math.random();
@@ -2766,6 +3017,9 @@ function renderBgfx(id){
     else if(id==="bubbles"){ const d = 14+r*40; sp.style.width = sp.style.height = d+"px"; sp.style.animationDuration = (10+Math.random()*12)+"s"; sp.style.animationDelay = (-Math.random()*20)+"s"; }
     else if(id==="snow"){ const d = 2+r*4; sp.style.width = sp.style.height = d+"px"; sp.style.animationDuration = (7+Math.random()*9)+"s"; sp.style.animationDelay = (-Math.random()*15)+"s"; }
     else if(id==="hearts"){ sp.textContent = "♥"; sp.style.fontSize = (12+r*18)+"px"; sp.style.animationDuration = (12+Math.random()*10)+"s"; sp.style.animationDelay = (-Math.random()*20)+"s"; }
+    else if(id==="confetti"){ sp.style.background = ["#ff6b6b","#ffd93d","#6bcb77","#4d96ff","#b983ff"][i%5]; sp.style.animationDuration = (8+Math.random()*8)+"s"; sp.style.animationDelay = (-Math.random()*16)+"s"; sp.style.transform = "rotate("+(r*360)+"deg)"; }
+    else if(id==="leaves"){ sp.textContent = ["🍂","🍁","🍃"][i%3]; sp.style.fontSize = (14+r*12)+"px"; sp.style.animationDuration = (10+Math.random()*10)+"s"; sp.style.animationDelay = (-Math.random()*20)+"s"; }
+    else if(id==="fireflies"){ sp.style.top = (20+Math.random()*75)+"%"; sp.style.animationDuration = (6+Math.random()*8)+"s"; sp.style.animationDelay = (-Math.random()*10)+"s"; }
     fx.appendChild(sp);
   }
 }
@@ -2775,6 +3029,9 @@ function applyCosmetics(cfg){
   if(cfg.card==="chalk") loadFont("hand");
   renderBgfx(cfg.appbg || "none");
   const pn = $("pName"); if(pn) pn.className = "pname ne-"+(cfg.name || "none");
+  $("avFrame").dataset.f = cfg.frame || "none";
+  ["petBig","petCard"].forEach(id=>{ const e = $(id); e.textContent = PET[cfg.pet] || ""; e.hidden = !PET[cfg.pet]; });
+  curSound = cfg.sound || "classic";
 }
 function renderShop(){
   const L = lvl(XP.total), cfg = previewCfg();
@@ -2810,12 +3067,13 @@ function renderShop(){
   renderBuybar();
 }
 function pickItem(cat, it){
-  if(owned(cat, it.id)){ clearPreview(); equip(cat, it.id); renderShop(); avReact("jump"); sfx("tap"); if(cat==="confetti") confetti(it.id, true); return; }
+  if(owned(cat, it.id)){ clearPreview(); equip(cat, it.id); renderShop(); avReact("jump"); sfx(cat==="sound" ? "level" : "tap"); if(cat==="confetti") confetti(it.id, true); return; }
   if(it.lv && lvl(XP.total).lv<it.lv){ toast("🔒", it.n+" gibt es ab Level "+it.lv, "Sammle weiter Punkte!"); return; }
   preview = {cat, id:it.id};
   applyCosmetics(previewCfg());
   renderShop(); avReact("jump"); sfx("tap");
   if(cat==="confetti") confetti(it.id, true);
+  if(cat==="sound") sfx("level");
 }
 function clearPreview(){ if(preview){ preview = null; applyCosmetics(AV); } }
 function renderBuybar(){
@@ -2993,6 +3251,99 @@ $("bkFile").onchange = async e=>{
   }catch(err){ alert("Das Backup konnte nicht geladen werden: "+err.message); }
 };
 
+/* ================= Tagesaufgaben ================= */
+const QUESTS = [
+  {t:"cards",   e:"🃏", n:[10,15,20], d:n=>n+" Lernkarten beantworten"},
+  {t:"known",   e:"✅", n:[5,10,15],  d:n=>n+" Lernkarten gewusst"},
+  {t:"test",    e:"📝", n:[1,2],      d:n=>n===1 ? "Einen Test machen" : n+" Tests machen"},
+  {t:"test80",  e:"🎯", n:[1],        d:()=>"Einen Test mit mindestens 80 %"},
+  {t:"speak",   e:"🎤", n:[3,5],      d:n=>n+" Wörter richtig sagen", need:()=>!!SR},
+  {t:"pairs",   e:"🧩", n:[1,2],      d:n=>n===1 ? "Eine Runde Paare spielen" : n+" Runden Paare spielen"},
+  {t:"letters", e:"🔤", n:[3,5],      d:n=>n+" Wörter aus Buchstaben bilden"},
+  {t:"blitz",   e:"⚡", n:[8,12,15],  d:n=>n+" Punkte in einer Blitzrunde"},
+  {t:"points",  e:"⭐", n:[40,60,80], d:n=>n+" Punkte sammeln"},
+  {t:"goal",    e:"🔥", n:[1],        d:()=>"Dein Tagesziel erreichen"}
+];
+function seedRand(seed){ let x = (seed>>>0) || 1; return ()=>{ x ^= x<<13; x >>>= 0; x ^= x>>>17; x ^= x<<5; x >>>= 0; return x/4294967296; }; }
+function ensureQuests(){
+  const d = today();
+  if(XP.quests && XP.quests.d===d && Array.isArray(XP.quests.list)) return XP.quests;
+  const r = seedRand(+d.replace(/-/g,"")*7919), pool = QUESTS.filter(q=>!q.need || q.need()), pick = [];
+  while(pick.length<3 && pool.length) pick.push(pool.splice(Math.floor(r()*pool.length), 1)[0]);
+  XP.quests = {d, bonus:false, list:pick.map((q,i)=>({t:q.t, n:q.n[Math.floor(r()*q.n.length)], prog:0, done:false, rw:[15,20,25][i]}))};
+  saveXP(); return XP.quests;
+}
+function questEvent(t, amt, isMax){
+  if(!XP) return;
+  const Q = ensureQuests(); let ch = false;
+  Q.list.forEach(q=>{
+    if(q.t!==t || q.done) return;
+    const np = isMax ? Math.max(q.prog, amt||0) : q.prog+(amt||1); if(np===q.prog) return;
+    q.prog = Math.min(np, q.n); ch = true;
+    if(q.prog>=q.n){
+      q.done = true; gainCoins(q.rw); XP.questsDone = (XP.questsDone||0)+1;
+      const def = QUESTS.find(x=>x.t===q.t); setTimeout(()=>{ toast(def.e, "Aufgabe geschafft!", def.d(q.n)+" · +"+q.rw+" Münzen"); sfx("badge"); }, 300);
+    }
+  });
+  if(!ch) return;
+  if(!Q.bonus && Q.list.every(q=>q.done)){ Q.bonus = true; gainCoins(40); setTimeout(()=>{ toast("🏆","Alle Tagesaufgaben geschafft!","Bonus: +40 Münzen"); confetti(null, true); }, 1200); }
+  saveXP(); renderQuests(); renderTop(); checkBadges(true);
+}
+function renderQuests(){
+  if(!XP) return;
+  const Q = ensureQuests(), strip = $("qstrip"); strip.innerHTML = "";
+  Q.list.forEach(q=>{
+    const def = QUESTS.find(x=>x.t===q.t), b = E("button","qpill"+(q.done ? " done" : ""));
+    b.appendChild(E("span","qe",def.e)); b.appendChild(E("span","", q.done ? "✓" : q.prog+"/"+q.n));
+    const bar = E("i"); bar.style.setProperty("--p", Math.round(q.prog/q.n*100)); b.appendChild(bar);
+    b.title = def.d(q.n); b.setAttribute("aria-label", "Tagesaufgabe: "+def.d(q.n)+", "+q.prog+" von "+q.n);
+    b.onclick = ()=>{ hsCur = "p"; tab("h"); };
+    strip.appendChild(b);
+  });
+  show("qstrip", curTab==="l" && !!SET.quest);
+  const box = $("qlist"); box.innerHTML = "";
+  Q.list.forEach(q=>{
+    const def = QUESTS.find(x=>x.t===q.t), row = E("div","qrow"+(q.done ? " done" : ""));
+    row.appendChild(E("span","qe",def.e));
+    const tt = E("div","qt"); tt.appendChild(E("b","",def.d(q.n))); tt.appendChild(E("small","", q.done ? "Geschafft!" : q.prog+" von "+q.n));
+    const mini = E("i","mini"), em = E("em", q.done ? "g" : "m"); em.style.width = Math.round(q.prog/q.n*100)+"%"; mini.appendChild(em); tt.appendChild(mini);
+    row.appendChild(tt);
+    const rw = E("span","qr"); if(q.done) rw.textContent = "✓ +"+q.rw; else { rw.appendChild(E("i","coin")); rw.appendChild(document.createTextNode("+"+q.rw)); }
+    row.appendChild(rw); box.appendChild(row);
+  });
+  const dn = Q.list.filter(q=>q.done).length;
+  $("qsum").textContent = dn+" von "+Q.list.length;
+  $("qfoot").textContent = Q.bonus ? "🏆 Alles geschafft – der Bonus (+40 Münzen) ist dir sicher. Morgen gibt es neue Aufgaben." : "Schaffst du alle drei, gibt es +40 Münzen extra. Jeden Tag gibt es neue Aufgaben.";
+}
+
+/* ================= Lernkalender & schwierige Wörter ================= */
+function renderCal(){
+  const box = $("cal"); box.innerHTML = "";
+  const now = new Date(), start = new Date(now); start.setDate(now.getDate()-((now.getDay()+6)%7)-7*11);
+  let days = 0, total = 0;
+  const def = ()=>{ $("calCap").textContent = "Die letzten 12 Wochen. Je kräftiger die Farbe, desto mehr hast du gelernt."; };
+  for(let i=0;i<84;i++){
+    const d = new Date(start); d.setDate(start.getDate()+i);
+    const k = dkey(d), v = XP.days[k] || 0, fut = d>now && k!==today();
+    const lv = v<=0 ? 0 : v<XP.goal*.5 ? 1 : v<XP.goal ? 2 : v<XP.goal*2 ? 3 : 4;
+    const c = E("i", (lv ? "l"+lv : "")+(k===today() ? " now" : "")+(fut ? " fut" : ""));
+    if(!fut){ if(v>0){ days++; total += v; } const desc = WD[d.getDay()]+" "+pad(d.getDate())+"."+pad(d.getMonth()+1)+".: "+fmt(v)+" Punkte"+(XP.hit.includes(k) ? " · Tagesziel ✓" : "");
+      c.title = desc; c.onclick = ()=>{ $("calCap").textContent = desc; }; }
+    box.appendChild(c);
+  }
+  $("calSum").textContent = days+(days===1 ? " Tag" : " Tage")+" gelernt";
+  def();
+}
+function renderHard(){
+  const m = objOr(XP.miss), all = cards.length ? allLangCards() : [];
+  const list = Object.entries(m).filter(([k])=>k.startsWith(lang+"|")).map(([k,n])=>({fw:k.slice(3), n})).filter(x=>all.some(c=>c.fw===x.fw)).sort((a,b)=>b.n-a.n).slice(0,6);
+  show("hwPanel", list.length>0);
+  const box = $("hwList"); box.innerHTML = "";
+  list.forEach(x=>{ const c = all.find(y=>y.fw===x.fw), r = E("div","hwrow"); r.appendChild(E("span","",c.fw+" = "+c.de)); r.appendChild(E("small","",x.n+"×")); box.appendChild(r); });
+  show("hwBtn", troubleCards().length>0);
+}
+$("hwBtn").onclick = ()=>{ troubleMode = true; LM = "cards"; save("vok_lmode", "cards"); tab("l"); renderLessonSel(); rebuildCards(); };
+
 /* ================= Weitere Lernarten ================= */
 const LMODES = [{id:"cards",n:"🃏 Karten"},{id:"speak",n:"🎤 Sprechen"},{id:"listen",n:"🎧 Hören"},{id:"pairs",n:"🧩 Paare"},{id:"letters",n:"🔤 Buchstaben"},{id:"blitz",n:"⚡ Blitz"}];
 const LM_BOX = {cards:"mCards", speak:"mSpeak", listen:"mListen", pairs:"mPairs", letters:"mLetters", blitz:"mBlitz"};
@@ -3074,7 +3425,7 @@ function stopListen(){ if(rec){ try{ rec.abort(); }catch(e){} } rec = null; list
 function startListen(){
   let got = false;
   try{ rec = new SR(); }catch(e){ $("spSt").textContent = "Die Spracherkennung konnte nicht gestartet werden."; return; }
-  rec.lang = lang==="en" ? "en-GB" : "it-IT"; rec.interimResults = true; rec.maxAlternatives = 5; rec.continuous = false;
+  rec.lang = lang==="en" ? SET.accent : SET.laRec; rec.interimResults = true; rec.maxAlternatives = 5; rec.continuous = false;
   rec.onstart = ()=>{ listening = true; $("spMic").classList.add("on"); $("spSt").textContent = "Ich höre zu … sprich jetzt!"; };
   rec.onresult = e=>{
     const r = e.results[e.results.length-1]; if(!r || !r[0]) return;
@@ -3125,7 +3476,7 @@ function evalSpeech(alts){
     if(ok) pts = Math.max(1, 3-SP.hint);
   }
   if(ok){
-    SP.done = true; XP.spoken = (XP.spoken||0)+1;
+    SP.done = true; XP.spoken = (XP.spoken||0)+1; questEvent("speak");
     const got = modeResult("speak", c, true, pts);
     $("spPts").textContent = got ? "+"+got+" P" : "";
     $("spSt").textContent = "Super! Weiter geht's mit dem nächsten Wort.";
@@ -3234,6 +3585,7 @@ function finishPairs(){
   const secs = Math.max(1, Math.round((Date.now()-PA.t0)/1000)), perfect = PA.err===0;
   saveKnown(); render(); renderLessonSel();
   if(perfect) XP.pairsPerfect = (XP.pairsPerfect||0)+1;
+  questEvent("pairs");
   XP.pairBest = objOr(XP.pairBest); const key = lang+PA.n, rec = !XP.pairBest[key] || secs<XP.pairBest[key];
   if(rec) XP.pairBest[key] = secs;
   const got = gameXP("pairs", PA.n+(perfect ? 5 : 0)); saveXP();
@@ -3289,7 +3641,7 @@ function renderLetters(fresh){
   });
   LE.tiles.forEach((t, k)=>{
     if(t.used) return;
-    const b = E("button","tile", t.ch); b.disabled = LE.done;
+    const b = E("button","ltile", t.ch); b.disabled = LE.done;
     b.onclick = ()=>placeTile(k); tl.appendChild(b);
   });
   if(fresh) stagger(tl, true); else stagger(tl, false);
@@ -3312,6 +3664,7 @@ function finishLetters(ok){
   if(!ok){ LE.chars.forEach((ch,j)=>{ if(LE.slots[j]!==null) LE.tiles[LE.slots[j]].used = false; const k = LE.tiles.findIndex(t=>!t.used && t.ch===ch); LE.slots[j] = k; LE.tiles[k].used = true; }); LE.bad = []; }
   renderLetters();
   const c = LE.c, pts = ok ? (LE.hint ? 1 : 3) : 0, got = modeResult("letters", c, ok, pts);
+  if(ok) questEvent("letters");
   const fb = $("leFb"); fb.innerHTML = ""; fb.className = "fb "+(ok ? "yes" : "no");
   const hd = E("div","fbh"); hd.appendChild(E("b","", ok ? "Richtig! ✓" : "Das Wort war:")); if(got) hd.appendChild(E("span","fbp","+"+got+" P")); fb.appendChild(hd);
   fb.appendChild(E("div","", c.fw+" = "+c.de));
@@ -3380,6 +3733,7 @@ function endBlitz(){
   const old = XP.blitzBest[lang] || 0, rec = BL.score>old;
   if(rec) XP.blitzBest[lang] = BL.score;
   XP.blitzMax = Math.max(XP.blitzMax||0, BL.score);
+  questEvent("blitz", BL.score, true);
   const got = gameXP("blitz", BL.score); saveXP();
   if(got) addXP(got); else checkBadges(true);
   show("blPlay", false); const d = $("blEnd"); d.innerHTML = ""; show("blEnd", true);
@@ -3466,9 +3820,9 @@ function init(){
   setLang(store("vok_lang") || "la", true);
   checkBadges(false); saveXP();
   renderTop();
-  tab("l");
+  tab(["l","t","h","s"].includes(SET.start) ? SET.start : "l");
   if(coinWelcome>0) setTimeout(()=>toast("💰","Neu: Münzen & Shop!","Du startest mit "+fmt(coinWelcome)+" Münzen. Gestalte deinen Avatar im Shop."), 700);
-  setupApp();
+  setupApp(); renderQuests();
   if(refund) setTimeout(()=>toast("🎨","Farben sind jetzt gratis!","Du bekommst "+fmt(refund)+" Münzen für deine App-Designs zurück."), 900);
   if(!pName() && !store("vok_welcomed")) setTimeout(()=>showWelcome(false), coinWelcome ? 1600 : 500);
 }
