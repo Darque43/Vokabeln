@@ -5,13 +5,19 @@ Vokabeltrainer für **Latein** und **Englisch** in einer einzigen HTML-Datei (`l
 ## Funktionen
 
 - **Lernen** mit Karteikarten: vorne das Wort mit allen Formen und dem Geschlecht (farbige Marke m/f/n), hinten die deutsche Bedeutung. Antippen zum Umdrehen, nach rechts wischen = gewusst, nach links = nochmal (am Computer: Pfeiltasten und Leertaste). Englische Wörter können vorgelesen werden 🔊.
+- **Weitere Lernarten** im Bereich „Lernen“:
+  - 🎤 **Sprechen**: Die deutsche Bedeutung wird angezeigt, du sagst das Wort. Bei Englisch gibt es eine Aussprache-Note (Prozent und Sterne, je nachdem wie sicher die Spracherkennung dich verstanden hat), bei Latein wird nur geprüft, ob das Wort stimmt. Braucht Chrome oder Safari und Internet.
+  - 🎧 **Hören** (Englisch): Ein Wort wird vorgelesen (auch langsam), du schreibst es auf.
+  - 🧩 **Paare**: Memory-Spiel – Wörter und Übersetzungen zusammenbringen, mit Zeit und Bestzeit.
+  - 🔤 **Buchstaben**: Das Wort aus durcheinandergewürfelten Buchstaben bilden (mit Tipp-Knopf, am Computer auch per Tastatur).
+  - ⚡ **Blitz**: 60 Sekunden „Stimmt die Übersetzung?“ mit Serienbonus und Rekord.
 - **Test**: Auswählen (Multiple Choice), Schreiben oder gemischt. Beim Schreiben füllt man eine Tabelle aus: weitere Formen (z. B. Genitiv bzw. 1. Person, Perfekt, PPP), Geschlecht und deutsche Bedeutung. Kleine Tippfehler werden toleriert, Formen dürfen auch nur als Endung eingegeben werden.
 - **Punkte-System** ⭐
   - Lernkarte gewusst +2, „Nochmal“ +1 (pro Karte einmal am Tag)
   - Test: Multiple Choice +5, Schreiben +10, jede richtige Form bzw. Geschlecht +5, jede weitere Bedeutung +5
   - Serienbonus +2 ab der 3. richtigen Antwort in Folge, fehlerfreier Test +20
   - Level mit Titeln, Tagesziel, 🔥 Serie (Tage in Folge mit erreichtem Tagesziel), Wochenübersicht
-  - 15 Abzeichen, darunter auch welche fürs Einkaufen und Münzensammeln
+  - 18 Abzeichen, darunter auch welche fürs Einkaufen, Sprechen, Paare und Blitz
 - **Profil** 👤: eigener Name (steht oben, beim Avatar und in der Bestenliste), Shop, Design und Einstellungen.
 - **Münzen & Shop** 🪙
   - Münzen gibt es für Punkte (1 je 5 Punkte), das Tagesziel, Level-Aufstiege, Abzeichen, fehlerfreie Tests und die **tägliche Belohnung** 🎁 (steigt jeden Tag bis 50 Münzen)

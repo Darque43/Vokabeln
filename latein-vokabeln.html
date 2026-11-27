@@ -541,6 +541,75 @@ main{position:relative;z-index:1}
 .cf.coin{width:16px;height:16px;border-radius:50%}
 .fw{position:fixed;z-index:70;width:7px;height:7px;border-radius:50%;pointer-events:none;margin:-3.5px 0 0 -3.5px}
 
+/* ---------- Lernarten ---------- */
+#lmodesw{margin:0 -18px 12px;padding:0 18px 2px;overflow-x:auto;scrollbar-width:none}
+#lmodesw::-webkit-scrollbar{display:none}
+.lchip.lm{padding:9px 15px;font-weight:600;font-size:.9rem}
+.lchip.lm.on{background:var(--acc);color:var(--accInk)}
+.glab{font-size:.85rem;color:var(--mute);margin-bottom:4px}
+.gcard{min-height:190px}
+.micwrap{display:flex;flex-direction:column;align-items:center;margin:22px 0 4px}
+.mic{position:relative;width:92px;height:92px;border-radius:50%;padding:0;background:var(--acc);color:var(--accInk);display:grid;place-items:center;box-shadow:0 10px 24px color-mix(in srgb,var(--acc) 40%,transparent)}
+.mic svg{width:38px;height:38px}
+.mic.on{background:#ef476f;color:#fff}
+.mic.on::before,.mic.on::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid #ef476f;animation:micRing 1.4s ease-out infinite}
+.mic.on::after{animation-delay:.7s}
+@keyframes micRing{to{transform:scale(1.8);opacity:0}}
+.micst{margin:12px 0 0;color:var(--mute);font-size:.9rem;text-align:center;min-height:1.4em}
+.heard{margin:4px 0 0;font:600 1.1rem var(--disp);min-height:1.4em;text-align:center}
+.spres{margin-top:12px;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line);animation:pop .25s}
+.spres.yes{background:var(--okbg);border-color:var(--ok)}
+.spres.no{background:var(--badbg);border-color:var(--bad)}
+.spres .fbh b{font:600 1.05rem var(--disp)}
+.spres.yes .fbh b{color:var(--ok)}
+.spres.no .fbh b{color:var(--bad)}
+.spword{display:flex;align-items:center;gap:10px;font:400 1.35rem var(--serif);margin:8px 0 2px}
+.say.mini{position:static;width:38px;height:38px;flex:none}
+.scorebar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:10px}
+.scorebar i{display:block;height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.3,.8,.3,1)}
+.scrow{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;font:600 .9rem var(--disp)}
+.stars{font-size:1.4rem;letter-spacing:3px}
+.stars span{display:inline-block;animation:ePop .5s cubic-bezier(.3,1.6,.5,1) backwards}
+.stars span.off{filter:grayscale(1);opacity:.3}
+.lplay{display:flex;gap:12px;align-items:center;justify-content:center;margin:10px 0 4px}
+.bigplay{width:76px;height:76px;border-radius:50%;padding:0;background:var(--acc);color:var(--accInk);display:grid;place-items:center;box-shadow:0 8px 20px color-mix(in srgb,var(--acc) 35%,transparent)}
+.bigplay svg{width:34px;height:34px}
+.bigplay.on{animation:ringPulse .6s ease-in-out infinite alternate}
+.ghead{display:flex;justify-content:space-between;align-items:center;font:600 .9rem var(--disp);color:var(--mute);margin:0 2px 10px}
+.ghead b{color:var(--ink)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ptile{min-height:80px;padding:10px 8px;border-radius:16px;border:1px solid var(--line);background:var(--card);font:600 .92rem/1.25 var(--disp);overflow-wrap:anywhere;transition:transform .2s,background-color .2s,border-color .2s,opacity .3s}
+.ptile.f{font:400 1.05rem/1.25 var(--serif)}
+.ptile.s{font-size:.8rem}
+.ptile.sel{border-color:var(--acc);background:var(--soft);transform:scale(1.05)}
+.ptile.ok{border-color:var(--ok);background:var(--okbg);animation:okPop .4s}
+.ptile.bad{border-color:var(--bad);background:var(--badbg);animation:shakeX .4s}
+.ptile.gone{opacity:0;transform:scale(.6);pointer-events:none}
+.gdone{text-align:center;padding:22px 16px;animation:boxIn .5s cubic-bezier(.3,1.5,.5,1)}
+.gdone .big{font:800 2.4rem/1.1 var(--disp);margin:6px 0}
+.gdone p{color:var(--mute);margin:6px 0}
+.slots{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:18px 0 6px}
+.word{display:flex;flex-wrap:wrap;justify-content:center;gap:5px}
+.slot{width:min(38px,calc((100vw - 70px)/var(--n,8) - 5px));height:46px;padding:0;border-radius:10px;border:2px dashed var(--line);background:transparent;font:600 1.3rem var(--serif);display:grid;place-items:center}
+.slot.fill{border-style:solid;border-color:var(--acc);background:var(--soft);animation:ePop .3s cubic-bezier(.3,1.6,.5,1)}
+.slot.hint{border-style:solid;border-color:#ffd23f;background:rgba(255,210,63,.18)}
+.slot.bad{border-color:var(--bad);background:var(--badbg);animation:shakeX .4s}
+.slot.win{border-style:solid;border-color:var(--ok);background:var(--okbg);animation:jumpS .5s backwards;animation-delay:calc(var(--i,0)*55ms)}
+@keyframes jumpS{40%{transform:translateY(-12px)}}
+.tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:14px 0}
+.tile{width:44px;height:48px;padding:0;border-radius:12px;background:var(--card);border:1px solid var(--line);font:600 1.3rem var(--serif);box-shadow:0 3px 0 var(--line)}
+.tile:active:not(:disabled){transform:translateY(2px);box-shadow:none}
+.blcard{min-height:180px}
+.blcard .cmid{gap:2px}
+.bleq{color:var(--mute);font:700 1.2rem var(--disp)}
+.blcard.okf{animation:flashOk .35s}
+.blcard.badf{animation:shakeX .35s}
+@keyframes flashOk{40%{box-shadow:0 0 0 6px var(--ok)}}
+#blPlay .act button{padding:20px 12px;font-size:1.05rem}
+#blYes{background:var(--ok);color:var(--okInk)}
+#blNo{background:var(--badbg);color:var(--bad)}
+.blbig{font:800 3rem/1 var(--disp);color:var(--acc)}
+
 /* ---------- Navigation ---------- */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
 @supports ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
@@ -607,10 +676,13 @@ main{position:relative;z-index:1}
   <button class="primary" id="dBtn">Abholen</button>
 </div>
 
+<div id="lmodesw" hidden><div class="lchips" id="lmodes" role="group" aria-label="Lernart"></div></div>
+
 <div id="lbar"><div id="lsel" class="lchips" role="group" aria-label="Lektionen"></div></div>
 
 <!-- ======== Lernen ======== -->
 <section id="learn">
+<div id="mCards">
   <div class="stats">
     <div class="tile"><b id="sV">0</b><span>Vokabeln</span></div>
     <div class="tile"><b id="sK">0 %</b><span id="sKl">gewusst</span></div>
@@ -647,6 +719,89 @@ main{position:relative;z-index:1}
     <button id="shuf">Mischen</button>
     <button id="reset">Zurücksetzen</button>
   </div>
+</div>
+
+<!-- Sprechen -->
+<div id="mSpeak" hidden>
+  <div class="qcard gcard">
+    <div class="ctop"><span id="spLec"></span><span id="spNum"></span></div>
+    <div class="cmid"><div class="glab" id="spAsk"></div><div class="w de" id="spQ"></div><div class="fsub" id="spHint"></div></div>
+    <div class="cside">🎤 Sprechen</div>
+  </div>
+  <div class="micwrap">
+    <button class="mic" id="spMic" aria-label="Mikrofon: tippen und sprechen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></button>
+    <p class="micst" id="spSt"></p>
+    <p class="heard" id="spHeard"></p>
+  </div>
+  <div id="spRes" class="spres" hidden>
+    <div class="fbh"><b id="spVerdict"></b><span class="fbp" id="spPts"></span></div>
+    <div id="spMsg" class="fbs"></div>
+    <div class="spword"><span id="spTarget"></span><button class="say mini" id="spSay" aria-label="Richtige Aussprache anhören"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19.5 5.5a9 9 0 0 1 0 13"/></svg></button></div>
+    <div id="spScore">
+      <div class="scorebar"><i id="spBar"></i></div>
+      <div class="scrow"><span id="spPct"></span><span class="stars" id="spStars"></span></div>
+      <p class="fbs" id="spFb"></p>
+    </div>
+  </div>
+  <div class="bar"><button id="spHintBtn">💡 Tipp</button><button id="spSkip">Überspringen</button><button id="spNext" class="primary" hidden>Weiter</button></div>
+  <p class="small" id="spInfo"></p>
+</div>
+
+<!-- Hören -->
+<div id="mListen" hidden>
+  <div class="qcard gcard">
+    <div class="ctop"><span id="liLec"></span><span id="liNum"></span></div>
+    <div class="cmid"><div class="glab">Hör zu und schreib das Wort auf</div>
+      <div class="lplay"><button class="bigplay" id="liPlay" aria-label="Wort abspielen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19.5 5.5a9 9 0 0 1 0 13"/></svg></button><button id="liSlow">🐢 Langsam</button></div>
+    </div>
+    <div class="cside">🎧 Hören</div>
+  </div>
+  <div class="tform"><input id="liIn" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Was hast du gehört?" aria-label="Was hast du gehört?"><button id="liCheck" class="primary">Prüfen</button></div>
+  <div id="liFb" class="fb"></div>
+  <div class="bar"><button id="liSkip">Weiß nicht</button><button id="liNext" class="primary" hidden>Weiter</button></div>
+  <p class="small" id="liInfo"></p>
+</div>
+
+<!-- Paare -->
+<div id="mPairs" hidden>
+  <div class="ghead"><span>⏱ <b id="paTime">0:00</b></span><span id="paLeft"></span><span>Fehler: <b id="paErr">0</b></span></div>
+  <div class="pgrid" id="paGrid"></div>
+  <div id="paDone" class="panel gdone" hidden></div>
+  <p class="small" id="paInfo">Tippe ein Wort und dann seine Übersetzung an.</p>
+</div>
+
+<!-- Buchstaben -->
+<div id="mLetters" hidden>
+  <div class="qcard gcard">
+    <div class="ctop"><span id="leLec"></span><span id="leNum"></span></div>
+    <div class="cmid"><div class="glab" id="leAsk"></div><div class="w de" id="leQ"></div></div>
+    <div class="cside">🔤 Buchstaben</div>
+  </div>
+  <div class="slots" id="leSlots"></div>
+  <div class="tiles" id="leTiles"></div>
+  <div id="leFb" class="fb"></div>
+  <div class="bar"><button id="leHint">💡 Tipp</button><button id="leSkip">Überspringen</button><button id="leNext" class="primary" hidden>Weiter</button></div>
+  <p class="small">Tippe die Buchstaben in der richtigen Reihenfolge an. Am Computer kannst du auch tippen.</p>
+</div>
+
+<!-- Blitz -->
+<div id="mBlitz" hidden>
+  <div id="blStart" class="panel gdone">
+    <div style="font-size:2.6rem">⚡</div>
+    <h2>Blitzrunde</h2>
+    <p>60 Sekunden: Stimmt die Übersetzung oder nicht? Antworte so schnell du kannst. Ab 5 richtigen in Folge gibt es doppelte Punkte.</p>
+    <p class="small" id="blBest"></p>
+    <button class="primary wide" id="blGo">Los geht's!</button>
+  </div>
+  <div id="blPlay" hidden>
+    <div class="ghead"><span>⏱ <b id="blTime">60</b></span><span class="combo" id="blCombo"></span><span><b id="blScore">0</b> P</span></div>
+    <div class="prog"><i id="blBar" style="width:100%;transition:width .1s linear"></i></div>
+    <div class="qcard blcard" id="blCard"><div class="cmid"><div class="w" id="blF"></div><div class="bleq">=</div><div class="w de" id="blD"></div></div></div>
+    <div class="act"><button id="blNo">✗ Stimmt nicht</button><button id="blYes">✓ Stimmt</button></div>
+    <p class="small" style="text-align:center">Am Computer: ← stimmt nicht · → stimmt</p>
+  </div>
+  <div id="blEnd" class="panel gdone" hidden></div>
+</div>
 </section>
 
 <!-- ======== Test ======== -->
@@ -1290,6 +1445,9 @@ const BADGES = [
   {id:"shop10",  e:"🎨", t:"Stylist",          d:"10 Sachen im Shop gekauft",      ok:x=>x.bought>=10},
   {id:"streak7", e:"🗓️", t:"Wochenheld",       d:"7 Tage in Folge das Tagesziel",  ok:x=>x.bestStreak>=7},
   {id:"rich",    e:"💰", t:"Schatzmeister",    d:"1.000 Münzen gesammelt",         ok:x=>x.coinsTotal>=1000},
+  {id:"speak10", e:"🎤", t:"Gut gesprochen",   d:"10 Wörter richtig gesagt",       ok:x=>(x.spoken||0)>=10},
+  {id:"pairs0",  e:"🧩", t:"Gedächtnisprofi",  d:"Paare-Runde ohne Fehler",        ok:x=>(x.pairsPerfect||0)>=1},
+  {id:"blitz20", e:"🏃", t:"Blitzmerker",      d:"20 Punkte in einer Blitzrunde",  ok:x=>(x.blitzMax||0)>=20},
   {id:"xp5000",  e:"👑", t:"Vokabelkönig",     d:"5.000 Punkte gesammelt",         ok:x=>x.total>=5000}
 ];
 function checkBadges(notify){
@@ -1608,12 +1766,13 @@ function fly(ok){
   c.addEventListener("pointercancel", end);
   c.addEventListener("click", ()=>{ if(sup){ sup = false; return; } flip(); });
 })();
-function speak(t){
+function speak(t, rate, onend){
   if(!ttsOK || !LANGS[lang].tts) return;
   try{
     const s = window.speechSynthesis; s.cancel();
     const txt = t.replace(/\([^)]*\)/g," ").replace(/\bsb\b\.?/gi,"somebody").replace(/\bsth\b\.?/gi,"something");
-    const u = new SpeechSynthesisUtterance(txt); u.lang = LANGS[lang].tts; u.rate = .9;
+    const u = new SpeechSynthesisUtterance(txt); u.lang = LANGS[lang].tts; u.rate = rate || .9;
+    if(onend){ u.onend = onend; u.onerror = onend; }
     const vs = s.getVoices(), v = vs.find(v=>(v.lang||"").replace("_","-")===u.lang) || vs.find(v=>/^en/i.test(v.lang||""));
     if(v) u.voice = v;
     s.speak(u);
@@ -1625,7 +1784,7 @@ $("say").addEventListener("click", e=>{ e.stopPropagation(); if(queue.length) sp
 $("tsay").onclick = ()=>{ if(T) speak(cards[T.q[T.pos]].fw); };
 document.addEventListener("keydown", e=>{
   if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName||"")) return;
-  if(!$("learn").hidden){
+  if(!$("learn").hidden && LM==="cards"){
     if(e.key==="ArrowRight") fly(true);
     else if(e.key==="ArrowLeft") fly(false);
     else if(e.key==="Backspace" || (e.key==="z" && (e.ctrlKey || e.metaKey))){ e.preventDefault(); doUndo(); }
@@ -1658,7 +1817,8 @@ function tab(v){
   curTab = v;
   if(v!=="s") clearPreview();
   show("learn",v==="l"); show("test",v==="t"); show("hs",v==="h"); show("shop",v==="s"); show("vok",v==="v");
-  show("lbar", v==="l"||v==="t"); show("langbar", true);
+  show("lbar", v==="l"||v==="t"); show("langbar", true); show("lmodesw", v==="l");
+  if(v!=="l") stopAllModes(); else showLModes(true);
   ["L","T","H","S","V"].forEach(x=>{ const on = x.toLowerCase()===v; $("tab"+x).classList.toggle("on",on); $("tab"+x).setAttribute("aria-current", on ? "page" : "false"); });
   if(v==="t"){ show("tsetup",true); show("tplay",false); show("tresult",false); }
   if(v==="h") hsView(hsCur);
@@ -2185,6 +2345,8 @@ function rebuildCards(){
   const sel = getSel();
   cards = troubleMode ? troubleCards() : langLessons().filter(l=>!sel.length || sel.includes(l.name)).flatMap(l=>parse(l.text).map(c=>({...c, lec:l.name})));
   build(true);
+  MQ = {};
+  if(curTab==="l" && LM!=="cards") startMode(LM);
 }
 function renderLessons(){
   const box = $("llist"); box.innerHTML = ""; stagger(box, false);
@@ -2830,6 +2992,418 @@ $("bkFile").onchange = async e=>{
     location.reload();
   }catch(err){ alert("Das Backup konnte nicht geladen werden: "+err.message); }
 };
+
+/* ================= Weitere Lernarten ================= */
+const LMODES = [{id:"cards",n:"🃏 Karten"},{id:"speak",n:"🎤 Sprechen"},{id:"listen",n:"🎧 Hören"},{id:"pairs",n:"🧩 Paare"},{id:"letters",n:"🔤 Buchstaben"},{id:"blitz",n:"⚡ Blitz"}];
+const LM_BOX = {cards:"mCards", speak:"mSpeak", listen:"mListen", pairs:"mPairs", letters:"mLetters", blitz:"mBlitz"};
+let LM = load("vok_lmode", "cards"); if(!LM_BOX[LM]) LM = "cards";
+let MQ = {};
+function showLModes(restart){
+  const box = $("lmodes"); box.innerHTML = "";
+  LMODES.forEach(m=>{ const b = E("button","lchip lm"+(m.id===LM ? " on" : ""), m.n); b.setAttribute("aria-pressed", m.id===LM ? "true" : "false"); b.onclick = ()=>{ if(m.id!==LM) setLMode(m.id); }; box.appendChild(b); });
+  Object.entries(LM_BOX).forEach(([k,id])=>show(id, k===LM));
+  const on = box.querySelector(".on"); if(on && on.offsetParent) try{ on.scrollIntoView({block:"nearest", inline:"nearest"}); }catch(e){}
+  if(restart && LM!=="cards") startMode(LM);
+}
+function setLMode(m){
+  stopAllModes(); LM = m; save("vok_lmode", m);
+  showLModes(true); anim($(LM_BOX[m]), "enter"); sfx("tap");
+}
+function startMode(m){ if(m==="speak") newSpeak(); else if(m==="listen") newListen(); else if(m==="pairs") newPairs(); else if(m==="letters") newLetters(); else if(m==="blitz") blitzIntro(); }
+function stopAllModes(){ stopListen(); clearInterval(paTimer); clearInterval(blTimer); blRunning = false; try{ window.speechSynthesis && speechSynthesis.cancel(); }catch(e){} }
+// Vokabeln für die Lernarten: schwierige und unbekannte zuerst
+function nextIdx(mode, ok){
+  let q = MQ[mode] || [];
+  if(!q.length){
+    q = cards.map((c,i)=>i).filter(i=>!ok || ok(cards[i]));
+    const pr = c=>(trouble[lang][c.fw] ? 2 : 0)+(known.has(c.fw) ? 0 : 1)+Math.random()*1.5;
+    q = q.map(i=>[i, pr(cards[i])]).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
+    if(q.length>1 && MQ[mode+"_last"]===q[0]) q.push(q.shift());
+  }
+  const i = q.length ? q.shift() : -1; MQ[mode] = q; MQ[mode+"_last"] = i;
+  return i;
+}
+const qLeft = m=>(MQ[m]||[]).length;
+function modePts(mode, c, pts){
+  const d = today(); if(!XP.lt || XP.lt.d!==d) XP.lt = {d, k:{}};
+  const key = mode+"|"+lang+"|"+c.fw; if(XP.lt.k[key]) return 0;
+  XP.lt.k[key] = 4; return pts;
+}
+function gameXP(mode, pts){
+  const d = today(); if(!XP.gx || XP.gx.d!==d) XP.gx = {d, m:{}};
+  const have = XP.gx.m[mode]||0, give = Math.max(0, Math.min(pts, 60-have)); XP.gx.m[mode] = have+give; return give;
+}
+function modeResult(mode, c, ok, pts){
+  if(ok) known.add(c.fw); markTrouble(c, ok); saveKnown();
+  const got = ok ? modePts(mode, c, pts) : 0;
+  saveXP(); render(); renderLessonSel();
+  if(got) addXP(got); else checkBadges(true);
+  return got;
+}
+function simStr(a, b){ if(!a || !b) return 0; return 1-lev(a, b)/Math.max(a.length, b.length); }
+function phon(x){
+  return String(x||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z]/g,"")
+    .replace(/ph/g,"f").replace(/th/g,"t").replace(/ch/g,"k").replace(/qu/g,"kv").replace(/[ckq]/g,"k").replace(/ae|oe/g,"e")
+    .replace(/y/g,"i").replace(/w/g,"v").replace(/z/g,"s").replace(/j/g,"i").replace(/h/g,"").replace(/(.)\1+/g,"$1");
+}
+const noCards = (box, msg)=>{ $(box).textContent = msg; };
+
+/* ---------- Sprechen ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let SP = null, rec = null, listening = false;
+function newSpeak(){
+  stopListen();
+  const L = LANGS[lang];
+  show("spRes", false); show("spNext", false); show("spSkip", true); show("spHintBtn", true);
+  $("spHeard").textContent = ""; $("spHint").textContent = "";
+  $("spInfo").textContent = lang==="en"
+    ? "Beim Englischen bekommst du eine Aussprache-Note: Sie zeigt, wie sicher die Spracherkennung dein Wort verstanden hat. Die Spracherkennung braucht Internet."
+    : "Bei Latein wird nur geprüft, ob du das richtige Wort sagst – die Aussprache wird nicht bewertet. Die Spracherkennung braucht Internet.";
+  if(!SR){ $("spMic").disabled = true; $("spSt").textContent = "Dein Browser kann leider keine Sprache erkennen. Probiere Chrome (Android, PC) oder Safari (iPhone, iPad)."; }
+  else { $("spMic").disabled = false; $("spSt").textContent = "Tippe aufs Mikrofon und sag das Wort auf "+L.name+"."; }
+  const i = nextIdx("speak");
+  if(i<0){ SP = null; $("spAsk").textContent = ""; $("spQ").textContent = "Noch keine Vokabeln"; $("spMic").disabled = true; return; }
+  const c = cards[i];
+  SP = {i, c, P:parseFw(c.fw), tries:0, hint:0, done:false};
+  $("spAsk").textContent = "Wie heißt das auf "+L.name+"?";
+  $("spQ").textContent = c.de; $("spQ").className = "w de"+fit(c.de);
+  $("spLec").textContent = c.lec || ""; $("spNum").textContent = qLeft("speak")+" übrig";
+  anim(document.querySelector("#mSpeak .qcard"), "in");
+}
+function stopListen(){ if(rec){ try{ rec.abort(); }catch(e){} } rec = null; listening = false; const m = $("spMic"); if(m) m.classList.remove("on"); }
+function startListen(){
+  let got = false;
+  try{ rec = new SR(); }catch(e){ $("spSt").textContent = "Die Spracherkennung konnte nicht gestartet werden."; return; }
+  rec.lang = lang==="en" ? "en-GB" : "it-IT"; rec.interimResults = true; rec.maxAlternatives = 5; rec.continuous = false;
+  rec.onstart = ()=>{ listening = true; $("spMic").classList.add("on"); $("spSt").textContent = "Ich höre zu … sprich jetzt!"; };
+  rec.onresult = e=>{
+    const r = e.results[e.results.length-1]; if(!r || !r[0]) return;
+    $("spHeard").textContent = "„"+r[0].transcript.trim()+"“";
+    if(r.isFinal && !got){ got = true; const alts = []; for(let k=0;k<r.length;k++) alts.push({t:r[k].transcript, c:r[k].confidence}); evalSpeech(alts); }
+  };
+  rec.onerror = e=>{
+    const m = {"not-allowed":"Bitte erlaube den Zugriff aufs Mikrofon (in den Einstellungen deines Browsers).","service-not-allowed":"Die Spracherkennung ist hier gesperrt. Öffne den Trainer im Browser statt als App.","no-speech":"Ich habe nichts gehört. Tippe nochmal und sprich deutlich ins Mikrofon.","audio-capture":"Es wurde kein Mikrofon gefunden.","network":"Für die Spracherkennung brauchst du Internet.","language-not-supported":"Diese Sprache kann dein Gerät leider nicht erkennen."}[e.error];
+    if(m){ got = true; $("spSt").textContent = m; }
+  };
+  rec.onend = ()=>{ listening = false; $("spMic").classList.remove("on"); if(!got && SP && !SP.done) $("spSt").textContent = "Ich habe nichts verstanden. Tippe nochmal aufs Mikrofon."; };
+  try{ rec.start(); sfx("tap"); buzz(15); }catch(e){ $("spSt").textContent = "Das Mikrofon konnte nicht gestartet werden."; }
+}
+$("spMic").onclick = ()=>{ if(listening){ try{ rec.stop(); }catch(e){} return; } if(!SP || SP.done || !SR) return; $("spHeard").textContent = ""; startListen(); };
+function evalSpeech(alts){
+  if(!SP || SP.done) return;
+  const c = SP.c, P = SP.P; SP.tries++;
+  let best = {sim:0, rank:9, conf:0, t:(alts[0] && alts[0].t) || ""};
+  if(lang==="en"){
+    const ts = [...new Set(acceptedFw(c).map(nFw).filter(Boolean))];
+    alts.forEach((a,k)=>{ const u = nFw(a.t); ts.forEach(t=>{ let v = simStr(u, t); if(t.length>2 && (" "+u+" ").includes(" "+t+" ")) v = Math.max(v, .92); if(v>best.sim+1e-9 || (Math.abs(v-best.sim)<1e-9 && k<best.rank)) best = {sim:v, rank:k, conf:+a.c||0, t:a.t}; }); });
+  } else {
+    const ts = [phon(P.head), phon(c.fw.replace(/\s[mfn]\.?(\s*\/\s*[mfn]\.?)?\s*$/i,""))];
+    alts.forEach((a,k)=>{ const u = phon(a.t); ts.forEach(t=>{ let v = simStr(u, t); if(t.length>=5 && u.slice(0,4)===t.slice(0,4) && Math.abs(u.length-t.length)<=2) v = Math.max(v, .75); if(t.length<=3 && u && Math.abs(u.length-t.length)<=1 && (t.startsWith(u) || u.startsWith(t))) v = Math.max(v, .7); if(v>best.sim+1e-9) best = {sim:v, rank:k, conf:+a.c||0, t:a.t}; }); });
+  }
+  const ok = lang==="en" ? best.sim>=.8 : best.sim>=.66;
+  show("spRes", true); const res = $("spRes"); res.className = "spres "+(ok ? "yes" : "no");
+  $("spVerdict").textContent = ok ? "Richtig! ✓" : "Nicht ganz.";
+  $("spMsg").textContent = "Verstanden: „"+best.t.trim()+"“"+(ok ? "" : " · Richtig ist:");
+  $("spTarget").textContent = c.fw;
+  show("spSay", !!LANGS[lang].tts && ttsOK);
+  let pts = 0;
+  if(lang==="en"){
+    let sc = best.conf>0 ? .6*best.sim+.4*best.conf : best.sim*.97;
+    sc -= best.rank*.06+(SP.tries-1)*.04; sc = Math.max(0, Math.min(1, sc));
+    const pc = Math.round(sc*100), st = pc>=90 ? 3 : pc>=75 ? 2 : pc>=55 ? 1 : 0;
+    show("spScore", true);
+    const bar = $("spBar"); bar.style.width = "0"; bar.style.background = pc>=75 ? "var(--ok)" : pc>=55 ? "#f5b82e" : "var(--bad)";
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ bar.style.width = pc+"%"; }));
+    $("spPct").textContent = "Aussprache: "+pc+" %";
+    const stars = $("spStars"); stars.innerHTML = "";
+    for(let k=0;k<3;k++){ const x = E("span", k<st ? "" : "off", "⭐"); x.style.animationDelay = (.25+k*.15)+"s"; stars.appendChild(x); }
+    $("spFb").textContent = !ok ? "Hör dir das Wort an und sprich es nach – dann nochmal versuchen." : pc>=90 ? "Ausgezeichnete Aussprache! 🌟" : pc>=75 ? "Gut ausgesprochen!" : "Verständlich – hör es dir nochmal an und sprich noch deutlicher.";
+    if(ok) pts = Math.max(1, 3-SP.hint)+(st===3 ? 1 : 0);
+    if(!ok) setTimeout(()=>speak(c.fw), 500);
+  } else {
+    show("spScore", false);
+    if(ok) pts = Math.max(1, 3-SP.hint);
+  }
+  if(ok){
+    SP.done = true; XP.spoken = (XP.spoken||0)+1;
+    const got = modeResult("speak", c, true, pts);
+    $("spPts").textContent = got ? "+"+got+" P" : "";
+    $("spSt").textContent = "Super! Weiter geht's mit dem nächsten Wort.";
+    sfx("ok"); avReact("jump"); setTimeout(()=>sparkle(res, 8), 60);
+    show("spSkip", false); show("spHintBtn", false);
+  } else {
+    if(SP.tries===1) modeResult("speak", c, false, 0);
+    $("spPts").textContent = "";
+    $("spSt").textContent = "Tippe nochmal aufs Mikrofon und versuch es erneut.";
+    sfx("bad"); avReact("shake"); anim(res, "shakeX");
+  }
+  show("spNext", true);
+  setTimeout(()=>{ try{ $("spRes").scrollIntoView({block:"nearest", behavior: RM ? "auto" : "smooth"}); }catch(e){} }, 80);
+}
+$("spSay").onclick = ()=>{ if(SP) speak(SP.c.fw); };
+$("spNext").onclick = ()=>newSpeak();
+$("spSkip").onclick = ()=>{ if(SP && !SP.done && SP.tries===0) markTrouble(SP.c, false); newSpeak(); };
+$("spHintBtn").onclick = ()=>{
+  if(!SP || SP.done) return;
+  const h = SP.P.head; SP.hint = Math.min(SP.hint+1, Math.max(1, h.length-1));
+  $("spHint").textContent = "Fängt an mit: "+h.slice(0, SP.hint+(lang==="en" && /^to /.test(h) ? 3 : 0))+"…";
+};
+
+/* ---------- Hören ---------- */
+let LI = null;
+function newListen(){
+  const L = LANGS[lang];
+  $("liFb").innerHTML = ""; $("liFb").className = "fb"; show("liNext", false); show("liSkip", true);
+  $("liIn").value = ""; $("liIn").style.borderColor = "";
+  const can = !!L.tts && ttsOK;
+  ["liPlay","liSlow","liIn","liCheck","liSkip"].forEach(id=>$(id).disabled = !can);
+  if(!can){ LI = null; $("liInfo").textContent = lang==="la" ? "„Hören“ gibt es für Englisch – für Latein haben Geräte leider keine Stimme. Probier „Sprechen“, „Paare“ oder „Buchstaben“!" : "Dein Gerät kann leider nicht vorlesen."; return; }
+  $("liInfo").textContent = "Du hörst ein englisches Wort. Schreib es richtig auf – „to“ musst du nicht mittippen.";
+  const i = nextIdx("listen");
+  if(i<0){ LI = null; return; }
+  const c = cards[i]; LI = {i, c, done:false};
+  $("liLec").textContent = c.lec || ""; $("liNum").textContent = qLeft("listen")+" übrig";
+  anim(document.querySelector("#mListen .qcard"), "in");
+  setTimeout(()=>playListen(), 350);
+  setTimeout(()=>{ try{ $("liIn").focus({preventScroll:true}); }catch(e){} }, 400);
+}
+function playListen(rate){ if(!LI) return; const b = $("liPlay"); b.classList.add("on"); speak(parseFw(LI.c.fw).head, rate, ()=>b.classList.remove("on")); setTimeout(()=>b.classList.remove("on"), 2500); }
+$("liPlay").onclick = ()=>playListen();
+$("liSlow").onclick = ()=>playListen(.55);
+function checkListen(giveUp){
+  if(!LI || LI.done) return;
+  const c = LI.c, v = $("liIn").value;
+  if(!giveUp && !v.trim()){ $("liIn").focus(); return; }
+  LI.done = true;
+  const g = giveUp ? {ok:false} : gradeFw(v, acceptedFw(c));
+  const pts = g.ok ? (g.typo ? 1 : 3) : 0;
+  const got = modeResult("listen", c, g.ok, pts);
+  const fb = $("liFb"); fb.innerHTML = ""; fb.className = "fb "+(g.ok ? "yes" : "no");
+  const hd = E("div","fbh"); hd.appendChild(E("b","", g.ok ? (g.typo ? "Fast richtig! ✓" : "Richtig! ✓") : "Nicht ganz.")); if(got) hd.appendChild(E("span","fbp","+"+got+" P")); fb.appendChild(hd);
+  fb.appendChild(E("div","", c.fw+" = "+c.de));
+  if(g.typo) fb.appendChild(E("div","fbs","Achte auf die Schreibweise."));
+  $("liIn").style.borderColor = g.ok ? "var(--ok)" : "var(--bad)";
+  sfx(g.ok ? "ok" : "bad"); avReact(g.ok ? "jump" : "shake"); if(!g.ok) anim($("liIn"), "shakeX");
+  if(!g.ok) setTimeout(()=>playListen(.8), 450);
+  show("liNext", true); show("liSkip", false); $("liNext").focus({preventScroll:true});
+}
+$("liCheck").onclick = ()=>checkListen(false);
+$("liIn").onkeydown = e=>{ if(e.key==="Enter"){ e.preventDefault(); if(LI && LI.done) newListen(); else checkListen(false); } };
+$("liSkip").onclick = ()=>checkListen(true);
+$("liNext").onclick = ()=>newListen();
+
+/* ---------- Paare ---------- */
+let PA = null, paTimer = null;
+const mmss = s=>Math.floor(s/60)+":"+pad(s%60);
+function newPairs(){
+  clearInterval(paTimer);
+  const grid = $("paGrid"); grid.innerHTML = ""; show("paDone", false); show("paGrid", true); show("paInfo", true);
+  const idx = [], sf = new Set(), sd = new Set();
+  MQ.pairs = [];
+  for(;;){ const i = nextIdx("pairs"); if(i<0) break; const c = cards[i], h = parseFw(c.fw).head; if(!sf.has(h) && !sd.has(c.de)){ sf.add(h); sd.add(c.de); idx.push(i); } if(idx.length===6 || !qLeft("pairs")) break; }
+  if(idx.length<3){ PA = null; $("paLeft").textContent = ""; noCards("paGrid", "Für Paare brauchst du mindestens 3 verschiedene Vokabeln."); return; }
+  const tiles = shuffle(idx.flatMap(i=>[{i, side:"f", t:parseFw(cards[i].fw).head}, {i, side:"d", t:cards[i].de}]));
+  PA = {left:idx.length, n:idx.length, err:0, t0:Date.now(), sel:null, lock:false};
+  tiles.forEach(t=>{
+    const b = E("button","ptile "+t.side+(t.t.length>22 ? " s" : ""), t.t);
+    b.onclick = ()=>pickTile(b, t); grid.appendChild(b);
+  });
+  $("paErr").textContent = "0"; $("paLeft").textContent = PA.left+" Paare"; $("paTime").textContent = "0:00";
+  paTimer = setInterval(()=>{ if(PA) $("paTime").textContent = mmss(Math.floor((Date.now()-PA.t0)/1000)); }, 500);
+  stagger(grid, true);
+}
+function pickTile(b, t){
+  if(!PA || PA.lock || b.classList.contains("gone") || b.classList.contains("ok")) return;
+  if(!PA.sel){ PA.sel = {b, t}; b.classList.add("sel"); sfx("tap"); return; }
+  if(PA.sel.b===b){ b.classList.remove("sel"); PA.sel = null; return; }
+  const a = PA.sel; PA.sel = null;
+  if(a.t.i===t.i && a.t.side!==t.side){
+    a.b.classList.remove("sel"); [a.b, b].forEach(x=>x.classList.add("ok")); sfx("ok"); buzz(10);
+    setTimeout(()=>[a.b, b].forEach(x=>x.classList.add("gone")), 420);
+    PA.left--; $("paLeft").textContent = PA.left ? PA.left+" Paare" : "";
+    const c = cards[t.i]; known.add(c.fw); markTrouble(c, true);
+    if(!PA.left) setTimeout(finishPairs, 520);
+  } else {
+    PA.err++; PA.lock = true; $("paErr").textContent = PA.err;
+    [a.b, b].forEach(x=>{ x.classList.remove("sel"); x.classList.add("bad"); }); sfx("bad"); buzz([10,40,10]);
+    setTimeout(()=>{ [a.b, b].forEach(x=>x.classList.remove("bad")); PA.lock = false; }, 450);
+  }
+}
+function finishPairs(){
+  clearInterval(paTimer);
+  const secs = Math.max(1, Math.round((Date.now()-PA.t0)/1000)), perfect = PA.err===0;
+  saveKnown(); render(); renderLessonSel();
+  if(perfect) XP.pairsPerfect = (XP.pairsPerfect||0)+1;
+  XP.pairBest = objOr(XP.pairBest); const key = lang+PA.n, rec = !XP.pairBest[key] || secs<XP.pairBest[key];
+  if(rec) XP.pairBest[key] = secs;
+  const got = gameXP("pairs", PA.n+(perfect ? 5 : 0)); saveXP();
+  if(got) addXP(got); else checkBadges(true);
+  show("paGrid", false); show("paInfo", false);
+  const d = $("paDone"); d.innerHTML = ""; show("paDone", true);
+  d.appendChild(E("div","", perfect ? "🧠" : "🧩")).style.fontSize = "2.6rem";
+  d.appendChild(E("h2","", perfect ? "Fehlerfrei! 🎉" : "Geschafft!"));
+  d.appendChild(E("div","big", mmss(secs)));
+  d.appendChild(E("p","", PA.n+" Paare · "+PA.err+(PA.err===1 ? " Fehler" : " Fehler")+(rec ? " · neue Bestzeit! 🏆" : " · Bestzeit "+mmss(XP.pairBest[key]))));
+  if(got) d.appendChild(E("div","xpgain","⭐ +"+got+" Punkte"));
+  const nb = E("button","primary wide","Neue Runde"); nb.onclick = ()=>newPairs(); d.appendChild(nb);
+  sfx(perfect ? "level" : "badge"); avReact("jump"); if(perfect || rec) confetti(null, true);
+}
+
+/* ---------- Buchstaben ---------- */
+let LE = null;
+function letterTarget(c){
+  let h = parseFw(c.fw).head.toLowerCase();
+  if(lang==="en") h = h.replace(/^to\s+/,"").replace(/\b(sb|sth)\b\.?/g,"");
+  return h.replace(/[^\p{L}\s]/gu,"").replace(/\s+/g," ").trim();
+}
+function newLetters(){
+  const L = LANGS[lang];
+  $("leFb").innerHTML = ""; $("leFb").className = "fb"; show("leNext", false); show("leSkip", true); show("leHint", true);
+  const i = nextIdx("letters", c=>{ const n = letterTarget(c).replace(/ /g,"").length; return n>=2 && n<=16; });
+  if(i<0){ LE = null; $("leAsk").textContent = ""; $("leQ").textContent = "Keine passenden Vokabeln"; $("leSlots").innerHTML = ""; $("leTiles").innerHTML = ""; return; }
+  const c = cards[i], target = letterTarget(c), chars = [...target.replace(/ /g,"")];
+  let mix = shuffle(chars.slice()), tries = 0;
+  while(chars.length>2 && mix.join("")===chars.join("") && tries++<6) mix = shuffle(chars.slice());
+  LE = {i, c, target, chars, tiles:mix.map(ch=>({ch, used:false})), slots:chars.map(()=>null), locked:chars.map(()=>false), hint:0, done:false, bad:[]};
+  $("leAsk").textContent = "Bilde das Wort auf "+L.name;
+  $("leQ").textContent = c.de; $("leQ").className = "w de"+fit(c.de);
+  $("leLec").textContent = c.lec || ""; $("leNum").textContent = qLeft("letters")+" übrig";
+  anim(document.querySelector("#mLetters .qcard"), "in");
+  renderLetters(true);
+}
+function renderLetters(fresh){
+  const sl = $("leSlots"), tl = $("leTiles"); sl.innerHTML = ""; tl.innerHTML = "";
+  const words = LE.target.split(" "), maxw = Math.max(...words.map(w=>[...w].length));
+  sl.style.setProperty("--n", Math.min(maxw, 12));
+  let j = 0;
+  words.forEach(w=>{
+    const wd = E("div","word");
+    [...w].forEach(()=>{
+      const k = j++, t = LE.slots[k], b = E("button","slot"+(t!==null ? " fill" : "")+(LE.locked[k] ? " hint" : "")+(LE.bad.includes(k) ? " bad" : "")+(LE.done ? " win" : ""), t!==null ? LE.tiles[t].ch : "");
+      b.style.setProperty("--i", k);
+      b.disabled = LE.done || LE.locked[k] || t===null;
+      b.onclick = ()=>{ if(LE.done || LE.locked[k] || LE.slots[k]===null) return; LE.tiles[LE.slots[k]].used = false; LE.slots[k] = null; LE.bad = LE.bad.filter(x=>x!==k); sfx("tap"); renderLetters(); };
+      wd.appendChild(b);
+    });
+    sl.appendChild(wd);
+  });
+  LE.tiles.forEach((t, k)=>{
+    if(t.used) return;
+    const b = E("button","tile", t.ch); b.disabled = LE.done;
+    b.onclick = ()=>placeTile(k); tl.appendChild(b);
+  });
+  if(fresh) stagger(tl, true); else stagger(tl, false);
+}
+function placeTile(k){
+  if(!LE || LE.done) return;
+  const j = LE.slots.indexOf(null); if(j<0) return;
+  LE.slots[j] = k; LE.tiles[k].used = true; sfx("tap");
+  if(LE.slots.indexOf(null)<0) checkLetters(); else renderLetters();
+}
+function checkLetters(){
+  const built = LE.slots.map(t=>LE.tiles[t].ch);
+  LE.bad = built.map((ch,j)=>ch!==LE.chars[j] ? j : -1).filter(j=>j>=0);
+  if(!LE.bad.length){ finishLetters(true); return; }
+  renderLetters(); sfx("bad"); buzz([10,40,10]);
+  const fb = $("leFb"); fb.className = "fb no"; fb.innerHTML = ""; fb.appendChild(E("div","fbh")).appendChild(E("b","","Noch nicht ganz – tippe die roten Buchstaben an und ändere sie."));
+}
+function finishLetters(ok){
+  LE.done = true;
+  if(!ok){ LE.chars.forEach((ch,j)=>{ if(LE.slots[j]!==null) LE.tiles[LE.slots[j]].used = false; const k = LE.tiles.findIndex(t=>!t.used && t.ch===ch); LE.slots[j] = k; LE.tiles[k].used = true; }); LE.bad = []; }
+  renderLetters();
+  const c = LE.c, pts = ok ? (LE.hint ? 1 : 3) : 0, got = modeResult("letters", c, ok, pts);
+  const fb = $("leFb"); fb.innerHTML = ""; fb.className = "fb "+(ok ? "yes" : "no");
+  const hd = E("div","fbh"); hd.appendChild(E("b","", ok ? "Richtig! ✓" : "Das Wort war:")); if(got) hd.appendChild(E("span","fbp","+"+got+" P")); fb.appendChild(hd);
+  fb.appendChild(E("div","", c.fw+" = "+c.de));
+  if(ok){ sfx("ok"); avReact("jump"); setTimeout(()=>sparkle($("leSlots"), 8), 200); } else { sfx("bad"); }
+  if(LANGS[lang].tts && ttsOK) setTimeout(()=>speak(c.fw), 300);
+  show("leNext", true); show("leSkip", false); show("leHint", false); $("leNext").focus({preventScroll:true});
+}
+$("leHint").onclick = ()=>{
+  if(!LE || LE.done) return;
+  const j = LE.chars.findIndex((ch,x)=>LE.slots[x]===null || LE.tiles[LE.slots[x]].ch!==ch);
+  if(j<0) return;
+  if(LE.slots[j]!==null){ LE.tiles[LE.slots[j]].used = false; LE.slots[j] = null; }
+  let k = LE.tiles.findIndex(t=>!t.used && t.ch===LE.chars[j]);
+  if(k<0){ const x = LE.slots.findIndex((t,y)=>t!==null && !LE.locked[y] && LE.tiles[t].ch===LE.chars[j]); if(x>=0){ k = LE.slots[x]; LE.slots[x] = null; LE.tiles[k].used = false; } }
+  if(k<0) return;
+  LE.slots[j] = k; LE.tiles[k].used = true; LE.locked[j] = true; LE.hint++; LE.bad = LE.bad.filter(x=>x!==j); sfx("tap");
+  if(LE.slots.indexOf(null)<0) checkLetters(); else renderLetters();
+};
+$("leSkip").onclick = ()=>{ if(LE && !LE.done){ finishLetters(false); } };
+$("leNext").onclick = ()=>newLetters();
+
+/* ---------- Blitz ---------- */
+let BL = null, blTimer = null, blRunning = false;
+function blitzIntro(){
+  clearInterval(blTimer); blRunning = false;
+  show("blStart", true); show("blPlay", false); show("blEnd", false);
+  const best = objOr(XP.blitzBest)[lang] || 0;
+  const enough = new Set(cards.map(c=>c.de)).size>=4;
+  $("blGo").disabled = !enough;
+  $("blBest").textContent = !enough ? "Für die Blitzrunde brauchst du mindestens 4 Vokabeln." : best ? "Dein Rekord: "+best+" Punkte" : "Noch kein Rekord – leg los!";
+}
+$("blGo").onclick = ()=>{
+  BL = {score:0, streak:0, n:0, ok:0, t0:Date.now(), dur:60000, cur:null};
+  show("blStart", false); show("blEnd", false); show("blPlay", true); blRunning = true;
+  $("blScore").textContent = "0"; $("blCombo").textContent = "";
+  burst("Los! ⚡"); nextBlitz();
+  clearInterval(blTimer); blTimer = setInterval(tickBlitz, 100);
+};
+function nextBlitz(){
+  const c = cards[Math.floor(Math.random()*cards.length)];
+  let de = c.de;
+  if(Math.random()<.5){ const o = cards.filter(x=>x.de!==c.de); if(o.length) de = o[Math.floor(Math.random()*o.length)].de; }
+  BL.cur = {c, truth:de===c.de};
+  const h = parseFw(c.fw).head;
+  $("blF").textContent = h; $("blF").className = "w"+fit(h);
+  $("blD").textContent = de; $("blD").className = "w de"+fit(de);
+}
+function answerBlitz(yes){
+  if(!blRunning || !BL) return;
+  const ok = yes===BL.cur.truth; BL.n++;
+  if(ok){ BL.ok++; BL.streak++; BL.score += BL.streak>=5 ? 2 : 1; sfx("ok"); anim($("blCard"), "okf"); if(BL.streak%5===0) burst("🔥 "+BL.streak+" in Folge!"); }
+  else { BL.streak = 0; sfx("bad"); buzz([10,40,10]); anim($("blCard"), "badf"); }
+  countTo($("blScore"), BL.score, "", 250);
+  $("blCombo").textContent = BL.streak>=2 ? "🔥 "+BL.streak+(BL.streak>=5 ? " · ×2" : "") : "";
+  nextBlitz();
+}
+function tickBlitz(){
+  if(!BL) return;
+  const left = Math.max(0, BL.dur-(Date.now()-BL.t0));
+  $("blTime").textContent = Math.ceil(left/1000); $("blBar").style.width = (left/BL.dur*100)+"%";
+  if(left<=0) endBlitz();
+}
+function endBlitz(){
+  clearInterval(blTimer); blRunning = false;
+  XP.blitzBest = objOr(XP.blitzBest);
+  const old = XP.blitzBest[lang] || 0, rec = BL.score>old;
+  if(rec) XP.blitzBest[lang] = BL.score;
+  XP.blitzMax = Math.max(XP.blitzMax||0, BL.score);
+  const got = gameXP("blitz", BL.score); saveXP();
+  if(got) addXP(got); else checkBadges(true);
+  show("blPlay", false); const d = $("blEnd"); d.innerHTML = ""; show("blEnd", true);
+  d.appendChild(E("div","", "⚡")).style.fontSize = "2.4rem";
+  d.appendChild(E("h2","", rec ? "Neuer Rekord! 🏆" : "Zeit ist um!"));
+  const big = E("div","blbig","0"); big._v = 0; d.appendChild(big); countTo(big, BL.score, " P", 900);
+  d.appendChild(E("p","", BL.ok+" von "+BL.n+" richtig"+(old && !rec ? " · Rekord: "+old : "")));
+  if(got) d.appendChild(E("div","xpgain","⭐ +"+got+" Punkte"));
+  const bar = E("div","bar"), again = E("button","primary","Nochmal"); again.onclick = ()=>$("blGo").click();
+  const back = E("button","","Zurück"); back.onclick = ()=>blitzIntro();
+  bar.appendChild(again); bar.appendChild(back); d.appendChild(bar);
+  sfx(rec ? "level" : "badge"); avReact(rec ? "jump" : "tilt"); if(rec && BL.score>0) confetti(null, true);
+}
+$("blYes").onclick = ()=>answerBlitz(true);
+$("blNo").onclick = ()=>answerBlitz(false);
+document.addEventListener("keydown", e=>{
+  if($("learn").hidden || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName||"")) return;
+  if(LM==="blitz" && blRunning){ if(e.key==="ArrowRight"){ e.preventDefault(); answerBlitz(true); } else if(e.key==="ArrowLeft"){ e.preventDefault(); answerBlitz(false); } }
+  else if(LM==="letters" && LE && !LE.done){
+    if(e.key==="Backspace"){ e.preventDefault(); for(let j=LE.slots.length-1;j>=0;j--) if(LE.slots[j]!==null && !LE.locked[j]){ LE.tiles[LE.slots[j]].used = false; LE.slots[j] = null; LE.bad = LE.bad.filter(x=>x!==j); renderLetters(); break; } }
+    else if(e.key.length===1 && /\p{L}/u.test(e.key)){ const key = norm(e.key); const k = LE.tiles.findIndex(t=>!t.used && norm(t.ch)===key); if(k>=0){ e.preventDefault(); placeTile(k); } }
+  }
+  else if(LM==="speak" && e.key===" " && e.target===document.body){ e.preventDefault(); $("spMic").click(); }
+});
 
 /* ================= Start ================= */
 function migrate(){
