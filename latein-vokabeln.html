@@ -6,7 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d1014" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f3f4f6" media="(prefers-color-scheme: light)">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vokabeln">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital@0;1&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
@@ -328,6 +334,23 @@ details[open] summary::before{transform:rotate(90deg)}
 input[type=search]{width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink);font-size:1rem;-webkit-appearance:none;appearance:none}
 input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3px var(--soft)}
 #sres{margin:6px 0 10px}
+#ocrProg{margin:8px 0 0;height:8px}
+.rhead,.rrow{display:grid;grid-template-columns:1fr 1fr 34px;gap:6px;align-items:center}
+.rhead{font-size:.74rem;color:var(--mute);font-weight:600;margin:0 2px 5px}
+.rrow{margin-bottom:6px}
+.rrow input[type=text]{padding:10px 11px;font-size:.95rem;border-radius:11px;min-width:0}
+.rrow.miss .rde{border-color:var(--bad);background:var(--badbg)}
+.rrow .rdel{background:none;color:var(--mute);padding:6px 0;font-size:1rem}
+.rrow .rdel:hover{color:var(--bad)}
+.ropts{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.82rem;color:var(--mute);margin:0 0 10px}
+.ropts .seg button{padding:6px 12px;font-size:.82rem;white-space:nowrap}
+.rtools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.rtools button{background:none;border:1px solid var(--line);border-radius:99px;padding:7px 13px;font-size:.84rem;color:var(--mute)}
+.rtools button:hover{color:var(--ink)}
+.rstat{padding:10px 12px;border-radius:12px;background:var(--okbg);color:var(--ink);margin:10px 0 0}
+.rstat.err{background:var(--badbg)}
+.rstat:empty{display:none}
+#rtext{margin-top:0}
 
 /* ---------- Navigation ---------- */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px))}
@@ -428,6 +451,7 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
     <button id="known">✓ Gewusst <small>+2</small></button>
   </div>
   <div class="tools">
+    <button id="undo" hidden>↶ Rückgängig</button>
     <button id="dir">Latein → Deutsch</button>
     <button id="only">Nur unbekannte</button>
     <button id="shuf">Mischen</button>
@@ -574,20 +598,33 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
   <div class="panel">
     <h2 id="vhead" style="font-size:1.1rem">Neue Lektion</h2>
     <label class="fld">Name der Lektion
-      <input id="vname" type="text" maxlength="30" placeholder="z. B. Lektion 15" autocomplete="off">
+      <input id="vname" type="text" maxlength="30" placeholder="z. B. Lektion 15" autocomplete="off" list="vnames">
     </label>
+    <datalist id="vnames"></datalist>
     <div class="two">
       <button id="photoBtn" class="primary">📷 Foto einlesen</button>
       <button id="typeBtn">✎ Selbst eintippen</button>
     </div>
     <input type="file" id="photo" accept="image/*" multiple hidden>
-    <p class="small" id="ocrStatus"></p>
+    <p class="small" id="ocrStatus" aria-live="polite"></p>
+    <div class="prog" id="ocrProg" hidden><i id="ocrBar"></i></div>
     <div id="review" hidden>
-      <label class="fld" id="rlabel">Erkannter Text, bitte prüfen
-        <textarea id="rtext" spellcheck="false"></textarea>
-      </label>
-      <p class="small">Eine Vokabel pro Zeile, z. B. <i class="ex"></i></p>
-      <button id="rsave" class="primary wide" style="margin-top:8px">In Lektion speichern</button>
+      <div class="ph" style="margin:16px 2px 8px"><b id="rTitle">Deine Vokabeln</b><span id="rCount"></span></div>
+      <div class="ropts" id="rOpts" hidden>
+        <span>Die Bedeutung steht in</span>
+        <div class="seg" id="rCol"><button data-v="1">Spalte 2</button><button data-v="2">Spalte 3</button></div>
+      </div>
+      <div id="rrows"></div>
+      <textarea id="rtext" spellcheck="false" hidden></textarea>
+      <div class="rtools">
+        <button id="rAdd">+ Zeile</button>
+        <button id="rSwap">⇄ Seiten tauschen</button>
+        <button id="rMode">Als Text bearbeiten</button>
+      </div>
+      <p class="small" id="rHint"></p>
+      <button id="rsave" class="primary wide" style="margin-top:6px">In Lektion speichern</button>
+      <p class="small rstat" id="rStatus" aria-live="polite"></p>
+      <button class="ghost" id="rcancel">Verwerfen</button>
     </div>
   </div>
   <h2 class="lh" id="llh">Deine Lektionen</h2>
@@ -595,7 +632,11 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
   <div id="sres"></div>
   <div id="llist"></div>
   <div id="medit" class="panel" hidden>
-    <label class="fld" style="margin-top:0"><span>Ändern: <b id="mname"></b></span>
+    <h2 style="font-size:1.05rem">Lektion bearbeiten</h2>
+    <label class="fld">Name
+      <input id="mname" type="text" maxlength="30" autocomplete="off">
+    </label>
+    <label class="fld">Vokabeln
       <textarea id="mtext" spellcheck="false"></textarea>
     </label>
     <p class="small">Eine Vokabel pro Zeile: Fremdwort = Deutsch, z. B. <i class="ex"></i></p>
@@ -606,6 +647,11 @@ input[type=search]:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 3
     <p class="small" style="margin-top:0">Alles wird nur in diesem Browser gespeichert. Mit einem Backup nimmst du Lektionen, Punkte, Münzen und deinen Avatar auf ein anderes Gerät mit.</p>
     <div class="two"><button id="bkOut">💾 Backup speichern</button><button id="bkIn">📂 Backup laden</button></div>
     <input type="file" id="bkFile" accept="application/json,.json" hidden>
+  </div>
+  <div class="panel" id="appPanel">
+    <div class="ph"><b>📲 Als App aufs Handy</b></div>
+    <p class="small" style="margin-top:0" id="appTxt">Dann startet der Trainer mit eigenem Symbol wie eine App, klappt auch ohne Internet, und deine Daten bleiben sicherer gespeichert.</p>
+    <button class="primary" id="instBtn" hidden>App installieren</button>
   </div>
 </section>
 </main>
@@ -656,7 +702,7 @@ const LANGS = {
   la:{name:"Latein", ocr:"lat+deu", ex:"amor, amoris m. = die Liebe", ph:"z. B. Lektion 15", gender:true, tts:"",
       formLabel:"Formen & Geschlecht", formSub:"bis 20 Punkte", formsHint:"z. B. Genitiv",
       rules:"Bei „Formen & Geschlecht“ tippst du zusätzlich die weiteren Formen (z. B. Genitiv) und wählst das Geschlecht, wenn die Vokabel eins hat (je +5). Dafür müssen die Formen in deiner Liste stehen, z. B. amor, amoris m. = die Liebe."},
-  en:{name:"Englisch", ocr:"eng+deu", ex:"to go, went, gone = gehen", ph:"z. B. Unit 3", gender:false, tts:"en-GB",
+  en:{name:"Englisch", ocr:"deu+eng", ex:"to go, went, gone = gehen", ph:"z. B. Unit 3", gender:false, tts:"en-GB",
       formLabel:"Mit Formen", formSub:"unregelmäßige Verben, bis 15 P", formsHint:"z. B. went, gone",
       rules:"Bei „Mit Formen“ tippst du zusätzlich die weiteren Formen ein, z. B. bei unregelmäßigen Verben (+5). Dafür müssen sie in deiner Liste stehen, z. B. to go, went, gone = gehen. „to“, „the“, „a“ und „sb./sth.“ musst du nicht mittippen."}
 };
@@ -977,7 +1023,9 @@ function renderTop(){
 }
 
 /* ================= Lernen ================= */
+let undo = null;
 function build(doShuffle){
+  undo = null; show("undo", false);
   queue = cards.map((c,i)=>i).filter(i=>!onlyUnknown || !known.has(cards[i].fw));
   if(doShuffle) shuffle(queue);
   setFlip(false,false); render();
@@ -1029,11 +1077,12 @@ function updateStats(done){
 function answer(ok){
   if(!queue.length) return;
   const i = queue.shift(), c = cards[i];
+  undo = {i, ok, wasKnown:known.has(c.fw), tr:trouble[lang][c.fw]||0};
   if(ok) known.add(c.fw); else { known.delete(c.fw); queue.push(i); }
   try{ navigator.vibrate && navigator.vibrate(ok ? 10 : [10,40,10]); }catch(e){}
   saveKnown(); markTrouble(c, ok);
   XP.cards++; const p = learnPts(c, ok); saveXP();
-  setFlip(false,false); render(); renderLessonSel();
+  setFlip(false,false); render(); renderLessonSel(); show("undo", true);
   if(p) addXP(p); else checkBadges(true);
 }
 let busy = false, sup = false;
@@ -1106,11 +1155,24 @@ document.addEventListener("keydown", e=>{
   if(!$("learn").hidden){
     if(e.key==="ArrowRight") fly(true);
     else if(e.key==="ArrowLeft") fly(false);
+    else if(e.key==="Backspace" || (e.key==="z" && (e.ctrlKey || e.metaKey))){ e.preventDefault(); doUndo(); }
     else if((e.key===" " || e.key==="Enter") && (e.target===document.body || e.target===$("card"))){ e.preventDefault(); flip(); }
   } else if(!$("tplay").hidden && T && !T.done && T.qt==="mc" && /^[1-4]$/.test(e.key)){
     const b = $("topts").children[+e.key-1]; if(b) b.click();
   }
 });
+function doUndo(){
+  if(!undo || busy) return;
+  const {i, ok, wasKnown, tr} = undo, c = cards[i]; undo = null; show("undo", false);
+  if(!c) return;
+  if(!ok){ const j = queue.lastIndexOf(i); if(j>=0) queue.splice(j,1); }
+  queue.unshift(i);
+  if(wasKnown) known.add(c.fw); else known.delete(c.fw);
+  if(tr) trouble[lang][c.fw] = tr; else delete trouble[lang][c.fw];
+  saveKnown(); saveTrouble();
+  setFlip(false,false); render(); renderLessonSel();
+}
+$("undo").onclick = doUndo;
 $("known").onclick = ()=>fly(true);
 $("again").onclick = ()=>fly(false);
 $("shuf").onclick = ()=>build(true);
@@ -1146,10 +1208,11 @@ function setLang(l, initial){
   lang = l; store("vok_lang", l); known = knownSets[l];
   document.documentElement.dataset.lang = l;
   document.querySelectorAll("#langbar button").forEach(b=>{ const on = b.dataset.lang===l; b.classList.toggle("on",on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
-  editRef = null; show("medit",false); show("review",false); $("rtext").value = "";
+  editRef = null; show("medit",false);
   troubleMode = false; $("vsearch").value = ""; $("sres").innerHTML = "";
+  RV = newRV(); show("review",false); $("rtext").value = ""; $("rStatus").textContent = "";
   try{ window.speechSynthesis && speechSynthesis.cancel(); }catch(e){}
-  applyLabels(); renderLessonSel(); rebuildCards();
+  applyLabels(); renderLessonSel(); rebuildCards(); restoreDraft();
   if(!initial) tab(curTab);
 }
 document.querySelectorAll("#langbar button").forEach(b=>b.onclick = ()=>{ if(b.dataset.lang!==lang) setLang(b.dataset.lang); });
@@ -1164,7 +1227,7 @@ function applyLabels(){
   $("vhead").textContent = "Neue "+L.name+"-Lektion";
   $("llh").textContent = "Deine "+L.name+"-Lektionen";
   document.querySelectorAll(".ex").forEach(x=>x.textContent = L.ex);
-  $("ocrStatus").textContent = "Fotografiere die Vokabelseite einer Lektion oder tippe die Vokabeln selbst ein. Fürs Foto brauchst du Internet, der Text wird auf deinem Gerät ausgelesen.";
+  $("ocrStatus").textContent = "Fotografiere die Vokabelliste einer Lektion (gerade von oben, hell und scharf) oder tippe die Vokabeln selbst ein. Fürs Foto brauchst du Internet, der Text wird auf deinem Gerät ausgelesen.";
 }
 
 /* ================= Test ================= */
@@ -1556,7 +1619,16 @@ function finish(){
     r.appendChild(ul);
   }
   const bar = E("div","bar");
-  if(T.wrong.length){ const w = T.wrong.slice(), b = E("button","primary","Fehler nochmal testen"); b.onclick = ()=>startTest(w); bar.appendChild(b); }
+  if(T.wrong.length){
+    const w = T.wrong.map(i=>cards[i]), b = E("button","primary","Fehler nochmal testen");
+    b.onclick = ()=>{
+      // Lektionsauswahl kann sich inzwischen geändert haben: Karten über den Inhalt wiederfinden
+      const idx = w.map(c=>cards.findIndex(x=>x.fw===c.fw && x.de===c.de)).filter(i=>i>=0);
+      if(!idx.length){ alert("Diese Vokabeln sind in der aktuellen Auswahl nicht mehr dabei."); return; }
+      startTest(idx);
+    };
+    bar.appendChild(b);
+  }
   const nb = E("button", T.wrong.length ? "" : "primary", "Neuer Test"); nb.onclick = ()=>tab("t"); bar.appendChild(nb);
   const vb = E("button","","Verlauf ansehen"); vb.onclick = ()=>{ hsCur = "h"; tab("h"); }; bar.appendChild(vb);
   r.appendChild(bar);
@@ -1566,7 +1638,8 @@ function finish(){
 
 /* ================= Lektionen ================= */
 const langLessons = ()=>lessons.filter(l=>l.lang===lang);
-function getSel(){ const a = load("vok_sel_"+lang, []), ll = langLessons(); return arr(a).filter(n=>ll.some(l=>l.name===n)); }
+const getSelRaw = ()=>arr(load("vok_sel_"+lang, []));
+function getSel(){ const ll = langLessons(); return getSelRaw().filter(n=>ll.some(l=>l.name===n)); }
 function setSel(a){ save("vok_sel_"+lang, a); }
 function curName(){ if(troubleMode) return "Fehlerkiste"; const a = getSel(); return a.length && a.length<langLessons().length ? a.join(" + ") : "Alle Lektionen"; }
 function saveLessons(){
@@ -1594,7 +1667,8 @@ function rebuildCards(){
 }
 function renderLessons(){
   const box = $("llist"); box.innerHTML = "";
-  const ll = langLessons();
+  const ll = langLessons(), dl = $("vnames"); dl.innerHTML = "";
+  ll.forEach(l=>{ const o = E("option"); o.value = l.name; dl.appendChild(o); });
   if(!ll.length){ box.appendChild(E("p","small","Noch keine "+LANGS[lang].name+"-Lektion. Leg oben eine an.")); return; }
   const hist = getHist();
   ll.forEach(l=>{
@@ -1611,69 +1685,302 @@ function renderLessons(){
     row.appendChild(t); row.appendChild(acts); box.appendChild(row);
   });
 }
-function openEdit(l){ editRef = l; $("mname").textContent = l.name; $("mtext").value = l.text; show("medit",true); $("medit").scrollIntoView({behavior: RM ? "auto" : "smooth", block:"center"}); $("mtext").focus({preventScroll:true}); }
-$("msave").onclick = ()=>{ if(!editRef) return; editRef.text = $("mtext").value.trim(); editRef = null; show("medit",false); saveLessons(); };
+function openEdit(l){ editRef = l; $("mname").value = l.name; $("mtext").value = l.text; show("medit",true); $("medit").scrollIntoView({behavior: RM ? "auto" : "smooth", block:"center"}); $("mtext").focus({preventScroll:true}); }
+$("msave").onclick = ()=>{
+  if(!editRef) return;
+  const l = editRef, old = l.name, nn = $("mname").value.trim().slice(0,30) || old;
+  if(nn!==old){
+    if(lessons.some(x=>x!==l && x.lang===l.lang && x.name===nn)){ alert("Eine Lektion „"+nn+"“ gibt es schon."); $("mname").focus(); return; }
+    l.name = nn;
+    setSel(getSelRaw().map(n=>n===old ? nn : n));
+    const fix = k=>save(k, arr(load(k, [])).map(e=>(e.lang||"la")===l.lang && e.l===old ? {...e, l:nn} : e));
+    fix("vok_hs"); fix("vok_hist");
+  }
+  l.text = $("mtext").value.trim(); editRef = null; show("medit",false); saveLessons();
+};
 $("mcancel").onclick = ()=>{ editRef = null; show("medit",false); };
+
+/* ================= Vokabeln einlesen (Foto & Eintippen) ================= */
+const OCR_SRC = "https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js";
+const OCR_TIP = "Tipp: Fotografiere nur die Vokabelliste – gerade von oben, hell und scharf.";
+const newRV = ()=>({mode:"rows", rows:[], base:[], raw:null, ncols:0, deCol:1, swap:false});
+let RV = newRV(), ocrBusy = false;
+const median = a=>{ if(!a.length) return 0; const q = [...a].sort((x,y)=>x-y), m = q.length>>1; return q.length%2 ? q[m] : (q[m-1]+q[m])/2; };
 
 function loadScript(src){
   return new Promise((res,rej)=>{
     if(window.Tesseract) return res();
-    const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = ()=>rej(new Error("Skript konnte nicht geladen werden"));
+    const s = document.createElement("script"); s.src = src; s.onload = res;
+    s.onerror = ()=>{ s.remove(); rej(new Error("Die Texterkennung konnte nicht geladen werden. Bist du mit dem Internet verbunden?")); };
     document.head.appendChild(s);
   });
 }
-function tidy(text){
-  return text.split("\n").map(l=>l.replace(/[|_]+/g," ").trim()).filter(l=>l.length>2).map(l=>{
-    if(l.includes("=")) return l;
-    const parts = l.split(/\t|\s[–—-]\s|\s{2,}/).map(p=>p.trim()).filter(Boolean);
-    return parts.length>=2 ? parts[0]+" = "+parts.slice(1).join(" ") : l+" = ???";
-  }).join("\n");
+// Foto auf eine gute Größe bringen: riesige Handyfotos verkleinern (schneller, weniger Speicher), winzige vergrößern
+function prepImage(file){
+  return new Promise((res, rej)=>{
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = ()=>{
+      try{
+        const w0 = img.naturalWidth, h0 = img.naturalHeight, long = Math.max(w0, h0);
+        const sc = long>2600 ? 2600/long : long<1200 ? 1200/long : 1;
+        const c = document.createElement("canvas"); c.width = Math.max(1, Math.round(w0*sc)); c.height = Math.max(1, Math.round(h0*sc));
+        const g = c.getContext("2d", {willReadFrequently:true}); g.imageSmoothingQuality = "high";
+        g.fillStyle = "#fff"; g.fillRect(0, 0, c.width, c.height);
+        g.drawImage(img, 0, 0, c.width, c.height);
+        // Graustufen + Kontrast strecken (hellstes Papier → weiß, dunkelste Schrift → schwarz)
+        const id = g.getImageData(0, 0, c.width, c.height), d = id.data, hist = new Uint32Array(256), n = c.width*c.height;
+        for(let i=0;i<d.length;i+=4){ const y = (d[i]*299+d[i+1]*587+d[i+2]*114)/1000|0; d[i] = y; hist[y]++; }
+        let lo = 0, hi = 255, acc = 0;
+        while(lo<254 && (acc += hist[lo]) < n*.01) lo++;
+        acc = 0; while(hi>lo+1 && (acc += hist[hi]) < n*.05) hi--;
+        const span = Math.max(60, hi-lo);
+        for(let i=0;i<d.length;i+=4){ const v = Math.max(0, Math.min(255, (d[i]-lo)*255/span)); d[i] = d[i+1] = d[i+2] = v; }
+        g.putImageData(id, 0, 0);
+        URL.revokeObjectURL(url); res(c);
+      }catch(e){ URL.revokeObjectURL(url); rej(e); }
+    };
+    img.onerror = ()=>{ URL.revokeObjectURL(url); rej(new Error("Das Bild konnte nicht geöffnet werden. Versuche ein JPG- oder PNG-Foto.")); };
+    img.src = url;
+  });
 }
-function needName(){
-  if($("vname").value.trim()) return false;
-  $("ocrStatus").textContent = "Gib zuerst den Namen der Lektion an, z. B. „"+LANGS[lang].ph.replace("z. B. ","")+"“.";
-  $("vname").focus(); return true;
+// Wörter mit Position → Zeilen → Spalten (Fremdsprache | Deutsch | Notizen)
+function extractRows(data){
+  const okWord = w=>{
+    if(!w || !w.bbox || !w.text) return false;
+    const n = (w.text.match(/[\p{L}\d]/gu)||[]).length, c = w.confidence;
+    return n>0 && !(n<=2 && c<80) && !(n<=4 && c<40);
+  };
+  const lines = arr(data.lines).map(l=>arr(l.words).filter(okWord).map(w=>({t:w.text.trim(), x0:w.bbox.x0, x1:w.bbox.x1, y0:w.bbox.y0, y1:w.bbox.y1}))).filter(ws=>ws.length);
+  const all = lines.flat(); if(!all.length) return [];
+  const H = median(all.map(w=>w.y1-w.y0)) || 20;
+  const sl = [];
+  lines.forEach(ws=>{ if(ws.length<2) return; const a = ws[0], b = ws[ws.length-1], dx = (b.x0+b.x1-a.x0-a.x1)/2; if(dx>H*4) sl.push((b.y0+b.y1-a.y0-a.y1)/2/dx); });
+  const slope = median(sl);
+  all.forEach(w=>{ w.yy = (w.y0+w.y1)/2 - slope*(w.x0+w.x1)/2; });
+  all.sort((a,b)=>a.yy-b.yy);
+  const rows = []; let cur = null;
+  all.forEach(w=>{
+    if(cur && w.yy-cur.y < H*.6){ cur.ws.push(w); cur.y += (w.yy-cur.y)/cur.ws.length; }
+    else { cur = {y:w.yy, ws:[w]}; rows.push(cur); }
+  });
+  rows.forEach(r=>r.ws.sort((a,b)=>a.x0-b.x0));
+  const cand = [];
+  rows.forEach(r=>{ for(let i=1;i<r.ws.length;i++) if(r.ws[i].x0-r.ws[i-1].x1 > H*1.2) cand.push(r.ws[i].x0); });
+  cand.sort((a,b)=>a-b);
+  const cl = [];
+  cand.forEach(x=>{ const c = cl[cl.length-1]; if(c && x-c.max <= H*1.5){ c.n++; c.sum += x; c.max = x; } else cl.push({n:1, sum:x, max:x}); });
+  const need = Math.max(2, Math.round(rows.length*.15));
+  const starts = cl.filter(c=>c.n>=need).map(c=>c.sum/c.n).sort((a,b)=>a-b).slice(0,3);
+  return rows.map(r=>{
+    const cols = [];
+    r.ws.forEach(w=>{ let k = 0; starts.forEach((st,i)=>{ if(w.x0 >= st-H) k = i+1; }); (cols[k] = cols[k] || []).push(w.t); });
+    const out = []; for(let k=0;k<=starts.length;k++) out.push(cols[k] ? cols[k].join(" ") : "");
+    return {cols: starts.length ? out : [out[0]], text: r.ws.map(w=>w.t).join(" ")};
+  });
 }
-$("photoBtn").onclick = ()=>{ if(!needName()) $("photo").click(); };
-$("typeBtn").onclick = ()=>{
-  if(needName()) return;
-  $("rlabel").firstChild.textContent = "Deine Vokabeln";
-  $("rtext").placeholder = LANGS[lang].ex+"\n…";
-  show("review",true); $("rtext").focus();
-  $("ocrStatus").textContent = "Tippe eine Vokabel pro Zeile ein: Fremdwort = Deutsch.";
-};
-$("photo").onchange = async e=>{
-  const files = [...e.target.files]; if(!files.length) return;
-  const st = $("ocrStatus"); let all = "";
-  try{
-    st.textContent = "Lade Texterkennung …";
-    await loadScript("https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js");
-    for(let k=0;k<files.length;k++){
-      const r = await Tesseract.recognize(files[k], LANGS[lang].ocr, {logger:m=>{ if(m.status==="recognizing text") st.textContent = "Lese Foto "+(k+1)+" von "+files.length+" … "+Math.round(m.progress*100)+" %"; }});
-      all += (all ? "\n" : "")+tidy(r.data.text);
-    }
-    $("rlabel").firstChild.textContent = "Erkannter Text, bitte prüfen";
-    const cur = $("rtext").value.trim();
-    $("rtext").value = (cur ? cur+"\n" : "")+all; show("review",true);
-    st.textContent = "Fertig. Prüfe den Text, korrigiere Fehler und ersetze „???“.";
-  }catch(err){
-    st.textContent = "Das Foto konnte nicht gelesen werden ("+err.message+"). Prüfe deine Internetverbindung.";
+const HEAD_RE = /^(lektion|kapitel|unit|lesson|vocabulary|vokabular|wortschatz|lernwortschatz|grundwortschatz|vokabeln|seite|page|übung|exercise)\b/i;
+const cleanPart = s=>String(s||"").replace(/[|_«»"„“”•·©®]+/g," ").replace(/\s+/g," ").replace(/^[\s—–\-.,;:]+/,"").replace(/[\s—–\-,;:]+$/,"").trim();
+function cleanFw(s){
+  s = cleanPart(s);
+  if(lang==="la"){
+    s = s.normalize("NFD").replace(/([aeiouyAEIOUY])[\u0300-\u036f]+/g, "$1\u0304").normalize("NFC"); // Längenstriche werden oft als ä, ó, à … gelesen
+    s = s.replace(/(^|[\s,])[I1l|](?=$|[\s,.])/g, "$1i");          // "servus, I m." → "servus, i m."
   }
-  e.target.value = "";
+  return s;
+}
+function splitLine(t){
+  const m = t.split(/\s*(?:=|\t|\s[–—-]\s|\s:\s|\s{2,})\s*/).filter(Boolean);
+  if(m.length>=2) return [m[0], m.slice(1).join(" ")];
+  if(lang==="la"){ const g = t.match(/^(.+?\s[mfn]\.)\s+(.+)$/); if(g) return [g[1], g[2]]; }
+  return [t, ""];
+}
+const deScore = s=>(s.match(/\b(der|die|das|den|dem|des|ein|eine|einen|und|oder|sich|etw|jdn|jdm|nicht|zu|mit|von|auf|für|im|ist|sein|werden)\b/gi)||[]).length + (s.match(/[äöüß]/g)||[]).length*.5;
+function guessDeCol(raw, n){
+  if(n<3) return 1;
+  const sc = k=>raw.reduce((a,r)=>a+deScore(r.cols[k]||""), 0);
+  return sc(2) > sc(1)*1.2 ? 2 : 1;
+}
+function buildEntries(raw, deCol, swap){
+  const out = [];
+  arr(raw).forEach(r=>{
+    let fw, de;
+    if(r.cols.length>1){ fw = r.cols[0]; de = r.cols[deCol] || ""; }
+    else [fw, de] = splitLine(r.text);
+    fw = cleanPart(fw); de = cleanPart(de);
+    const all = (fw+" "+de).trim();
+    if(!/\p{L}{2}/u.test(all) || HEAD_RE.test(all)) return;
+    if(!fw && de){ const p = out[out.length-1]; if(p) p.de = p.de ? p.de+", "+de : de; return; } // Bedeutung geht in der nächsten Zeile weiter
+    if(fw) out.push({fw, de});
+  });
+  out.forEach(e=>{ if(swap){ const t = e.fw; e.fw = e.de; e.de = t; } e.fw = cleanFw(e.fw); e.de = cleanPart(e.de); });
+  return out.filter(e=>e.fw || e.de);
+}
+async function runOCR(files){
+  if(ocrBusy) return;
+  const st = $("ocrStatus"), L = LANGS[lang];
+  ocrBusy = true; $("photoBtn").disabled = true;
+  show("ocrProg", true); $("ocrBar").style.width = "2%";
+  let worker = null, cur = 0;
+  try{
+    st.textContent = "Lade Texterkennung … (beim ersten Mal dauert das etwas)";
+    await loadScript(OCR_SRC);
+    worker = await Tesseract.createWorker(L.ocr, 1, {logger:m=>{
+      if(m.status==="recognizing text"){
+        $("ocrBar").style.width = Math.max(2, (cur+m.progress)/files.length*100)+"%";
+        st.textContent = "Lese Foto "+(cur+1)+" von "+files.length+" … "+Math.round(m.progress*100)+" %";
+      } else if(/load/.test(m.status||"") && !cur) st.textContent = "Lade Sprachdaten für "+L.name+" …";
+    }});
+    const raw = [];
+    for(cur=0; cur<files.length; cur++){
+      st.textContent = "Bereite Foto "+(cur+1)+" von "+files.length+" vor …";
+      const img = await prepImage(files[cur]);
+      const r = await worker.recognize(img, {rotateAuto:true});
+      raw.push(...extractRows(r.data));
+    }
+    syncFromText();
+    const ncols = Math.max(1, ...raw.map(r=>r.cols.length));
+    RV.mode = "rows"; RV.base = RV.rows.slice(); RV.raw = raw; RV.ncols = ncols; RV.swap = false;
+    RV.deCol = guessDeCol(raw, ncols);
+    RV.rows = RV.base.concat(buildEntries(raw, RV.deCol, false));
+    const neu = RV.rows.length-RV.base.length;
+    if(!neu){ st.textContent = "Auf dem Foto wurden keine Vokabeln gefunden. "+OCR_TIP; if(!RV.rows.length) RV.raw = null; return; }
+    const miss = RV.rows.slice(RV.base.length).filter(r=>!isComplete(r)).length;
+    $("rStatus").textContent = "";
+    renderReview(); saveDraft();
+    st.textContent = "✓ "+neu+(neu===1 ? " Vokabel" : " Vokabeln")+" erkannt"+(miss ? ", bei "+miss+" fehlt noch die Bedeutung (rot)" : "")+". Prüfe kurz alles und tippe dann auf „In Lektion speichern“.";
+    $("review").scrollIntoView({block:"start", behavior: RM ? "auto" : "smooth"});
+  }catch(err){
+    st.textContent = "Das Foto konnte nicht gelesen werden: "+((err && err.message) || err)+" "+OCR_TIP;
+  }finally{
+    if(worker) worker.terminate().catch(()=>{});
+    ocrBusy = false; $("photoBtn").disabled = false; show("ocrProg", false);
+  }
+}
+
+/* ---------- Prüfliste ---------- */
+const isComplete = r=>!!(r.fw.trim() && r.de.trim() && r.de.trim()!=="???");
+const shareHead = new RegExp("^[^=]+\\((" + Object.values(LANGS).map(x=>x.name).join("|") + ")\\)$");
+function textToRows(t){
+  return String(t).split("\n").map(l=>l.trim()).filter(l=>l && !shareHead.test(l)).map(l=>{
+    const i = l.indexOf("=");
+    return i>=0 ? {fw:l.slice(0,i).trim(), de:l.slice(i+1).trim().replace(/^\?+$/,"")} : {fw:l, de:""};
+  });
+}
+const rowsToText = rows=>rows.map(r=>r.fw+" = "+r.de).join("\n");
+function syncFromText(){ if(RV.mode==="text"){ RV.rows = textToRows($("rtext").value); RV.raw = null; RV.base = []; } }
+function currentRows(){ return RV.mode==="text" ? textToRows($("rtext").value) : RV.rows; }
+function updateCount(){
+  const rows = currentRows().filter(r=>r.fw.trim() || r.de.trim()), ok = rows.filter(isComplete).length, miss = rows.length-ok;
+  $("rCount").textContent = ok+" fertig"+(miss ? " · "+miss+" unvollständig" : "");
+}
+function rowEl(r){
+  const L = LANGS[lang], d = E("div","rrow");
+  const a = E("input","rfw"), b = E("input","rde"), x = E("button","rdel","✕");
+  [a,b].forEach(i=>{ i.type = "text"; i.autocomplete = "off"; i.spellcheck = false; i.setAttribute("autocapitalize","off"); });
+  a.value = r.fw; b.value = r.de; a.placeholder = L.name; b.placeholder = "Bedeutung fehlt";
+  a.setAttribute("aria-label", L.name); b.setAttribute("aria-label","Deutsch"); x.setAttribute("aria-label","Zeile löschen");
+  const upd = ()=>{ d.classList.toggle("miss", !!r.fw.trim() && !r.de.trim()); updateCount(); saveDraft(); };
+  a.oninput = ()=>{ r.fw = a.value; upd(); };
+  b.oninput = ()=>{ r.de = b.value; upd(); };
+  x.onclick = ()=>{ const i = RV.rows.indexOf(r); if(i>=0) RV.rows.splice(i,1); const j = RV.base.indexOf(r); if(j>=0) RV.base.splice(j,1); d.remove(); updateCount(); saveDraft(); };
+  d.appendChild(a); d.appendChild(b); d.appendChild(x);
+  d.classList.toggle("miss", !!r.fw.trim() && !r.de.trim());
+  return d;
+}
+function renderReview(){
+  const L = LANGS[lang], text = RV.mode==="text";
+  show("review", true);
+  show("rrows", !text); $("rtext").hidden = !text;
+  $("rMode").textContent = text ? "Als Liste bearbeiten" : "Als Text bearbeiten";
+  show("rAdd", !text);
+  show("rOpts", !text && !!RV.raw && RV.ncols>=3);
+  $("rCol").querySelectorAll("button").forEach(b=>b.classList.toggle("on", +b.dataset.v===RV.deCol));
+  $("rHint").textContent = text ? "Eine Vokabel pro Zeile, z. B. "+L.ex+". Du kannst hier auch eine geteilte Lektion einfügen."
+    : "Rot heißt: Die Bedeutung fehlt noch. Mit ✕ löschst du Zeilen, die nicht dazugehören. Steht links Deutsch, tippe auf „Seiten tauschen“.";
+  if(!text){
+    const box = $("rrows"); box.innerHTML = "";
+    const hd = E("div","rhead"); hd.appendChild(E("span","",L.name)); hd.appendChild(E("span","","Deutsch")); hd.appendChild(E("span")); box.appendChild(hd);
+    RV.rows.forEach(r=>box.appendChild(rowEl(r)));
+  }
+  updateCount();
+}
+function rstat(msg, err){ const s = $("rStatus"); s.textContent = msg; s.classList.toggle("err", !!err); s.scrollIntoView({block:"nearest", behavior: RM ? "auto" : "smooth"}); }
+function saveDraft(){
+  const has = RV.mode==="text" ? !!$("rtext").value.trim() : RV.rows.length>0;
+  save("vok_draft", has ? {lang, name:$("vname").value, text:RV.mode==="text" ? $("rtext").value : "", rv:RV} : null);
+}
+function restoreDraft(){
+  const d = load("vok_draft", null);
+  if(!d || d.lang!==lang || !d.rv) return;
+  const ok = r=>r && typeof r.fw==="string" && typeof r.de==="string";
+  RV = Object.assign(newRV(), d.rv); RV.rows = arr(RV.rows).filter(ok); RV.base = arr(RV.base).filter(ok);
+  if(RV.raw && !Array.isArray(RV.raw)) RV.raw = null;
+  if(d.name && !$("vname").value) $("vname").value = d.name;
+  if(RV.mode==="text") $("rtext").value = d.text || "";
+  if(RV.rows.length || (RV.mode==="text" && $("rtext").value.trim())){
+    renderReview();
+    $("ocrStatus").textContent = "Dein angefangener Import ist noch da. Prüfe ihn und tippe auf „In Lektion speichern“.";
+  }
+}
+function closeReview(){ RV = newRV(); show("review", false); $("rtext").value = ""; $("rStatus").textContent = ""; save("vok_draft", null); }
+$("photoBtn").onclick = ()=>{ if(!ocrBusy) $("photo").click(); };
+$("photo").onchange = e=>{ const files = [...e.target.files]; e.target.value = ""; if(files.length) runOCR(files); };
+$("typeBtn").onclick = ()=>{
+  syncFromText();
+  RV.mode = "text"; RV.raw = null; RV.base = [];
+  $("rtext").value = rowsToText(RV.rows.filter(r=>r.fw.trim() || r.de.trim()));
+  $("rtext").placeholder = LANGS[lang].ex+"\n…";
+  renderReview(); $("rtext").focus();
+  $("ocrStatus").textContent = "Tippe eine Vokabel pro Zeile ein: "+LANGS[lang].name+" = Deutsch.";
+};
+$("rtext").oninput = ()=>{ updateCount(); saveDraft(); };
+$("vname").oninput = ()=>{ if(!$("review").hidden) saveDraft(); };
+$("rMode").onclick = ()=>{
+  if(RV.mode==="text"){ syncFromText(); RV.mode = "rows"; }
+  else { $("rtext").value = rowsToText(RV.rows); RV.mode = "text"; RV.raw = null; RV.base = []; }
+  renderReview(); saveDraft();
+};
+$("rAdd").onclick = ()=>{ const r = {fw:"", de:""}; RV.rows.push(r); const el = rowEl(r); $("rrows").appendChild(el); el.querySelector("input").focus(); updateCount(); };
+$("rCol").querySelectorAll("button").forEach(b=>b.onclick = ()=>{
+  if(!RV.raw) return;
+  RV.deCol = +b.dataset.v; RV.rows = RV.base.concat(buildEntries(RV.raw, RV.deCol, RV.swap));
+  renderReview(); saveDraft();
+});
+$("rSwap").onclick = ()=>{
+  const sw = r=>{ const t = r.fw; r.fw = r.de; r.de = t; };
+  if(RV.mode==="text"){ syncFromText(); RV.rows.forEach(sw); $("rtext").value = rowsToText(RV.rows); }
+  else if(RV.raw){ RV.swap = !RV.swap; RV.base.forEach(sw); RV.rows = RV.base.concat(buildEntries(RV.raw, RV.deCol, RV.swap)); }
+  else RV.rows.forEach(sw);
+  renderReview(); saveDraft();
+};
+$("rcancel").onclick = ()=>{
+  const has = currentRows().some(r=>r.fw.trim() || r.de.trim());
+  if(has && !confirm("Die Vokabeln in der Liste verwerfen?")) return;
+  closeReview(); $("ocrStatus").textContent = "";
 };
 $("rsave").onclick = ()=>{
-  const name = $("vname").value.trim().slice(0,30), text = $("rtext").value.trim();
-  if(!name){ needName(); return; }
-  if(!text){ $("ocrStatus").textContent = "Es sind noch keine Vokabeln eingetragen."; $("rtext").focus(); return; }
-  if(text.includes("???")){ $("ocrStatus").textContent = "Ersetze zuerst alle „???“ durch die richtige Bedeutung."; return; }
-  const n = parse(text).length;
-  if(!n){ $("ocrStatus").textContent = "Keine Vokabel erkannt. Schreibe pro Zeile: Fremdwort = Deutsch."; return; }
+  syncFromText();
+  const name = $("vname").value.trim().slice(0,30);
+  const rows = RV.rows.filter(r=>r.fw.trim() || r.de.trim()), good = rows.filter(isComplete), bad = rows.filter(r=>!isComplete(r));
+  if(!good.length){ rstat(bad.length ? "Bei allen Zeilen fehlt noch die Bedeutung. Ergänze sie in der rechten Spalte." : "Es sind noch keine Vokabeln eingetragen.", true); return; }
+  if(!name){ rstat("Gib der Lektion oben noch einen Namen, z. B. „"+LANGS[lang].ph.replace("z. B. ","")+"“.", true); $("vname").focus(); return; }
+  const fix = t=>t.trim().replace(/\s*=\s*/g," – ").replace(/\s+/g," ");
+  const text = good.map(r=>fix(r.fw)+" = "+fix(r.de)).join("\n");
   const ex = lessons.find(l=>l.name===name && l.lang===lang);
   if(ex) ex.text = (ex.text.trim()+"\n"+text).trim(); else lessons.push({name, text, lang});
   const cs = getSel(); if(cs.length && !cs.includes(name)){ cs.push(name); setSel(cs); }
-  saveLessons(); $("vname").value = "";
-  show("review",false); $("rtext").value = "";
-  $("ocrStatus").textContent = n+(n===1 ? " Vokabel" : " Vokabeln")+" in „"+name+"“ gespeichert. Du kannst jetzt lernen oder testen.";
+  saveLessons();
+  try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){}
+  const n = good.length, msg = n+(n===1 ? " Vokabel" : " Vokabeln")+" in „"+name+"“ gespeichert";
+  toast("✅", msg, "Du kannst jetzt lernen oder testen.");
+  if(bad.length){
+    RV.rows = bad; RV.base = []; RV.raw = null; RV.mode = "rows";
+    renderReview(); saveDraft();
+    rstat("✓ "+msg+". "+bad.length+(bad.length===1 ? " Zeile ist" : " Zeilen sind")+" noch ohne Bedeutung – ergänze sie und speichere nochmal, oder lösche sie mit ✕.", false);
+  } else {
+    closeReview(); $("vname").value = "";
+    $("ocrStatus").textContent = "✓ "+msg+". Du kannst jetzt lernen oder testen.";
+  }
 };
 
 /* ================= Fehlerkiste ================= */
@@ -1881,7 +2188,19 @@ function init(){
   renderTop();
   tab("l");
   if(coinWelcome>0) setTimeout(()=>toast("💰","Neu: Münzen & Shop!","Du startest mit "+fmt(coinWelcome)+" Münzen. Gestalte deinen Avatar im Shop."), 700);
+  setupApp();
 }
+let installEv = null;
+function setupApp(){
+  const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone;
+  if(standalone){ show("appPanel", false); try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){} }
+  else if(/iphone|ipad|ipod/i.test(navigator.userAgent)) $("appTxt").textContent += " Auf dem iPhone: In Safari unten auf Teilen tippen und dann „Zum Home-Bildschirm“.";
+  else $("appTxt").textContent += " Auf Android: Im Chrome-Menü (⋮) „App installieren“ wählen – oder den Knopf hier, sobald er erscheint.";
+  if("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost")) navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+window.addEventListener("beforeinstallprompt", e=>{ e.preventDefault(); installEv = e; show("instBtn", true); });
+window.addEventListener("appinstalled", ()=>{ show("appPanel", false); toast("📲","App installiert","Du findest den Trainer jetzt auf deinem Startbildschirm."); });
+$("instBtn").onclick = async ()=>{ if(!installEv) return; installEv.prompt(); try{ await installEv.userChoice; }catch(e){} installEv = null; show("instBtn", false); };
 init();
 </script>
 </body>
